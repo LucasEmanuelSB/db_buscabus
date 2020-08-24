@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { createUser, findUser, findUsers,updateUser, deleteUser } = require("../controllers/users");
+const { createUser, findUser, findUsers,updateUser, deleteUser, generateAuthToken } = require("../controllers/users");
 
 router.post("/", async (req, res) => {
   const { name, surname, email, password, birth_date, genre, job, credits, is_online, device_adress } = req.body;

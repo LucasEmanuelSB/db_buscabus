@@ -1,12 +1,12 @@
 const Route = require("../models/routes");
 
-async function createRoute(route) {
+async function createRoute(route_) {
 
   let route = null;
 
   try {
     route = await Route.create({
-      route
+      route_
     });
     return route;
   } catch (error) {

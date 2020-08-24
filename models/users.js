@@ -38,7 +38,7 @@ class Users extends Sequelize.Model {
           allowNull: false,
         },
         credits: {
-          type: Sequelize.FLOAT(4,2),
+          type: Sequelize.FLOAT,
           allowNull: false,
         },
         is_online: {
@@ -63,8 +63,8 @@ class Users extends Sequelize.Model {
 
   static associate(models) {
     this.belongsTo(models.persons, {
-      foreignKey: "device_adress",
-      as: "device_adress",
+      foreignKey: "device_adress__",
+      as: "device_adress_",
     });
   }
 }

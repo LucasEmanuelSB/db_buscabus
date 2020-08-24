@@ -18,7 +18,7 @@ class Connections extends Sequelize.Model {
           allowNull: false,
         },
         time_connection: {
-          type: Sequelize.timestamps,
+          type: Sequelize.TIME,
           allowNull: false,
         },
       },
@@ -41,8 +41,8 @@ class Connections extends Sequelize.Model {
 
   static associate(models) {
     this.belongsTo(models.persons, {
-      foreignKey: "device_adress",
-      as: "device_adress",
+      foreignKey: "device_adress__",
+      as: "device_adress_",
     });
   }
 }

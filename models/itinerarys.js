@@ -11,19 +11,19 @@ class Itinerarys extends Sequelize.Model {
         },
         id_bus: {
           type: Sequelize.INTEGER,
-          autoIncrement: true,
+          allowNull: false,
         },
         id_route: {
           type: Sequelize.INTEGER,
-          autoIncrement: true,
+          allowNull: false,
         },
         date: {
           type: Sequelize.DATE,
-          autoIncrement: true,
+          allowNull: false,
         },
         time: {
           type: Sequelize.TIME,
-          autoIncrement: true,
+          allowNull: false,
         },
         id_start_adress:{
           type: Sequelize.INTEGER,

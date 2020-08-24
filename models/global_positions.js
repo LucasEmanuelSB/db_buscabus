@@ -14,15 +14,15 @@ class Global_Positions extends Sequelize.Model {
           allowNull: false, 
         },
         latitude:{
-          type: Sequelize.FLOAT(40,6),
+          type: Sequelize.FLOAT,
           allowNull: false, 
         },
         longitude:{
-          type: Sequelize.FLOAT(40,6),
+          type: Sequelize.FLOAT,
           allowNull: false, 
         },
         time:{
-          type: Sequelize.timestamps,
+          type: Sequelize.TIME,
           allowNull: false, 
         },
         is_gps:{

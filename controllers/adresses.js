@@ -1,4 +1,4 @@
-const Adress = require("../models/adress");
+const Adress = require("../models/adresses");
 
 async function createAdress(country, uf, city, neighborhood, street, cep) {
 

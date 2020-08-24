@@ -1,4 +1,8 @@
 const User = require("../models/users");
+const bcrypt = require("bcrypt");
+const Users = require("../models/Users");
+const jwt = require("jsonwebtoken");
+const config = require("../config.json");
 
 async function createUser(name, surname, email, password, birth_date, genre, job, credits, is_online, device_adress) {
 
@@ -78,10 +82,18 @@ async function deleteUser(id_user){
     }
 }
 
+function generateAuthToken(email) {
+  const token = jwt.sign({ email }, config.secure, {
+    expiresIn: 60 * 60 * 24,
+  });
+
+  return token;
+}
 module.exports = {
   createUser,
   findUser,
   findUsers,
   updateUser,
-  deleteUser
+  deleteUser,
+  generateAuthToken
 };
