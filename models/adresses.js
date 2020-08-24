@@ -46,7 +46,9 @@ class Adresses extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.belongTo(models.bus_stops);
+    this.belongsTo(models.bus_stops, {
+      as: "bus_stops"
+    });
   }
 
 }

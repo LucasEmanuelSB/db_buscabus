@@ -29,7 +29,8 @@ class Companys extends Sequelize.Model {
     return this;
   }
   static associate(models) {
-    this.hasMany(models.ratings_companys, {
+    this.belongsToMany(models.users, {
+      through: "Ratings_Companys",
       onDelete: 'CASCADE',
       as: 'rating_companys'
     });

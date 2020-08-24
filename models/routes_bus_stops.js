@@ -4,7 +4,7 @@ class Routes_Bus_Stops extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_route_bus_stops: {
+        id_route_bus_stop: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

@@ -9,7 +9,7 @@ class Bus extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        number: {
+        line: {
           type: Sequelize.INTEGER,
           primaryKey: true,
         },
@@ -30,23 +30,32 @@ class Bus extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.hasMany(models.global_positions);
+    this.hasMany(models.global_positions,{
+      as: "global_positions"
+    });
   }
   static associate(models) {
     this.hasMany(models.connections, {
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      as: "connections",
     });
   }
   static associate(models) {
-    this.belongsToMany(models.itinerarys);
-  }
-  static associate(models) {
-    this.belongsToMany(models.favorites_bus,{
-      onDelete: 'CASCADE'
+    this.belongsToMany(models.itinerarys,{
+      as: "itinerarys",
     });
   }
   static associate(models) {
-    this.hasMany(models.bus_drivers);
+    this.belongsToMany(models.users,{
+      through: "Favorites_Bus",
+      onDelete: 'CASCADE',
+      as: "favorites_bus"
+    });
+  }
+  static associate(models) {
+    this.belongsTo(models.bus_drivers,{
+      as: "bus_drivers",
+    });
   }
 }
 

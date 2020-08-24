@@ -74,7 +74,8 @@ class Itinerarys extends Sequelize.Model {
     });
   }
   static associate(models) {
-    this.belongsToMany(models.favorites_itinerarys, {
+    this.belongsToMany(models.users, {
+      through: 'Favorite_Itinerary',
       as: "favorites_itinerarys",
       onDelete: 'CASCADE'
     });

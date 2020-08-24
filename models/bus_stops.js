@@ -44,26 +44,28 @@ class Bus_Stops extends Sequelize.Model {
     });
   }
   static associate(models) {
-    this.belongToMany(models.favorites_bus_stops, {
+    this.belongsToMany(models.users, {
+      through: "Favorite_Bus_Stops",
       onDelete: 'CASCADE',
       as: "favorites_bus_stops"
     });
   }
   static associate(models) {
-    this.belongTo(models.itinerarys, {
+    this.belongsTo(models.itinerarys, {
       as: "itinerary_start_adress",
     });
   }
   static associate(models) {
-    this.belongTo(models.itinerarys, {
+    this.belongsTo(models.itinerarys, {
       as: "itinerary_end_adress"
     });
   }
-  static associate(models) {
-    this.belongToMany(models.routes_bus_stops, {
+   static associate(models) {
+    this.belongsToMany(models.routes, {
+      through: "Routes_Bus_Stops",
       as: "routes_bus_stops"
     });
-  }
+  } 
 
   
 }

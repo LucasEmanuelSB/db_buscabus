@@ -21,7 +21,7 @@ class Global_Positions extends Sequelize.Model {
           type: Sequelize.FLOAT,
           allowNull: false, 
         },
-        time:{
+        time_sample:{
           type: Sequelize.TIME,
           allowNull: false, 
         },

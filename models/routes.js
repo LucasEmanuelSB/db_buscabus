@@ -27,15 +27,17 @@ class Routes extends Sequelize.Model {
 
   static associate(models) {
     this.belongsToMany(models.itinerarys, {
+      through: "Itinerarys",
       as: "itinerarys",
     });
   }
-  static associate(models) {
-    this.hasMany(models.routes_bus_stops, {
+   static associate(models) {
+    this.belongsToMany(models.bus_stops, {
+      through: "Routes_Bus_Stops",
       as: "routes_bus_stops",
       onDelete: 'CASCADE',
     });
-  }
+  } 
 }
 
 module.exports = Routes;

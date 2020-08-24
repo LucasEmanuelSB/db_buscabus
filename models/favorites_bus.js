@@ -34,14 +34,14 @@ class Favorites_Bus extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.bus, {
+    this.hasOne(models.bus, {
       foreignKey: "id_bus",
       as: "bus",
     });
   }
 
   static associate(models) {
-    this.belongsTo(models.users, {
+    this.hasOne(models.users, {
       foreignKey: "id_user",
       as: "user",
     });

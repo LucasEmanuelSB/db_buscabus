@@ -30,7 +30,8 @@ class Bus_Drivers extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.hasMany(models.ratings_bus_drivers, {
+    this.belongsToMany(models.users, {
+      through: "Ratings_Bus_Drivers",
       onDelete: 'CASCADE'
     });
   }
