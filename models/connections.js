@@ -41,8 +41,8 @@ class Connections extends Sequelize.Model {
 
   static associate(models) {
     this.belongsTo(models.persons, {
-      foreignKey: "device_adress__",
-      as: "device_adress_",
+      foreignKey: "device_adress",
+      //as: "device_adress_",
     });
   }
 }

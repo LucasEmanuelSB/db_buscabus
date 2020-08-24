@@ -17,7 +17,7 @@ class Favorites_Bus_Stops extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: false, 
         },
-        label:{
+        description:{
           type: Sequelize.STRING,
           allowNull: false, 
         },
@@ -34,14 +34,14 @@ class Favorites_Bus_Stops extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.bus_stops, {
+    this.hasOne(models.bus_stops, {
       foreignKey: "id_bus_stop",
       as: "bus_stop",
     });
   }
 
   static associate(models) {
-    this.belongsTo(models.users, {
+    this.hasOne(models.users, {
       foreignKey: "id_user",
       as: "user",
     });

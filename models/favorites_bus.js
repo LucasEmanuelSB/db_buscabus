@@ -17,7 +17,7 @@ class Favorites_Bus extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: false, 
         },
-        label:{
+        description:{
           type: Sequelize.STRING,
           allowNull: false, 
         },

@@ -28,7 +28,26 @@ class Bus extends Sequelize.Model {
 
     return this;
   }
-  
+
+  static associate(models) {
+    this.hasMany(models.global_positions);
+  }
+  static associate(models) {
+    this.hasMany(models.connections, {
+      onDelete: 'CASCADE'
+    });
+  }
+  static associate(models) {
+    this.belongsToMany(models.itinerarys);
+  }
+  static associate(models) {
+    this.belongsToMany(models.favorites_bus,{
+      onDelete: 'CASCADE'
+    });
+  }
+  static associate(models) {
+    this.hasMany(models.bus_drivers);
+  }
 }
 
 module.exports = Bus;

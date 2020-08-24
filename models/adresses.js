@@ -45,6 +45,10 @@ class Adresses extends Sequelize.Model {
     return this;
   }
 
+  static associate(models) {
+    this.belongTo(models.bus_stops);
+  }
+
 }
 
 module.exports = Adresses;

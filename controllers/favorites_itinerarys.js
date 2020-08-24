@@ -1,6 +1,6 @@
 const Favorite_Itinerary = require("../models/favorites_itinerarys");
 
-async function createFavoriteItinerary(id_user, id_itinerary, label) {
+async function createFavoriteItinerary(id_user, id_itinerary, description) {
 
   let favorite_itinerary = null;
 
@@ -8,7 +8,7 @@ async function createFavoriteItinerary(id_user, id_itinerary, label) {
     favorite_itinerary = await Favorite_Itinerary.create({
         id_user, 
         id_itinerary, 
-        label
+        description
     });
     return favorite_itinerary;
   } catch (error) {

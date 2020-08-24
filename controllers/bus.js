@@ -1,12 +1,12 @@
 const Bus = require("../models/bus");
 
-async function createBus(number,is_available) {
+async function createBus(line,is_available) {
 
   let bus = null;
 
   try {
     bus = await Bus.create({
-      number,
+      line,
       is_available,
     });
     return bus;

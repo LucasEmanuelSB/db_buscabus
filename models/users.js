@@ -67,6 +67,30 @@ class Users extends Sequelize.Model {
       as: "device_adress_",
     });
   }
+  static associate(models) {
+    this.belongsTo(models.favorites_bus, {
+      as: "favorites_bus",
+      onDelete: 'CASCADE'
+    });
+  }
+  static associate(models) {
+    this.belongsTo(models.ratings_bus_drivers, {
+      as: "ratings_bus_drivers",
+      onDelete: 'CASCADE'
+    });
+  }
+  static associate(models) {
+    this.belongsTo(models.ratings_companys, {
+      as: "ratings_companys",
+      onDelete: 'CASCADE'
+    });
+  }
+  static associate(models) {
+    this.belongsTo(models.favorites_itinerarys, {
+      as: "favorites_itinerarys",
+      onDelete: 'CASCADE'
+    });
+  }
 }
 
 module.exports = Users;

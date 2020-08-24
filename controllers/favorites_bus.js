@@ -1,6 +1,6 @@
 const Favorite_Bus = require("../models/favorites_bus");
 
-async function createFavoriteBus(id_bus, id_user, label) {
+async function createFavoriteBus(id_bus, id_user, description) {
 
   let favorite_bus = null;
 
@@ -8,7 +8,7 @@ async function createFavoriteBus(id_bus, id_user, label) {
     favorite_bus = await Favorite_Bus.create({
         id_bus, 
         id_user, 
-        label
+        description
     });
     return favorite_bus;
   } catch (error) {

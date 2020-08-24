@@ -36,12 +36,36 @@ class Bus_Stops extends Sequelize.Model {
 
     return this;
   }
+
   static associate(models) {
-    this.belongsTo(models.adresses, {
+    this.hasOne(models.adresses, {
       foreignKey: "id_adress",
       as: "adress",
     });
   }
+  static associate(models) {
+    this.belongToMany(models.favorites_bus_stops, {
+      onDelete: 'CASCADE',
+      as: "favorites_bus_stops"
+    });
+  }
+  static associate(models) {
+    this.belongTo(models.itinerarys, {
+      as: "itinerary_start_adress",
+    });
+  }
+  static associate(models) {
+    this.belongTo(models.itinerarys, {
+      as: "itinerary_end_adress"
+    });
+  }
+  static associate(models) {
+    this.belongToMany(models.routes_bus_stops, {
+      as: "routes_bus_stops"
+    });
+  }
+
+  
 }
 
 module.exports = Bus_Stops;

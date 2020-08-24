@@ -4,11 +4,11 @@ const router = express.Router();
 const { createFavoriteItinerary, findFavoriteItinerary, findFavoritesItinerarys,updateFavoriteItinerary, deleteFavoriteItinerary } = require("../controllers/favorites_itinerarys");
 
 router.post("/", async (req, res) => {
-  const { id_user, id_itinerary, label } = req.body;
+  const { id_user, id_itinerary, description } = req.body;
   let favorite_itinerary = null;
 
   try {
-    favorite_itinerary = await createFavoriteItinerary(id_user, id_itinerary, label);
+    favorite_itinerary = await createFavoriteItinerary(id_user, id_itinerary, description);
 
     return res.status(200).send(favorite_itinerary);
   } catch (error) {

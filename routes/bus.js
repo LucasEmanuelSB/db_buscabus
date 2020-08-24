@@ -4,11 +4,11 @@ const router = express.Router();
 const { createBus, findBus, findBuses,updateBus, deleteBus } = require("../controllers/bus");
 
 router.post("/", async (req, res) => {
-  const { number,is_available } = req.body;
+  const { line,is_available } = req.body;
   let bus = null;
 
   try {
-    bus = await createBus(number,is_available);
+    bus = await createBus(line,is_available);
 
     return res.status(200).send(bus);
   } catch (error) {
