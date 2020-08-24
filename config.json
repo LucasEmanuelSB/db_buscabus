@@ -1,0 +1,11 @@
+{
+    "secure": "6109896",
+    "sequelize": {
+        "host": "localhost",
+        "dialect": "postgres",
+        "database": "db_buscabus",
+        "username": "postgres",
+        "password": ""
+
+    }
+}
