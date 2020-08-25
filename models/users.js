@@ -67,7 +67,7 @@ class Users extends Sequelize.Model {
       //as: "device_adress_",
     });
   }
-  static associate(models) {
+/*   static associate(models) {
     this.belongsToMany(models.bus, {
       through: "Favorites_Bus",
       as: "favorites_bus",
@@ -101,7 +101,7 @@ class Users extends Sequelize.Model {
       as: "ratings_companys",
       onDelete: 'CASCADE'
     });
-  }
+  } */
 
 }
 

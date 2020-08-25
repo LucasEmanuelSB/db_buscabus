@@ -29,7 +29,7 @@ class Bus extends Sequelize.Model {
     return this;
   }
 
-  static associate(models) {
+/*   static associate(models) {
     this.hasMany(models.global_positions,{
       as: "global_positions"
     });
@@ -51,12 +51,12 @@ class Bus extends Sequelize.Model {
       onDelete: 'CASCADE',
       as: "favorites_bus"
     });
-  }
-  static associate(models) {
+  } */
+/*   static associate(models) {
     this.belongsTo(models.bus_drivers,{
       as: "bus_drivers",
     });
-  }
+  } */
 }
 
 module.exports = Bus;

@@ -4,7 +4,7 @@ const router = express.Router();
 const { createBus, findBus, findBuses,updateBus, deleteBus } = require("../controllers/bus");
 
 router.post("/", async (req, res) => {
-  const { line,is_available } = req.body;
+  const { line, is_available } = req.body;
   let bus = null;
 
   try {
@@ -12,6 +12,7 @@ router.post("/", async (req, res) => {
 
     return res.status(200).send(bus);
   } catch (error) {
+    console.log(error);
     return res.status(500).send("internal server error");
   }
 });
@@ -36,8 +37,9 @@ router.get("/", async (req,res) => {
     try {
       buses = await findBuses();
   
-      return res.status(200).send(bus);
+      return res.status(200).send(buses);
     } catch (error) {
+      console.log(error);
       return res.status(500).send("internal server error");
 }});
 

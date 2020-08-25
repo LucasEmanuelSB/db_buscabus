@@ -24,7 +24,7 @@ class Persons extends Sequelize.Model {
 
     return this;
   }
-
+/* 
   static associate(models) {
     this.belongsTo(models.connections, {
       as: "connection",
@@ -35,7 +35,7 @@ class Persons extends Sequelize.Model {
     this.hasOne(models.users, {
       as: "user_account",
     });
-  }
+  } */
   
 }
 

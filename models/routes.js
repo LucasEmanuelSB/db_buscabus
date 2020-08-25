@@ -25,7 +25,7 @@ class Routes extends Sequelize.Model {
     return this;
   }
 
-  static associate(models) {
+/*   static associate(models) {
     this.belongsToMany(models.itinerarys, {
       through: "Itinerarys",
       as: "itinerarys",
@@ -37,7 +37,7 @@ class Routes extends Sequelize.Model {
       as: "routes_bus_stops",
       onDelete: 'CASCADE',
     });
-  } 
+  }  */
 }
 
 module.exports = Routes;

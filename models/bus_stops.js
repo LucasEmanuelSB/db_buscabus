@@ -43,7 +43,7 @@ class Bus_Stops extends Sequelize.Model {
       as: "adress",
     });
   }
-  static associate(models) {
+/*   static associate(models) {
     this.belongsToMany(models.users, {
       through: "Favorite_Bus_Stops",
       onDelete: 'CASCADE',
@@ -65,7 +65,7 @@ class Bus_Stops extends Sequelize.Model {
       through: "Routes_Bus_Stops",
       as: "routes_bus_stops"
     });
-  } 
+  }  */
 
   
 }
