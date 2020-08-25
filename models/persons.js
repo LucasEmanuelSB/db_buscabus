@@ -24,18 +24,19 @@ class Persons extends Sequelize.Model {
 
     return this;
   }
-/* 
+ 
   static associate(models) {
     this.belongsTo(models.connections, {
-      as: "connection",
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
+      // as: "connection",
+      
     });
   }
   static associate(models) {
     this.hasOne(models.users, {
-      as: "user_account",
+      // as: "user_account",
     });
-  } */
+  } 
   
 }
 

@@ -22,7 +22,7 @@ class Routes_Bus_Stops extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "routes_bus",
+        modelName: "routes_bus_stops",
       }
     );
 
@@ -32,13 +32,13 @@ class Routes_Bus_Stops extends Sequelize.Model {
   static associate(models) {
     this.belongsTo(models.routes, {
       foreignKey: "id_route",
-      as: "route",
+      // as: "route",
     });
   }
   static associate(models) {
     this.belongsTo(models.bus_stops, {
       foreignKey: "id_bus_stop",
-      as: "bus_stop",
+      // as: "bus_stop",
     });
   }
 }

@@ -28,13 +28,13 @@ class Companys extends Sequelize.Model {
 
     return this;
   }
-/*   static associate(models) {
+  static associate(models) {
     this.belongsToMany(models.users, {
-      through: "Ratings_Companys",
+      through: models.ratings_companys,
       onDelete: 'CASCADE',
-      as: 'rating_companys'
+      // as: 'rating_companys'
     });
-  } */
+  } 
 }
 
 module.exports = Companys;

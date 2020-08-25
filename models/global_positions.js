@@ -44,7 +44,7 @@ class Global_Positions extends Sequelize.Model {
   static associate(models) {
     this.belongsTo(models.bus, {
       foreignKey: "id_bus",
-      as: "bus",
+      // as: "bus",
     });
   }
 

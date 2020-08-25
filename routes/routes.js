@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:id_route", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const { id_route } = req.params;
   let route = null;
 
@@ -41,7 +41,7 @@ router.get("/", async (req,res) => {
       return res.status(500).send("internal server error");
 }});
 
-router.put("/:id_route", async (req, res) => {
+router.put("/:id", async (req, res) => {
     const { id_route } = req.params;
     let route = null;
   
@@ -54,7 +54,7 @@ router.put("/:id_route", async (req, res) => {
     }
 });
 
-router.delete("/:id_route", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     const { id_route } = req.params;
     let route = null;
   

@@ -36,14 +36,14 @@ class Favorites_Itinerarys extends Sequelize.Model {
   static associate(models) {
     this.hasOne(models.itinerarys, {
       foreignKey: "id_itinerary",
-      as: "itinerary",
+      // as: "itinerary",
     });
   }
 
   static associate(models) {
     this.hasOne(models.users, {
       foreignKey: "id_user",
-      as: "user",
+      // as: "user",
     });
   }
 }

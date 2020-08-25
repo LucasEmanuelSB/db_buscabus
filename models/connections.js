@@ -35,14 +35,14 @@ class Connections extends Sequelize.Model {
   static associate(models) {
     this.belongsTo(models.bus, {
       foreignKey: "id_bus",
-      as: "bus",
+      // as: "bus",
     });
   }
 
   static associate(models) {
     this.belongsTo(models.persons, {
       foreignKey: "device_adress",
-      //as: "device_adress_",
+      // as: "device_connected_adress",
     });
   }
 }

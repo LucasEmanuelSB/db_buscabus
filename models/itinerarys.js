@@ -46,40 +46,39 @@ class Itinerarys extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.bus, {
+    this.hasOne(models.bus, {
       foreignKey: "id_bus",
-      as: "bus",
+      // as: "bus",
     });
   }
 
   static associate(models) {
-    this.belongsTo(models.routes, {
+    this.hasOne(models.routes, {
       foreignKey: "id_route",
-      as: "route",
+      // as: "route",
     });
   }
   static associate(models) {
-    this.belongsTo(models.bus_stops, {
+    this.hasOne(models.bus_stops, {
       foreignKey: "id_start_adress",
-      as: "start_adress",
+      // as: "start_adress",
       onDelete: 'CASCADE'
     });
   }
 
   static associate(models) {
-    this.belongsTo(models.bus_stops, {
+    this.hasOne(models.bus_stops, {
       foreignKey: "id_end_adress",
-      as: "end_adress",
+      // as: "end_adress",
       onDelete: 'CASCADE'
     });
   }
-/*   static associate(models) {
+   static associate(models) {
     this.belongsToMany(models.users, {
-      through: 'Favorite_Itinerary',
-      as: "favorites_itinerarys",
+      through: models.favorites_itinerarys,
       onDelete: 'CASCADE'
     });
-  } */
+  } 
 }
 
 module.exports = Itinerarys;

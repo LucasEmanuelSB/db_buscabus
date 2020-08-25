@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:id_adress", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const { id_adress } = req.params;
   let adress = null;
 
@@ -25,12 +25,13 @@ router.get("/:id_adress", async (req, res) => {
 
     return res.status(200).send(adress);
   } catch (error) {
+    console.log(error);
     return res.status(500).send("internal server error");
   }
 });
 
 router.get("/", async (req,res) => {
-    const { country, uf, city, neighborhood, street, cep } = req.body;
+    //const { country, uf, city, neighborhood, street, cep } = req.body;
     let adresses = null;
   
     try {
@@ -41,7 +42,7 @@ router.get("/", async (req,res) => {
       return res.status(500).send("internal server error");
 }});
 
-router.put("/:id_adress", async (req, res) => {
+router.put("/:id", async (req, res) => {
     const { id_adress } = req.params;
     let adress = null;
   
@@ -54,7 +55,7 @@ router.put("/:id_adress", async (req, res) => {
     }
 });
 
-router.delete("/:id_adress", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     const { id_adress } = req.params;
     let adress = null;
   

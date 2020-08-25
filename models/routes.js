@@ -25,19 +25,19 @@ class Routes extends Sequelize.Model {
     return this;
   }
 
-/*   static associate(models) {
+  static associate(models) {
     this.belongsToMany(models.itinerarys, {
-      through: "Itinerarys",
-      as: "itinerarys",
+      through: models.itinerarys,
+      // as: "itinerarys",
     });
   }
-   static associate(models) {
+  static associate(models) {
     this.belongsToMany(models.bus_stops, {
-      through: "Routes_Bus_Stops",
-      as: "routes_bus_stops",
+      through: models.routes_bus_stops,
+      // as: "routes_bus_stops",
       onDelete: 'CASCADE',
     });
-  }  */
+  }  
 }
 
 module.exports = Routes;
