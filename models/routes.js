@@ -26,12 +26,6 @@ class Routes extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.itinerarys, {
-      through: models.itinerarys,
-      // as: "itinerarys",
-    });
-  }
-  static associate(models) {
     this.belongsToMany(models.bus_stops, {
       through: models.routes_bus_stops,
       // as: "routes_bus_stops",

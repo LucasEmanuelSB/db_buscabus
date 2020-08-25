@@ -59,7 +59,7 @@ class Itinerarys extends Sequelize.Model {
     });
   }
   static associate(models) {
-    this.hasOne(models.bus_stops, {
+    this.belongsTo(models.bus_stops, {
       foreignKey: "id_start_adress",
       // as: "start_adress",
       onDelete: 'CASCADE'
@@ -67,7 +67,7 @@ class Itinerarys extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.hasOne(models.bus_stops, {
+    this.belongsTo(models.bus_stops, {
       foreignKey: "id_end_adress",
       // as: "end_adress",
       onDelete: 'CASCADE'

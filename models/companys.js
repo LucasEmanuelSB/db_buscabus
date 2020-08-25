@@ -32,7 +32,7 @@ class Companys extends Sequelize.Model {
     this.belongsToMany(models.users, {
       through: models.ratings_companys,
       onDelete: 'CASCADE',
-      // as: 'rating_companys'
+      //as: 'rating_companys'
     });
   } 
 }

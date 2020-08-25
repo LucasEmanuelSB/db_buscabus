@@ -9,10 +9,10 @@ class Bus_Drivers extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-/*         id_bus:{
+         id_bus:{
           type: Sequelize.INTEGER,
           allowNull: false, 
-        }, */
+        }, 
         average_rate:{
           type: Sequelize.DECIMAL(1,1),
           allowNull: false, 
@@ -37,8 +37,8 @@ class Bus_Drivers extends Sequelize.Model {
   } 
   static associate(models) {
     this.belongsTo(models.bus, {
-      //foreignKey: "id_bus",
-      // as: "bus",
+      foreignKey: "id_bus",
+      as: "bus",
     });
   }
 }

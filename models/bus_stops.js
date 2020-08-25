@@ -21,10 +21,10 @@ class Bus_Stops extends Sequelize.Model {
           type: Sequelize.FLOAT,
           allowNull: false, 
         },
-/*         id_adress:{
+        id_adress:{
           type: Sequelize.INTEGER,
           allowNull: false, 
-        }, */
+        },
       },
       {
         freezeTableName: true,

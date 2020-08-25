@@ -9,7 +9,7 @@ class Global_Positions extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        id_onibus:{
+        id_bus:{
           type: Sequelize.INTEGER,
           allowNull: false, 
         },

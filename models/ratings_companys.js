@@ -34,13 +34,13 @@ class Ratings_Companys extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.hasOne(models.companys, {
+    this.belongsTo(models.companys, {
       foreignKey: "id_company",
       // as: "company",
     });
   }
   static associate(models) {
-    this.hasOne(models.users, {
+    this.belongsTo(models.users, {
       foreignKey: "id_user",
       // as: "user",
     });
