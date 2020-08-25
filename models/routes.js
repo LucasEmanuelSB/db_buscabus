@@ -4,7 +4,7 @@ class Routes extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_route: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

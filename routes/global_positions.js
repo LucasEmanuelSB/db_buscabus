@@ -1,68 +1,61 @@
 const express = require("express");
 const router = express.Router();
-
-const { createGlobalPosition, findGlobalPosition, findGlobalPositions,updateGlobalPosition, deleteGlobalPosition } = require("../controllers/global_positions");
+const Global_Positions = require("../models/global_positions");
 
 router.post("/", async (req, res) => {
-  const { id_bus, latitude, longitude, time, is_gps } = req.body;
-  let global_position = null;
-
   try {
-    global_position = await createGlobalPosition(id_bus, latitude, longitude, time, is_gps);
-
-    return res.status(200).send(global_position);
+    Global_Positions.create(req.body);
+    return res.status(200).send("Criado com sucesso");
   } catch (error) {
-    return res.status(500).send("internal server error");
-  }
-});
-
-router.get("/:id", async (req, res) => {
-  const { id_global_position } = req.params;
-  let global_position = null;
-
-  try {
-    global_position = await findGlobalPosition(id_global_position);
-
-    return res.status(200).send(global_position);
-  } catch (error) {
-    return res.status(500).send("internal server error");
+    return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
-    const { country, uf, city, neighborhood, street, cep } = req.body;
-    let global_positions = null;
-  
-    try {
-        global_positions = await findGlobalPositions();
-  
+  try {
+    const global_positions = await Global_Positions.findAll({
+      raw: true,
+    });
       return res.status(200).send(global_positions);
-    } catch (error) {
+  } catch (error) {
       return res.status(500).send("internal server error");
 }});
 
+router.get("/:id", async (req, res) => {
+  try {
+    const global_position = await Global_Positions.findOne({
+      raw: true, // ???
+      // nest: true,
+      where: {id: req.params.id}
+    });
+    return res.status(200).send(global_position);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("internal server error");
+  }
+});
+
 router.put("/:id", async (req, res) => {
-    const { id_global_position } = req.params;
-    let global_position = null;
-  
-    try {
-        global_position = await updateGlobalPosition(id_global_position);
-  
-      return res.status(200).send(global_position);
-    } catch (error) {
-      return res.status(500).send("internal server error");
-    }
+  try {
+    await Global_Positions.update(req.body,
+      { where: {id: req.params.id} }
+    );
+    return res.status(200).send(true);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("error");
+  }
+
 });
 
 router.delete("/:id", async (req, res) => {
-    const { id_global_position } = req.params;
-    let global_position = null;
-  
     try {
-      await deleteGlobalPosition(id_global_position);
-  
-      return res.status(200).send(global_position);
+      await Global_Positions.destroy({
+        where: {id: req.params.id},
+      }); 
+      return res.status(200).send("Deletado com sucesso");
     } catch (error) {
+      console.log(error);
       return res.status(500).send("internal server error");
     }
 });

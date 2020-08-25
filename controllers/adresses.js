@@ -5,14 +5,7 @@ async function createAdress(country, uf, city, neighborhood, street, cep) {
   let adress = null;
 
   try {
-    adress = await Adress.create({
-      country,
-      uf,
-      city, 
-      neighborhood, 
-      street, 
-      cep
-    });
+
     return adress;
   } catch (error) {
     throw new Error(error);
@@ -38,9 +31,7 @@ async function findAdresses() {
   let adresses = null;
 
   try {
-    adresses = await Adress.findAll({
-      raw: true,
-    });
+    
 
     return adresses;
   } catch (error) {
@@ -49,12 +40,8 @@ async function findAdresses() {
 }
 
 async function updateAdress(id_adress, obj) {
-  let adress = null;
-
   try {
-    adress = await Adress.update(obj, {
-      where: id_adress
-    });
+
     return true;
   } catch (error) {
     console.log(error);

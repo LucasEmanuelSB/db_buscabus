@@ -4,7 +4,7 @@ class Ratings_Bus_Drivers extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_rating_bus_driver: {
+        id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true,

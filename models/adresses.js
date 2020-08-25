@@ -4,7 +4,7 @@ class Adresses extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_adress: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

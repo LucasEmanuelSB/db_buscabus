@@ -4,7 +4,7 @@ class Favorites_Bus extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_favorite_bus: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

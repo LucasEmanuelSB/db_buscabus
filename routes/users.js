@@ -1,68 +1,61 @@
 const express = require("express");
 const router = express.Router();
-
-const { createUser, findUser, findUsers,updateUser, deleteUser, generateAuthToken } = require("../controllers/users");
+const Users = require("../models/users");
 
 router.post("/", async (req, res) => {
-  const { name, surname, email, password, birth_date, genre, job, credits, is_online, device_adress } = req.body;
-  let user = null;
-
   try {
-    user = await createUser(name, surname, email, password, birth_date, genre, job, credits, is_online, device_adress);
-
-    return res.status(200).send(user);
+    Users.create(req.body);
+    return res.status(200).send("Criado com sucesso");
   } catch (error) {
-    return res.status(500).send("internal server error");
-  }
-});
-
-router.get("/:id", async (req, res) => {
-  const { id_user } = req.params;
-  let user = null;
-
-  try {
-    user = await findUsers(id_user);
-
-    return res.status(200).send(user);
-  } catch (error) {
-    return res.status(500).send("internal server error");
+    return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
-    const { country, uf, city, neighborhood, street, cep } = req.body;
-    let users = null;
-  
-    try {
-        users = await findUsers();
-  
+  try {
+    const users = await Users.findAll({
+      raw: true,
+    });
       return res.status(200).send(users);
-    } catch (error) {
+  } catch (error) {
       return res.status(500).send("internal server error");
 }});
 
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await Users.findOne({
+      raw: true, // ???
+      // nest: true,
+      where: {id: req.params.id}
+    });
+    return res.status(200).send(user);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("internal server error");
+  }
+});
+
 router.put("/:id", async (req, res) => {
-    const { id_user } = req.params;
-    let user = null;
-  
-    try {
-        user = await updateUser(id_user);
-  
-      return res.status(200).send(user);
-    } catch (error) {
-      return res.status(500).send("internal server error");
-    }
+  try {
+    await Users.update(req.body,
+      { where: {id: req.params.id} }
+    );
+    return res.status(200).send(true);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("error");
+  }
+
 });
 
 router.delete("/:id", async (req, res) => {
-    const { id_user } = req.params;
-    let user = null;
-  
     try {
-      await deleteUser(id_user);
-  
-      return res.status(200).send(user);
+      await Users.destroy({
+        where: {id: req.params.id},
+      }); 
+      return res.status(200).send("Deletado com sucesso");
     } catch (error) {
+      console.log(error);
       return res.status(500).send("internal server error");
     }
 });

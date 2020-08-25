@@ -1,68 +1,61 @@
 const express = require("express");
 const router = express.Router();
-
-const { createFavoriteBusStop, findFavoriteBusStop, findFavoritesBusStops,updateFavoriteBusStop, deleteFavoriteBusStop } = require("../controllers/favorites_bus_stops");
+const Favorites_Bus_Stops = require("../models/favorites_bus_stops");
 
 router.post("/", async (req, res) => {
-  const { id_bus_stop, id_user, description } = req.body;
-  let favorite_bus_stop = null;
-
   try {
-    favorite_bus_stop = await createFavoriteBusStop(id_bus_stop, id_user, description);
-
-    return res.status(200).send(favorite_bus_stop);
+    Favorites_Bus_Stops.create(req.body);
+    return res.status(200).send("Criado com sucesso");
   } catch (error) {
-    return res.status(500).send("internal server error");
-  }
-});
-
-router.get("/:id", async (req, res) => {
-  const { id_favorite_bus_stop } = req.params;
-  let favorite_bus_stop = null;
-
-  try {
-    favorite_bus_stop = await findFavoriteBusStop(id_favorite_bus_stop);
-
-    return res.status(200).send(favorite_bus_stop);
-  } catch (error) {
-    return res.status(500).send("internal server error");
+    return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
-    const { country, uf, city, neighborhood, street, cep } = req.body;
-    let favorites_bus_stops = null;
-  
-    try {
-        favorites_bus_stops = await findFavoritesBusStops();
-  
+  try {
+    const favorites_bus_stops = await Favorites_Bus_Stops.findAll({
+      raw: true,
+    });
       return res.status(200).send(favorites_bus_stops);
-    } catch (error) {
+  } catch (error) {
       return res.status(500).send("internal server error");
 }});
 
+router.get("/:id", async (req, res) => {
+  try {
+    const favorite_bus_stop = await Favorites_Bus_Stops.findOne({
+      raw: true, // ???
+      // nest: true,
+      where: {id: req.params.id}
+    });
+    return res.status(200).send(favorite_bus_stop);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("internal server error");
+  }
+});
+
 router.put("/:id", async (req, res) => {
-    const { id_favorite_bus_stop } = req.params;
-    let favorite_bus_stop = null;
-  
-    try {
-        favorite_bus_stop = await updateFavoriteBusStop(id_favorite_bus_stop);
-  
-      return res.status(200).send(favorite_bus_stop);
-    } catch (error) {
-      return res.status(500).send("internal server error");
-    }
+  try {
+    await Favorites_Bus_Stops.update(req.body,
+      { where: {id: req.params.id} }
+    );
+    return res.status(200).send(true);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("error");
+  }
+
 });
 
 router.delete("/:id", async (req, res) => {
-    const { id_favorite_bus_stop } = req.params;
-    let favorite_bus_stop = null;
-  
     try {
-      await deleteFavoriteBusStop(id_favorite_bus_stop);
-  
-      return res.status(200).send(favorite_bus_stop);
+      await Favorites_Bus_Stops.destroy({
+        where: {id: req.params.id},
+      }); 
+      return res.status(200).send("Deletado com sucesso");
     } catch (error) {
+      console.log(error);
       return res.status(500).send("internal server error");
     }
 });

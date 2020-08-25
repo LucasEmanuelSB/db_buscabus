@@ -4,7 +4,7 @@ class Favorites_Itinerarys extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_favorite_itinerary: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

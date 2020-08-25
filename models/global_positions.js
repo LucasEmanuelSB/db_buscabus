@@ -4,7 +4,7 @@ class Global_Positions extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_global_positions: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

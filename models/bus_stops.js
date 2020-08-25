@@ -4,7 +4,7 @@ class Bus_Stops extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_bus_stop: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,
@@ -21,10 +21,10 @@ class Bus_Stops extends Sequelize.Model {
           type: Sequelize.FLOAT,
           allowNull: false, 
         },
-        id_adress:{
+/*         id_adress:{
           type: Sequelize.INTEGER,
           allowNull: false, 
-        },
+        }, */
       },
       {
         freezeTableName: true,
@@ -38,34 +38,11 @@ class Bus_Stops extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.hasOne(models.adresses, {
+    this.belongsTo(models.adresses, {
       foreignKey: "id_adress",
-      // as: "adress",
+      as: "adress",
     });
   }
-  static associate(models) {
-    this.belongsToMany(models.users, {
-      through: models.favorites_bus_stops,
-      onDelete: 'CASCADE',
-      // as: "favorites_bus_stops"
-    });
-  }
-/*   static associate(models) {
-    this.belongsTo(models.itinerarys, {
-      // as: "itinerary_start_adress",
-    });
-  }
-  static associate(models) {
-    this.belongsTo(models.itinerarys, {
-      // as: "itinerary_end_adress"
-    });
-  } */
-   static associate(models) {
-    this.belongsToMany(models.routes, {
-      through: models.routes_bus_stops,
-    });
-  }  
-
   
 }
 

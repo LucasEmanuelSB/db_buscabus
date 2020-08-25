@@ -1,68 +1,61 @@
 const express = require("express");
 const router = express.Router();
-
-const { createPerson, findPerson, findPersons,updatePerson, deletePerson } = require("../controllers/persons");
+const Persons = require("../models/persons");
 
 router.post("/", async (req, res) => {
-  const { device_adress } = req.body;
-  let person = null;
-
   try {
-    person = await createPerson(device_adress);
-
-    return res.status(200).send(person);
+    Persons.create(req.body);
+    return res.status(200).send("Criado com sucesso");
   } catch (error) {
-    return res.status(500).send("internal server error");
-  }
-});
-
-router.get("/:id", async (req, res) => {
-  const { id_person } = req.params;
-  let person = null;
-
-  try {
-    person = await findPersons(id_person);
-
-    return res.status(200).send(person);
-  } catch (error) {
-    return res.status(500).send("internal server error");
+    return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
-    const { country, uf, city, neighborhood, street, cep } = req.body;
-    let persons = null;
-  
-    try {
-        persons = await findPersons();
-  
+  try {
+    const persons = await Persons.findAll({
+      raw: true,
+    });
       return res.status(200).send(persons);
-    } catch (error) {
+  } catch (error) {
       return res.status(500).send("internal server error");
 }});
 
+router.get("/:id", async (req, res) => {
+  try {
+    const person = await Persons.findOne({
+      raw: true, // ???
+      // nest: true,
+      where: {id: req.params.id}
+    });
+    return res.status(200).send(person);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("internal server error");
+  }
+});
+
 router.put("/:id", async (req, res) => {
-    const { id_person } = req.params;
-    let person = null;
-  
-    try {
-        person = await updatePerson(id_person);
-  
-      return res.status(200).send(person);
-    } catch (error) {
-      return res.status(500).send("internal server error");
-    }
+  try {
+    await Persons.update(req.body,
+      { where: {id: req.params.id} }
+    );
+    return res.status(200).send(true);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("error");
+  }
+
 });
 
 router.delete("/:id", async (req, res) => {
-    const { id_person } = req.params;
-    let person = null;
-  
     try {
-      await deletePerson(id_person);
-  
-      return res.status(200).send(person);
+      await Persons.destroy({
+        where: {id: req.params.id},
+      }); 
+      return res.status(200).send("Deletado com sucesso");
     } catch (error) {
+      console.log(error);
       return res.status(500).send("internal server error");
     }
 });

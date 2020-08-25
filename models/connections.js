@@ -4,7 +4,7 @@ class Connections extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_connection: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

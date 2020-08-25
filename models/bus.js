@@ -4,7 +4,7 @@ class Bus extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_bus: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

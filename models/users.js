@@ -4,7 +4,7 @@ class Users extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_user: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

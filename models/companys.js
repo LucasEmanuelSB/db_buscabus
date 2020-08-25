@@ -4,7 +4,7 @@ class Companys extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_company: {
+        id: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true,

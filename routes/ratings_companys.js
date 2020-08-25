@@ -1,68 +1,61 @@
 const express = require("express");
 const router = express.Router();
-
-const { createRatingCompany, findRatingCompany, findRatingsCompanys,updateRatingCompany, deleteRatingCompany } = require("../controllers/ratings_companys");
+const Rating_Companys = require("../models/ratings_companys");
 
 router.post("/", async (req, res) => {
-  const { id_company, id_user, rate } = req.body;
-  let rating_company = null;
-
   try {
-    rating_company = await createRatingCompany(id_company, id_user, rate);
-
-    return res.status(200).send(rating_company);
+    Rating_Companys.create(req.body);
+    return res.status(200).send("Criado com sucesso");
   } catch (error) {
-    return res.status(500).send("internal server error");
-  }
-});
-
-router.get("/:id", async (req, res) => {
-  const { id_rating_company } = req.params;
-  let rating_company = null;
-
-  try {
-    rating_company = await findRatingsCompanys(id_rating_company);
-
-    return res.status(200).send(rating_company);
-  } catch (error) {
-    return res.status(500).send("internal server error");
+    return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
-    const { country, uf, city, neighborhood, street, cep } = req.body;
-    let ratings_companys = null;
-  
-    try {
-        ratings_companys = await findRatingsCompanys();
-  
+  try {
+    const ratings_companys = await Rating_Companys.findAll({
+      raw: true,
+    });
       return res.status(200).send(ratings_companys);
-    } catch (error) {
+  } catch (error) {
       return res.status(500).send("internal server error");
 }});
 
+router.get("/:id", async (req, res) => {
+  try {
+    const rating_company = await Rating_Companys.findOne({
+      raw: true, // ???
+      // nest: true,
+      where: {id: req.params.id}
+    });
+    return res.status(200).send(rating_company);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("internal server error");
+  }
+});
+
 router.put("/:id", async (req, res) => {
-    const { id_rating_company } = req.params;
-    let rating_company = null;
-  
-    try {
-        rating_company = await updateRatingCompany(id_rating_company);
-  
-      return res.status(200).send(rating_company);
-    } catch (error) {
-      return res.status(500).send("internal server error");
-    }
+  try {
+    await Rating_Companys.update(req.body,
+      { where: {id: req.params.id} }
+    );
+    return res.status(200).send(true);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("error");
+  }
+
 });
 
 router.delete("/:id", async (req, res) => {
-    const { id_rating_company } = req.params;
-    let rating_company = null;
-  
     try {
-      await deleteRatingCompany(id_rating_company);
-  
-      return res.status(200).send(rating_company);
+      await Rating_Companys.destroy({
+        where: {id: req.params.id},
+      }); 
+      return res.status(200).send("Deletado com sucesso");
     } catch (error) {
+      console.log(error);
       return res.status(500).send("internal server error");
     }
 });

@@ -4,7 +4,7 @@ class Ratings_Companys extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_rating_company: {
+        id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true,

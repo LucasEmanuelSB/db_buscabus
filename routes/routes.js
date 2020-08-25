@@ -1,68 +1,61 @@
 const express = require("express");
 const router = express.Router();
-
-const { createRoute, findRoute, findRoutes,updateRoute, deleteRoute } = require("../controllers/routes");
+const Routes = require("../models/routes");
 
 router.post("/", async (req, res) => {
-  const { points } = req.body;
-  let route = null;
-
   try {
-    route = await createRoute(points);
-
-    return res.status(200).send(route);
+    Routes.create(req.body);
+    return res.status(200).send("Criado com sucesso");
   } catch (error) {
-    return res.status(500).send("internal server error");
-  }
-});
-
-router.get("/:id", async (req, res) => {
-  const { id_route } = req.params;
-  let route = null;
-
-  try {
-    route = await findRoutes(id_route);
-
-    return res.status(200).send(route);
-  } catch (error) {
-    return res.status(500).send("internal server error");
+    return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
-    const { country, uf, city, neighborhood, street, cep } = req.body;
-    let routes = null;
-  
-    try {
-        routes = await findRoutes();
-  
+  try {
+    const routes = await Routes.findAll({
+      raw: true,
+    });
       return res.status(200).send(routes);
-    } catch (error) {
+  } catch (error) {
       return res.status(500).send("internal server error");
 }});
 
+router.get("/:id", async (req, res) => {
+  try {
+    const route = await Routes.findOne({
+      raw: true, // ???
+      // nest: true,
+      where: {id: req.params.id}
+    });
+    return res.status(200).send(route);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("internal server error");
+  }
+});
+
 router.put("/:id", async (req, res) => {
-    const { id_route } = req.params;
-    let route = null;
-  
-    try {
-        route = await updateRoute(id_route);
-  
-      return res.status(200).send(route);
-    } catch (error) {
-      return res.status(500).send("internal server error");
-    }
+  try {
+    await Routes.update(req.body,
+      { where: {id: req.params.id} }
+    );
+    return res.status(200).send(true);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("error");
+  }
+
 });
 
 router.delete("/:id", async (req, res) => {
-    const { id_route } = req.params;
-    let route = null;
-  
     try {
-      await deleteRoute(id_route);
-  
-      return res.status(200).send(route);
+      await Routes.destroy({
+        where: {id: req.params.id},
+      }); 
+      return res.status(200).send("Deletado com sucesso");
     } catch (error) {
+      console.log(error);
       return res.status(500).send("internal server error");
     }
 });

@@ -1,68 +1,62 @@
 const express = require("express");
 const router = express.Router();
-
-const { createBusDriver, findBusDriver, findBusDrivers,updateBusDriver, deleteBusDriver } = require("../controllers/bus_drivers");
+const Bus_Drivers = require("../models/bus_drivers");
 
 router.post("/", async (req, res) => {
-  const { id_bus, average_rate } = req.body;
-  let bus_driver = null;
-
   try {
-    bus_driver = await createDriverBus(id_bus, average_rate);
-
-    return res.status(200).send(bus_driver);
+    Bus_Drivers.create(req.body);
+    return res.status(200).send("Criado com sucesso");
   } catch (error) {
-    return res.status(500).send("internal server error");
-  }
-});
-
-router.get("/:id", async (req, res) => {
-  const { id_bus_driver } = req.params;
-  let bus_driver = null;
-
-  try {
-    bus_driver = await findBusDriver(id_bus_driver);
-
-    return res.status(200).send(bus_driver);
-  } catch (error) {
-    return res.status(500).send("internal server error");
+    console.log(error);
+    return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
-    const { country, uf, city, neighborhood, street, cep } = req.body;
-    let bus_drivers = null;
-  
-    try {
-      bus_drivers = await findBusDriver_drivers();
-  
+  try {
+    const bus_drivers = await Bus_Drivers.findAll({
+      raw: true,
+    });
       return res.status(200).send(bus_drivers);
-    } catch (error) {
+  } catch (error) {
       return res.status(500).send("internal server error");
 }});
 
+router.get("/:id", async (req, res) => {
+  try {
+    const bus_driver = await Bus_Drivers.findOne({
+      raw: true, // ???
+      // nest: true,
+      where: {id: req.params.id}
+    });
+    return res.status(200).send(bus_driver);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("internal server error");
+  }
+});
+
 router.put("/:id", async (req, res) => {
-    const { id_bus_driver } = req.params;
-    let bus_driver = null;
-  
-    try {
-        bus_driver = await updateBusDriver(id_bus_driver);
-  
-      return res.status(200).send(bus_driver);
-    } catch (error) {
-      return res.status(500).send("internal server error");
-    }
+  try {
+    await Bus_Drivers.update(req.body,
+      { where: {id: req.params.id} }
+    );
+    return res.status(200).send(true);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("error");
+  }
+
 });
 
 router.delete("/:id", async (req, res) => {
-    const { id_bus_driver } = req.params;
-    let bus_driver = null;
-  
     try {
-      await deleteBusDriver(id_bus_driver);
-  
-      return res.status(200).send(bus_driver);
+      await Bus_Drivers.destroy({
+        where: {id: req.params.id},
+      }); 
+      return res.status(200).send("Deletado com sucesso");
     } catch (error) {
+      console.log(error);
       return res.status(500).send("internal server error");
     }
 });
