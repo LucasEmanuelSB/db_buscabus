@@ -9,14 +9,14 @@ class Favorites_Bus extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        id_bus:{
+/*         id_bus:{
           type: Sequelize.INTEGER,
           allowNull: false, 
         },
         id_user:{
           type: Sequelize.INTEGER,
           allowNull: false, 
-        },
+        }, */
         description:{
           type: Sequelize.STRING,
           allowNull: false, 
@@ -33,19 +33,19 @@ class Favorites_Bus extends Sequelize.Model {
     return this;
   }
 
-  static associate(models) {
+/*   static associate(models) {
     this.belongsTo(models.bus, {
-      foreignKey: "id_bus",
-      // as: "bus",
+      //foreignKey: 'id',
+      sourceKey: 'id_bus'
     });
   }
 
   static associate(models) {
     this.belongsTo(models.users, {
-      foreignKey: "id_user",
-      // as: "user",
+      //foreignKey: 'id',
+      sourceKey: 'id_user'
     });
-  }
+  } */
   
 }
 

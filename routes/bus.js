@@ -26,14 +26,9 @@ router.get("/:id", async (req, res) => {
   try {
     const bus = await Bus.findOne({
       raw: true, // ???
-      // nest: true,
+      nest: true,
       where: {id: req.params.id},
-      include: [
-      {
-        model: Global_Positions,
-        as: "global positions"
-      },
-      ],
+      include: [ {model: Global_Positions}],
     });
     return res.status(200).send(bus);
   } catch (error) {

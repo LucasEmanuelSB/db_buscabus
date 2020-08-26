@@ -1,5 +1,4 @@
 const Sequelize = require("sequelize");
-const { foreign_key } = require("inflection");
 
 class Adresses extends Sequelize.Model {
   static init(sequelize) {
@@ -10,29 +9,29 @@ class Adresses extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        country:{
+        country: {
           type: Sequelize.STRING,
-          allowNull: false, 
+          allowNull: false,
         },
-        uf:{
+        uf: {
           type: Sequelize.CHAR(2),
-          allowNull: false, 
+          allowNull: false,
         },
-        city:{
+        city: {
           type: Sequelize.STRING,
-          allowNull: false, 
+          allowNull: false,
         },
-        neighborhood:{
+        neighborhood: {
           type: Sequelize.STRING,
-          allowNull: false, 
+          allowNull: false,
         },
-        street:{
+        street: {
           type: Sequelize.STRING,
-          allowNull: false, 
+          allowNull: false,
         },
-        cep:{
+        cep: {
           type: Sequelize.INTEGER,
-          allowNull: false, 
+          allowNull: false,
         },
       },
       {
@@ -46,11 +45,11 @@ class Adresses extends Sequelize.Model {
     return this;
   }
 
-  static associate(models){
-    this.hasOne(models.bus_stops, {
-      sourceKey: "id_adress",
-      as: "adress",
+  static associate(models) {
+    this.belongsTo(models.bus_stops, {
+      foreignKey: 'id',
+      //as: "adress",
     });
-}
+  }
 }
 module.exports = Adresses;

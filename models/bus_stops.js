@@ -9,21 +9,21 @@ class Bus_Stops extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        is_terminal:{
+        is_terminal: {
           type: Sequelize.BOOLEAN,
-          allowNull: false, 
+          allowNull: false,
         },
-        latitude:{
+        latitude: {
           type: Sequelize.FLOAT,
-          allowNull: false, 
+          allowNull: false,
         },
-        longitude:{
+        longitude: {
           type: Sequelize.FLOAT,
-          allowNull: false, 
+          allowNull: false,
         },
-        id_adress:{
+        id_adress: {
           type: Sequelize.INTEGER,
-          allowNull: false, 
+          allowNull: false,
         },
       },
       {
@@ -38,12 +38,12 @@ class Bus_Stops extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.adresses, {
-      foreignKey: "id_adress",
-      as: "adress",
+    this.hasOne(models.adresses, {
+      foreignKey: 'id',
+      sourceKey: 'id_adress',
+      //as: "adress",
     });
   }
-  
 }
 
 module.exports = Bus_Stops;

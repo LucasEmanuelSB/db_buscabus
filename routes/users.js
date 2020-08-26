@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../models/users");
-
+const Bus = require("../models/bus");
 router.post("/", async (req, res) => {
   try {
     Users.create(req.body);
@@ -26,7 +26,8 @@ router.get("/:id", async (req, res) => {
     const user = await Users.findOne({
       raw: true, // ???
       // nest: true,
-      where: {id: req.params.id}
+      where: {id: req.params.id},
+      include: [{model: Bus }]
     });
     return res.status(200).send(user);
   } catch (error) {

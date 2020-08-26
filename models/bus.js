@@ -11,12 +11,16 @@ class Bus extends Sequelize.Model {
         },
         line: {
           type: Sequelize.INTEGER,
-          primaryKey: true,
+          allowNull: true,
         },
         is_available:{
           type: Sequelize.BOOLEAN,
           allowNull: false, 
         },
+        id_global_position:{
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        }
       },
       {
         freezeTableName: true,
@@ -29,10 +33,19 @@ class Bus extends Sequelize.Model {
     return this;
   }
 
-   static associate(models) {
+  static associate(models) {
     this.hasMany(models.global_positions,{
-      foreignKey: "id_bus",
-      as: "global_positions",
+      foreignKey: 'id',
+      sourceKey: 'id_global_position',
+      onDelete: 'CASCADE',
+    });
+    //models.global_positions.belongsTo(this);
+  }
+
+  static associate(models) {
+    this.belongsToMany(models.users,{
+      through: models.favorites_bus,
+      foreignKey: 'id',
       onDelete: 'CASCADE',
     });
     //models.global_positions.belongsTo(this);

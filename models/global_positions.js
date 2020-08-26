@@ -9,10 +9,6 @@ class Global_Positions extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        id_bus:{
-          type: Sequelize.INTEGER,
-          allowNull: false, 
-        },
         latitude:{
           type: Sequelize.FLOAT,
           allowNull: false, 
@@ -23,10 +19,6 @@ class Global_Positions extends Sequelize.Model {
         },
         time_sample:{
           type: Sequelize.TIME,
-          allowNull: false, 
-        },
-        is_gps:{
-          type: Sequelize.BOOLEAN,
           allowNull: false, 
         },
       },
@@ -43,8 +35,8 @@ class Global_Positions extends Sequelize.Model {
 
   static associate(models) {
     this.belongsTo(models.bus, {
-      foreignKey: "id_bus",
-      as: "bus",
+      foreignKey: 'id',
+      //as: "bus",
     });
   }
 

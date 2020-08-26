@@ -69,8 +69,8 @@ class Users extends Sequelize.Model {
   }
   static associate(models) {
     this.belongsToMany(models.bus, {
+      foreignKey: 'id',
       through: models.favorites_bus,
-      // as: "favorites_bus",
       onDelete: 'CASCADE'
     });
   }
