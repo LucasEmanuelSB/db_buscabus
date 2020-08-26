@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Adresses = require("../models/adresses");
+const Bus_Stops = require("../models/bus_stops");
 
 router.post("/", async (req, res) => {
   try {
@@ -26,7 +27,11 @@ router.get("/:id", async (req, res) => {
     const adress = await Adresses.findOne({
       raw: true, // ???
       // nest: true,
-      where: {id: req.params.id}
+      where: {id: req.params.id},
+       include: [{
+        model: Bus_Stops,
+        as : "bus_stops",
+      }] 
     });
     return res.status(200).send(adress);
   } catch (error) {

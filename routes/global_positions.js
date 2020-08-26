@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Global_Positions = require("../models/global_positions");
-
+const Bus = require("../models/bus");
 router.post("/", async (req, res) => {
   try {
     Global_Positions.create(req.body);
@@ -26,7 +26,11 @@ router.get("/:id", async (req, res) => {
     const global_position = await Global_Positions.findOne({
       raw: true, // ???
       // nest: true,
-      where: {id: req.params.id}
+      where: {id: req.params.id},
+      include: [{
+        model: Bus,
+        as: "bus",
+      }]
     });
     return res.status(200).send(global_position);
   } catch (error) {

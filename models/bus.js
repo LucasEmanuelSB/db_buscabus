@@ -31,12 +31,14 @@ class Bus extends Sequelize.Model {
 
    static associate(models) {
     this.hasMany(models.global_positions,{
+      foreignKey: "id_bus",
+      as: "global_positions",
       onDelete: 'CASCADE',
-      // as: "global_positions"
     });
+    //models.global_positions.belongsTo(this);
   }
 
-  static associate(models) {
+/*   static associate(models) {
     this.hasMany(models.connections, {
       onDelete: 'CASCADE',
       // as: "connections",
@@ -58,7 +60,7 @@ class Bus extends Sequelize.Model {
     this.hasOne(models.bus_drivers,{
       // as: "bus_drivers",
     });
-  } 
+  }  */
 }
 
 module.exports = Bus;

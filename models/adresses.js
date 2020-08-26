@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const { foreign_key } = require("inflection");
 
 class Adresses extends Sequelize.Model {
   static init(sequelize) {
@@ -45,6 +46,11 @@ class Adresses extends Sequelize.Model {
     return this;
   }
 
+  static associate(models){
+    this.hasOne(models.bus_stops, {
+      sourceKey: "id_adress",
+      as: "adress",
+    });
 }
-
+}
 module.exports = Adresses;
