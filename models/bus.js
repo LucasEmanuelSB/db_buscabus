@@ -17,10 +17,6 @@ class Bus extends Sequelize.Model {
           type: Sequelize.BOOLEAN,
           allowNull: false, 
         },
-        id_global_position:{
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        }
       },
       {
         freezeTableName: true,
@@ -33,47 +29,13 @@ class Bus extends Sequelize.Model {
     return this;
   }
 
-  static associate(models) {
-    this.hasMany(models.global_positions,{
-      foreignKey: 'id',
-      sourceKey: 'id_global_position',
-      onDelete: 'CASCADE',
-    });
-    //models.global_positions.belongsTo(this);
-  }
-
-  static associate(models) {
-    this.belongsToMany(models.users,{
-      through: models.favorites_bus,
-      foreignKey: 'id',
-      onDelete: 'CASCADE',
-    });
-    //models.global_positions.belongsTo(this);
-  }
-
-/*   static associate(models) {
-    this.hasMany(models.connections, {
-      onDelete: 'CASCADE',
-      // as: "connections",
+  static associate(models){
+    this.belongsToMany(models.global_positions,{
+      through: models.bus_global_positions,
+      foreignKey: 'id_bus',
+      as: 'current_position'
     });
   }
-  static associate(models) {
-    this.belongsToMany(models.itinerarys,{
-      // as: "itinerarys",
-    });
-  }
-  static associate(models) {
-    this.belongsToMany(models.users,{
-      through: models.favorites_bus_stop,
-      onDelete: 'CASCADE',
-      // as: "favorites_bus"
-    });
-  } 
-   static associate(models) {
-    this.hasOne(models.bus_drivers,{
-      // as: "bus_drivers",
-    });
-  }  */
 }
 
 module.exports = Bus;

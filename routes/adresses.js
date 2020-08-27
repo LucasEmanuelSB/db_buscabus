@@ -28,10 +28,6 @@ router.get("/:id", async (req, res) => {
       raw: true, // ???
       // nest: true,
       where: {id: req.params.id},
-       include: [{
-        model: Bus_Stops,
-        as : "bus_stops",
-      }] 
     });
     return res.status(200).send(adress);
   } catch (error) {

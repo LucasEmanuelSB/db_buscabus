@@ -24,19 +24,6 @@ class Persons extends Sequelize.Model {
 
     return this;
   }
- 
-  static associate(models) {
-    this.belongsTo(models.connections, {
-      onDelete: 'CASCADE',
-      // as: "connection",
-      
-    });
-  }
-  static associate(models) {
-    this.hasOne(models.users, {
-      // as: "user_account",
-    });
-  } 
   
 }
 

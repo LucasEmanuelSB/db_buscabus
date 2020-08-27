@@ -4,7 +4,7 @@ const Global_Positions = require("../models/global_positions");
 const Bus = require("../models/bus");
 router.post("/", async (req, res) => {
   try {
-    Global_Positions.create(req.body);
+    const gps = Global_Positions.create(req.body);
     return res.status(200).send("Criado com sucesso");
   } catch (error) {
     return res.status(500).send("Ocorreu um erro interno");

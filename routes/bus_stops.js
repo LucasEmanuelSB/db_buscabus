@@ -25,11 +25,12 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const bus_stop = await Bus_Stops.findOne({
-      raw: true, // ???
-      // nest: true,
+      raw: true, 
+      nest: true,
       where: {id: req.params.id},
       include: [{
         model: Adress,
+        as : 'adress'
         //as: "adresses"
       }]
     });

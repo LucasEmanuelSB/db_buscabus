@@ -1,34 +1,36 @@
 const express = require("express");
 const router = express.Router();
-const Routes_Bus_Stops = require("../models/routes_bus_stops");
+const Bus_Global_Positions = require("../models/bus_global_positions");
+const Bus_Stops = require("../models/bus_stops");
 
 router.post("/", async (req, res) => {
   try {
-    Routes_Bus_Stops.create(req.body);
+    Bus_Global_Positions.create(req.body);
     return res.status(200).send("Criado com sucesso");
   } catch (error) {
+    console.log(error);
     return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
   try {
-    const routes_bus_stops = await Routes_Bus_Stops.findAll({
+    const bus_global_positions = await Bus_Global_Positions.findAll({
       raw: true,
     });
-      return res.status(200).send(routes_bus_stops);
+      return res.status(200).send(bus_global_positions);
   } catch (error) {
       return res.status(500).send("internal server error");
 }});
 
 router.get("/:id", async (req, res) => {
   try {
-    const route_bus_stop = await Routes_Bus_Stops.findOne({
+    const bus_global_position = await Bus_Global_Positions.findOne({
       raw: true, // ???
       // nest: true,
-      where: {id: req.params.id}
+      where: {id: req.params.id},
     });
-    return res.status(200).send(route_bus_stop);
+    return res.status(200).send(bus_global_position);
   } catch (error) {
     console.log(error);
     return res.status(500).send("internal server error");
@@ -37,7 +39,7 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    await Routes_Bus_Stops.update(req.body,
+    await Bus_Global_Positions.update(req.body,
       { where: {id: req.params.id} }
     );
     return res.status(200).send(true);
@@ -50,7 +52,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-      await Routes_Bus_Stops.destroy({
+      await Bus_Global_Positions.destroy({
         where: {id: req.params.id},
       }); 
       return res.status(200).send("Deletado com sucesso");

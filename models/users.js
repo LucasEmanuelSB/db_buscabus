@@ -61,48 +61,6 @@ class Users extends Sequelize.Model {
     return this;
   }
 
-  static associate(models) {
-    this.belongsTo(models.persons, {
-      foreignKey: "device_adress",
-      //// as: "device_adress_",
-    });
-  }
-  static associate(models) {
-    this.belongsToMany(models.bus, {
-      foreignKey: 'id',
-      through: models.favorites_bus,
-      onDelete: 'CASCADE'
-    });
-  }
-  static associate(models) {
-    this.belongsToMany(models.bus_stop, {
-      through: models.favorites_bus_stop,
-      // as: "favorites_bus_stops",
-      onDelete: 'CASCADE'
-    });
-  }
-  static associate(models) {
-    this.belongsToMany(models.itinerarys, {
-      through: models.favorites_itinerarys,
-      // as: "favorites_itinerarys",
-      onDelete: 'CASCADE'
-    });
-  }
-  static associate(models) {
-    this.belongsTo(models.bus_drivers, {
-      through: models.ratings_bus_drivers,
-      // as: "ratings_bus_drivers",
-      onDelete: 'CASCADE'
-    });
-  }
-  static associate(models) {
-    this.belongsToMany(models.companys, {
-      through: models.ratings_companys,
-      // as: "ratings_companys",
-      onDelete: 'CASCADE'
-    });
-  } 
-
 }
 
 module.exports = Users;

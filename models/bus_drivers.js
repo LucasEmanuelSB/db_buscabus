@@ -28,19 +28,6 @@ class Bus_Drivers extends Sequelize.Model {
 
     return this;
   }
-
-  static associate(models) {
-    this.belongsToMany(models.users, {
-      through: models.ratings_bus_drivers,
-      onDelete: 'CASCADE'
-    });
-  } 
-  static associate(models) {
-    this.belongsTo(models.bus, {
-      foreignKey: "id_bus",
-      as: "bus",
-    });
-  }
 }
 
 module.exports = Bus_Drivers;

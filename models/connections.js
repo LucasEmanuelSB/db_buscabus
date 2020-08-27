@@ -32,19 +32,6 @@ class Connections extends Sequelize.Model {
 
     return this;
   }
-  static associate(models) {
-    this.belongsTo(models.bus, {
-      foreignKey: "id_bus",
-      // as: "bus",
-    });
-  }
-
-  static associate(models) {
-    this.belongsTo(models.persons, {
-      foreignKey: "device_adress",
-      // as: "device_connected_adress",
-    });
-  }
 }
 
 module.exports = Connections;

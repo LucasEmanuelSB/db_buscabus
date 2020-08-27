@@ -28,19 +28,6 @@ class Routes_Bus_Stops extends Sequelize.Model {
 
     return this;
   }
-
-  static associate(models) {
-    this.belongsTo(models.routes, {
-      foreignKey: "id_route",
-      // as: "route",
-    });
-  }
-  static associate(models) {
-    this.belongsTo(models.bus_stops, {
-      foreignKey: "id_bus_stop",
-      // as: "bus_stop",
-    });
-  }
 }
 
 module.exports = Routes_Bus_Stops;

@@ -36,12 +36,12 @@ class Bus_Stops extends Sequelize.Model {
 
     return this;
   }
-
+  
   static associate(models) {
     this.hasOne(models.adresses, {
       foreignKey: 'id',
       sourceKey: 'id_adress',
-      //as: "adress",
+      as : 'adress',
     });
   }
 }
