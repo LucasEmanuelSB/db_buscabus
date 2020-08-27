@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Bus_Drivers = require("../models/bus_drivers");
+const Bus = require("../models/bus");
 
 router.post("/", async (req, res) => {
   try {
@@ -16,6 +17,11 @@ router.get("/", async (req,res) => {
   try {
     const bus_drivers = await Bus_Drivers.findAll({
       raw: true,
+      nest: true,
+      include: [{
+        model: Bus,
+        as: 'bus'
+      }]
     });
       return res.status(200).send(bus_drivers);
   } catch (error) {

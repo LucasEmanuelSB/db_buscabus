@@ -29,6 +29,13 @@ class Companys extends Sequelize.Model {
     return this;
   }
 
+  static associate(models){
+    this.belongsToMany(models.users,{
+      through: models.users_bus_drivers,
+      foreignKey: 'id_company',
+      as: 'users_ratings'
+    });
+  }
 }
 
 module.exports = Companys;

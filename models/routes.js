@@ -24,6 +24,14 @@ class Routes extends Sequelize.Model {
 
     return this;
   }
+
+  static associate(models){
+    this.hasMany(models.itinerarys,{
+      foreignKey: 'id_route',
+      sourceKey: 'id',
+      as: 'itinerarys'
+    })
+  }
 }
 
 module.exports = Routes;

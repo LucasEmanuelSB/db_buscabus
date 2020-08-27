@@ -17,6 +17,11 @@ class Bus extends Sequelize.Model {
           type: Sequelize.BOOLEAN,
           allowNull: false, 
         },
+        id_bus_driver:{
+          type: Sequelize.INTEGER,
+          allowNull: true,
+          onDelete: 'CASCADE'
+        }
       },
       {
         freezeTableName: true,
@@ -34,6 +39,21 @@ class Bus extends Sequelize.Model {
       through: models.bus_global_positions,
       foreignKey: 'id_bus',
       as: 'current_position'
+    });
+  }
+
+  static associate(models){
+    this.hasMany(models.itinerarys,{
+      foreignKey: 'id_bus',
+      sourceKey: 'id',
+      as: 'itinerarys'
+    });
+  }
+  static associate(models){
+    this.belongsToMany(models.users,{
+      through: models.users_bus,
+      foreignKey: 'id_bus',
+      as: 'users_favorites'
     });
   }
 }

@@ -5,9 +5,10 @@ const Bus_Stops = require("../models/bus_stops");
 
 router.post("/", async (req, res) => {
   try {
-    Adresses.create(req.body);
-    return res.status(200).send("Criado com sucesso");
+    const adresses = await Adresses.create(req.body);
+    return res.status(200).send(adresses);
   } catch (error) {
+    console.log(error);
     return res.status(500).send("Ocorreu um erro interno");
   }
 });
@@ -19,6 +20,7 @@ router.get("/", async (req,res) => {
     });
       return res.status(200).send(adresses);
   } catch (error) {
+      console.log(error);
       return res.status(500).send("internal server error");
 }});
 

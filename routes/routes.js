@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Routes = require("../models/routes");
+const Itinerarys = require("../models/itinerarys");
 
 router.post("/", async (req, res) => {
   try {
@@ -15,6 +16,11 @@ router.get("/", async (req,res) => {
   try {
     const routes = await Routes.findAll({
       raw: true,
+      nest: true,
+      include: [{
+        model: Itinerarys,
+        as: 'itinerarys'
+      }]
     });
       return res.status(200).send(routes);
   } catch (error) {

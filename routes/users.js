@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Users = require("../models/users");
 const Bus = require("../models/bus");
+
 router.post("/", async (req, res) => {
   try {
     Users.create(req.body);

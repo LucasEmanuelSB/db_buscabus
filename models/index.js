@@ -14,6 +14,11 @@ const Persons = require("../models/persons");
 const Routes = require("../models/routes");
 const Routes_Bus_Stops = require("../models/routes_bus_stops")
 const Users = require("../models/users");
+const Users_Bus = require("../models/users_bus");
+const Users_Bus_Drivers = require("../models/users_bus_drivers");
+const Users_Bus_Stops = require("../models/users_bus_stops");
+const Users_Companys = require("../models/users_companys");
+const Users_Itinerarys = require("../models/users_itinerarys");
 
 const models = [
     Adresses,
@@ -28,7 +33,12 @@ const models = [
     Persons, 
     Routes, 
     Routes_Bus_Stops, 
-    Users 
+    Users,
+    Users_Bus,
+    Users_Bus_Drivers,
+    Users_Bus_Stops,
+    Users_Companys,
+    Users_Itinerarys 
 ];
 
 class Database {

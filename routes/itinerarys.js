@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Itinerarys = require("../models/itinerarys");
+const Bus_Stops = require("../models/bus_stops");
 
 router.post("/", async (req, res) => {
   try {
@@ -14,10 +15,13 @@ router.post("/", async (req, res) => {
 router.get("/", async (req,res) => {
   try {
     const itinerarys = await Itinerarys.findAll({
+      nest: true,
       raw: true,
+      include: [{model: Bus_Stops}]
     });
       return res.status(200).send(itinerarys);
   } catch (error) {
+    console.log(error);
       return res.status(500).send("internal server error");
 }});
 

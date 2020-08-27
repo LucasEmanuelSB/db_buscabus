@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Bus = require("../models/bus");
 const Global_Positions = require("../models/global_positions");
+const Itinerarys = require("../models/itinerarys");
 
 
 router.post("/", async (req, res) => {
@@ -16,14 +17,12 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req,res) => {
   try {
-    const buses = await Bus.findaAll({
-      attributes: [[]]
-      /* nest: true,
+    const buses = await Bus.findAll({
+      nest: true,
       include: [{
-      model: Global_Positions,
-      as: 'current_position',
-      through: { attributes: [] },
-    }] */
+        model: Itinerarys,
+        as: 'itinerary'
+      }]
     });
       return res.status(200).send(buses);
   } catch (error) {
@@ -33,18 +32,18 @@ router.get("/", async (req,res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-
-    const bus = await Bus.findAll({
+    const bus = await Bus.findOne({
       nest: true,
-      include:[{
+      where: {id: req.params.id},
+     /* include:[{
         model: Global_Positions,
         as: 'current_position',
          through: { attributes: []}, 
-/*          query: ('SELECT * FROM global_positions WHERE max(id)', {
+          query: ('SELECT * FROM global_positions WHERE max(id)', {
           model: Global_Positions,
           mapToModel: true 
-        }),  */
-      }]
+        }),  
+      }]*/
       
     });
     return res.status(200).send(bus);

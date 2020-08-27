@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const { foreign_key } = require("inflection");
 
 class Itinerarys extends Sequelize.Model {
   static init(sequelize) {
@@ -43,6 +44,24 @@ class Itinerarys extends Sequelize.Model {
     );
 
     return this;
+  }
+
+  static associate(models){
+    this.belongsTo(models.bus_stops,{
+      foreignKey: 'id_start_adress',
+    });
+  }
+  static associate(models){
+    this.belongsTo(models.bus_stops,{
+      foreignKey: 'id_end_adress',
+    });
+  }
+  static associate(models){
+    this.belongsToMany(models.users,{
+      through: models.users_itinerarys,
+      foreignKey: 'id_itinerary',
+      as: 'users_favorites'
+    });
   }
 }
 
