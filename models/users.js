@@ -26,7 +26,7 @@ class Users extends Sequelize.Model {
           allowNull: false,
         },
         birth_date: {
-          type: Sequelize.DATE,
+          type: Sequelize.DATEONLY,
           allowNull: false,
         },
         gender: {
@@ -62,38 +62,35 @@ class Users extends Sequelize.Model {
   }
 
   static associate(models){
+
     this.belongsToMany(models.bus,{
       through: models.users_bus,
       foreignKey: 'id_user',
       as: 'favorites_bus'
     });
-  }
-  static associate(models){
-    this.belongsToMany(models.bus_drivers,{
-      through: models.users_bus_drivers,
-      foreignKey: 'id_user',
-      as: 'rating_bus_drivers'
-    });
-  }
-  static associate(models){
+
     this.belongsToMany(models.bus_stops,{
       through: models.users_bus_stops,
       foreignKey: 'id_user',
       as: 'favorites_bus_stops'
     });
-  }
-  static associate(models){
-    this.belongsToMany(models.company,{
-      through: models.users_companys,
-      foreignKey: 'id_user',
-      as: 'rating_company'
-    });
-  }
-  static associate(models){
+
     this.belongsToMany(models.itinerarys,{
       through: models.users_itinerarys,
       foreignKey: 'id_user',
       as: 'favorites_itinerarys'
+    });
+
+    this.belongsToMany(models.bus_drivers,{
+      through: models.users_bus_drivers,
+      foreignKey: 'id_user',
+      as: 'ratings_bus_drivers'
+    });
+
+    this.belongsToMany(models.companys,{
+      through: models.users_companys,
+      foreignKey: 'id_user',
+      as: 'ratings_company'
     });
   }
 }

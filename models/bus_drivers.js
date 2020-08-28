@@ -30,14 +30,13 @@ class Bus_Drivers extends Sequelize.Model {
   }
 
   static associate(models){
+    
     this.hasMany(models.bus,{
       foreignKey: 'id_bus_driver',
       sourceKey: 'id',
       as: 'bus'
-    })
-  }
+    });
 
-  static associate(models){
     this.belongsToMany(models.users,{
       through: models.users_bus_drivers,
       foreignKey: 'id_bus_driver',

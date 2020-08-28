@@ -9,6 +9,11 @@ class Users_Bus extends Sequelize.Model {
             autoIncrement: true,
             primaryKey: true,
           },
+          is_favorite: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+          }, 
            id_user:{
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',
@@ -18,7 +23,7 @@ class Users_Bus extends Sequelize.Model {
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',
             allowNull: false,
-          } 
+          }
         },
         {
           freezeTableName: true,

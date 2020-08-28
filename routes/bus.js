@@ -4,7 +4,6 @@ const Bus = require("../models/bus");
 const Global_Positions = require("../models/global_positions");
 const Itinerarys = require("../models/itinerarys");
 
-
 router.post("/", async (req, res) => {
   try {
     console.log(req.body);

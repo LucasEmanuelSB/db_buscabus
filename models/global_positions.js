@@ -34,11 +34,13 @@ class Global_Positions extends Sequelize.Model {
   }
 
   static associate(models){
+
     this.belongsToMany(models.bus,{
       through: models.bus_global_positions,
       foreignKey: 'id_global_position',
     });
   }
+  
 }
 
 module.exports = Global_Positions;

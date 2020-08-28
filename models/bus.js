@@ -35,6 +35,19 @@ class Bus extends Sequelize.Model {
   }
 
   static associate(models){
+    
+    this.hasMany(models.itinerarys,{
+      foreignKey: 'id_bus',
+      sourceKey: 'id',
+      as: 'itinerarys'
+    });
+
+    this.belongsToMany(models.users,{
+      through: models.users_bus,
+      foreignKey: 'id_bus',
+      as: 'users_favorites'
+    });
+
     this.belongsToMany(models.global_positions,{
       through: models.bus_global_positions,
       foreignKey: 'id_bus',
@@ -42,20 +55,6 @@ class Bus extends Sequelize.Model {
     });
   }
 
-  static associate(models){
-    this.hasMany(models.itinerarys,{
-      foreignKey: 'id_bus',
-      sourceKey: 'id',
-      as: 'itinerarys'
-    });
-  }
-  static associate(models){
-    this.belongsToMany(models.users,{
-      through: models.users_bus,
-      foreignKey: 'id_bus',
-      as: 'users_favorites'
-    });
-  }
 }
 
 module.exports = Bus;

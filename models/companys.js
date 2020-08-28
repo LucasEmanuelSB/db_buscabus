@@ -30,8 +30,9 @@ class Companys extends Sequelize.Model {
   }
 
   static associate(models){
+    
     this.belongsToMany(models.users,{
-      through: models.users_bus_drivers,
+      through: models.users_companys,
       foreignKey: 'id_company',
       as: 'users_ratings'
     });

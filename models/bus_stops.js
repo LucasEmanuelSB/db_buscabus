@@ -38,19 +38,19 @@ class Bus_Stops extends Sequelize.Model {
   }
   
   static associate(models) {
+
     this.hasOne(models.adresses, {
       foreignKey: 'id',
       sourceKey: 'id_adress',
       as : 'adress',
     });
-  }
 
-  static associate(models){
     this.belongsToMany(models.users,{
       through: models.users_bus_stops,
       foreignKey: 'id_bus_stop',
       as: 'users_favorites'
     });
+
   }
 
 }

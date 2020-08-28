@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 router.use("/adresses", require("./adresses"));
+router.use("/auth", require("./auth"));
 router.use("/bus", require("./bus"));
 router.use("/bus_drivers", require("./bus_drivers"));
 router.use("/bus_global_positions", require("./bus_global_positions"));
