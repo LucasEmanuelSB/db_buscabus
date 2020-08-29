@@ -9,7 +9,7 @@ class Routes extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        route:{
+        points:{
           type: Sequelize.JSON,
           allowNull: false, 
         },
@@ -26,6 +26,11 @@ class Routes extends Sequelize.Model {
   }
 
   static associate(models){
+
+    this.belongsToMany(models.bus_stops,{
+      through: models.routes_bus_stops,
+      foreignKey: 'id_route'
+    })
 
     this.hasMany(models.itinerarys,{
       foreignKey: 'id_route',

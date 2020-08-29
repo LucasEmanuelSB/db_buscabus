@@ -23,7 +23,7 @@ class Bus_Stops extends Sequelize.Model {
         },
         id_adress: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
         },
       },
       {
@@ -39,16 +39,15 @@ class Bus_Stops extends Sequelize.Model {
   
   static associate(models) {
 
+    this.belongsToMany(models.routes,{
+      through: models.routes_bus_stops,
+      foreignKey: 'id_bus_stop'
+    })
+
     this.hasOne(models.adresses, {
       foreignKey: 'id',
       sourceKey: 'id_adress',
       as : 'adress',
-    });
-
-    this.belongsToMany(models.users,{
-      through: models.users_bus_stops,
-      foreignKey: 'id_bus_stop',
-      as: 'users_favorites'
     });
 
   }

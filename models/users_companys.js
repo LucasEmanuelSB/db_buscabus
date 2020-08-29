@@ -4,25 +4,21 @@ class Users_Companys extends Sequelize.Model {
     static init(sequelize) {
       super.init(
         {
-          id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-          },
-          rate: {
-            type: Sequelize.DECIMAL(2,1),
-            allowNull: true,
-          },
            id_user:{
+            primaryKey: true,
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',
-            allowNull: false,
+            
           },
           id_company:{
+            primaryKey: true,
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',
-            allowNull: false,
-          } 
+          },
+          rate: {
+            type: Sequelize.DECIMAL,
+            allowNull: true,
+          }
         },
         {
           freezeTableName: true,

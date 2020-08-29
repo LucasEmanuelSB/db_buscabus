@@ -9,13 +9,13 @@ class Bus_Drivers extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-         id_bus:{
-          type: Sequelize.INTEGER,
-          allowNull: false, 
-        }, 
+        name: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
         average_rate:{
-          type: Sequelize.DECIMAL(1,1),
-          allowNull: false, 
+          type: Sequelize.DECIMAL,
+          allowNull: true, 
         },
       },
       {

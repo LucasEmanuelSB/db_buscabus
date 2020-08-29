@@ -31,8 +31,6 @@ router.post("/", async (req, res) => {
     console.log("post password: ", password);
     console.log("auth password: ", user.password);
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
     const validPassword = await bcrypt.compare(password, user.password);
 
     console.log(validPassword)
@@ -52,6 +50,7 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.log(error);
     throw new Error(error);
+    return res.send(error);
   }
 });
 

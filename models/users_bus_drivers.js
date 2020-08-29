@@ -4,25 +4,20 @@ class Users_Bus_Drivers extends Sequelize.Model {
     static init(sequelize) {
       super.init(
         {
-          id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-          },
-          rate: {
-            type: Sequelize.DECIMAL(2,1),
-            allowNull: true,
-          }, 
            id_user:{
             type: Sequelize.INTEGER,
+            primaryKey: true,
             onDelete: 'CASCADE',
-            allowNull: false,
           },
           id_bus_driver:{
             type: Sequelize.INTEGER,
+            primaryKey: true,
             onDelete: 'CASCADE',
+          },
+          rate: {
+            type: Sequelize.DECIMAL,
             allowNull: false,
-          } 
+          },  
         },
         {
           freezeTableName: true,

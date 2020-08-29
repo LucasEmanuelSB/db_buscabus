@@ -21,7 +21,7 @@ class Bus extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: true,
           onDelete: 'CASCADE'
-        }
+        },
       },
       {
         freezeTableName: true,
@@ -36,22 +36,26 @@ class Bus extends Sequelize.Model {
 
   static associate(models){
     
-    this.hasMany(models.itinerarys,{
-      foreignKey: 'id_bus',
-      sourceKey: 'id',
-      as: 'itinerarys'
+    this.belongsTo(models.bus_drivers,{
+      foreignKey: 'id_bus_driver',
+      as: 'bus_driver'
     });
 
-    this.belongsToMany(models.users,{
-      through: models.users_bus,
+    this.hasOne(models.itinerarys,{
       foreignKey: 'id_bus',
-      as: 'users_favorites'
+      sourceKey: 'id',
+      as: 'itinerary'
     });
 
     this.belongsToMany(models.global_positions,{
       through: models.bus_global_positions,
       foreignKey: 'id_bus',
       as: 'current_position'
+    });
+
+    this.hasMany(models.persons,{
+      foreignKey: 'id_bus',
+      as: 'persons'
     });
   }
 

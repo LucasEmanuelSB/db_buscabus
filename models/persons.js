@@ -9,6 +9,10 @@ class Persons extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
+        id_bus: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
         device_adress: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -24,7 +28,13 @@ class Persons extends Sequelize.Model {
 
     return this;
   }
-  
+
+  static associate(models){
+    this.belongsTo(models.bus,{
+      foreignKey: 'id_bus'
+    });
+  }
+
 }
 
 module.exports = Persons;

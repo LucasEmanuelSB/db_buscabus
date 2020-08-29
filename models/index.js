@@ -8,18 +8,14 @@ const Bus_Global_Positions = require("../models/bus_global_positions");
 const Bus_Stops = require("../models/bus_stops");
 const Calendars = require("../models/calendars");
 const Companys = require("../models/companys");
-const Connections = require("../models/connections");
 const Global_Positions = require("../models/global_positions");
 const Itinerarys = require("../models/itinerarys");
 const Persons = require("../models/persons");
 const Routes = require("../models/routes");
 const Routes_Bus_Stops = require("../models/routes_bus_stops")
 const Users = require("../models/users");
-const Users_Bus = require("../models/users_bus");
 const Users_Bus_Drivers = require("../models/users_bus_drivers");
-const Users_Bus_Stops = require("../models/users_bus_stops");
 const Users_Companys = require("../models/users_companys");
-const Users_Itinerarys = require("../models/users_itinerarys");
 
 const models = [
     Adresses,
@@ -29,18 +25,14 @@ const models = [
     Bus_Stops,
     Calendars, 
     Companys, 
-    Connections,  
     Global_Positions, 
     Itinerarys, 
     Persons, 
     Routes, 
     Routes_Bus_Stops, 
     Users,
-    Users_Bus,
     Users_Bus_Drivers,
-    Users_Bus_Stops,
-    Users_Companys,
-    Users_Itinerarys 
+    Users_Companys
 ];
 
 class Database {

@@ -6,20 +6,15 @@ class Bus_Global_Positions extends Sequelize.Model {
     static init(sequelize) {
       super.init(
         {
-          id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-          },
            id_bus:{
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',
-            allowNull: false,
+            primaryKey: true,
           },
           id_global_position:{
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',
-            allowNull: false,
+            primaryKey: true,
           } 
         },
         {

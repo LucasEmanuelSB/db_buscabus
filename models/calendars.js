@@ -10,11 +10,13 @@ class Calendar extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        week: {
-            type: Sequelize.ARRAY(Sequelize.DataTypes.TIME)
+        weeks: {
+            type: Sequelize.ARRAY(Sequelize.DataTypes.TIME),
+            allowNull: false,
         },
         weekends_holidays: {
-            type: Sequelize.ARRAY(Sequelize.DataTypes.TIME)
+            type: Sequelize.ARRAY(Sequelize.DataTypes.TIME),
+            allowNull: false
         }
       },
       {

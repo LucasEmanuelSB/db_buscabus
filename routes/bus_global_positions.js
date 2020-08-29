@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Bus_Global_Positions = require("../models/bus_global_positions");
-const Bus_Stops = require("../models/bus_stops");
 
 router.post("/", async (req, res) => {
   try {
@@ -26,8 +25,7 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const bus_global_position = await Bus_Global_Positions.findOne({
-      raw: true, // ???
-      // nest: true,
+      nest: true,
       where: {id: req.params.id},
     });
     return res.status(200).send(bus_global_position);
@@ -37,7 +35,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+/* router.put("/:id", async (req, res) => {
   try {
     await Bus_Global_Positions.update(req.body,
       { where: {id: req.params.id} }
@@ -48,7 +46,7 @@ router.put("/:id", async (req, res) => {
     return res.status(500).send("error");
   }
 
-});
+}); */
 
 router.delete("/:id", async (req, res) => {
     try {
@@ -58,7 +56,7 @@ router.delete("/:id", async (req, res) => {
       return res.status(200).send("Deletado com sucesso");
     } catch (error) {
       console.log(error);
-      return res.status(500).send("internal server error");
+      return res.status(500).send(error);
     }
 });
 

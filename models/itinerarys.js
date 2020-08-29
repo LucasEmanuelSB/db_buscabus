@@ -11,23 +11,23 @@ class Itinerarys extends Sequelize.Model {
         },
         id_bus: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true
         },
         id_route: {
           type: Sequelize.INTEGER,
-          allowNull: false,
+          allowNull: true,
         },
         id_start_adress:{
           type: Sequelize.INTEGER,
-          allowNull: false, 
+          allowNull: true, 
         },
         id_end_adress:{
           type: Sequelize.INTEGER,
-          allowNull: false, 
+          allowNull: true, 
         },
         id_calendar:{
           type: Sequelize.INTEGER,
-          allowNull: false, 
+          allowNull: true, 
         },
       },
       {
@@ -43,22 +43,26 @@ class Itinerarys extends Sequelize.Model {
 
   static associate(models){
 
+    this.belongsTo(models.bus,{
+      foreignKey: 'id_bus'
+    });
+
+    this.belongsTo(models.routes,{
+      foreignKey: 'id_route'
+    });
+
     this.belongsTo(models.calendars,{
       foreignKey: 'id_calendar'
     });
-    
+
     this.belongsTo(models.bus_stops,{
       foreignKey: 'id_start_adress',
+      as: 'start_adress'
     });
     
     this.belongsTo(models.bus_stops,{
       foreignKey: 'id_end_adress',
-    });
-
-    this.belongsToMany(models.users,{
-      through: models.users_itinerarys,
-      foreignKey: 'id_itinerary',
-      as: 'users_favorites'
+      as: 'end_adress'
     });
 
   }

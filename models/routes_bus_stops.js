@@ -4,18 +4,13 @@ class Routes_Bus_Stops extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id: {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          primaryKey: true,
-        },
         id_route:{
           type: Sequelize.INTEGER,
-          allowNull: false, 
+          primaryKey: true, 
         },
         id_bus_stop:{
           type: Sequelize.INTEGER,
-          allowNull: false, 
+          primaryKey: true,
         },
       },
       {

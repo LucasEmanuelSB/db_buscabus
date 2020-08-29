@@ -9,6 +9,10 @@ class Users extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
+        id_person: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+        },
         name: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -27,29 +31,37 @@ class Users extends Sequelize.Model {
           allowNull: false,
         },
         birth_date: {
-          type: Sequelize.DATEONLY,
+          type: Sequelize.DATE,
           allowNull: false,
         },
         gender: {
           type: Sequelize.CHAR(1),
           allowNull: false,
+          defaultValue: 'A'
         },
         job: {
           type: Sequelize.CHAR(2),
           allowNull: false,
+          defaultValue: "AN"
         },
         credits: {
           type: Sequelize.FLOAT,
           allowNull: false,
+          defaultValue: 0.0
         },
         is_online: {
           type: Sequelize.BOOLEAN,
           allowNull: false,
+          defaultValue: false
         },
         device_adress: {
           type: Sequelize.STRING,
           allowNull: true,
         },
+        favorites: {
+          type: Sequelize.JSON,
+          allowNull: true
+        }
       },
       {
         freezeTableName: true,
@@ -64,22 +76,8 @@ class Users extends Sequelize.Model {
 
   static associate(models){
 
-    this.belongsToMany(models.bus,{
-      through: models.users_bus,
-      foreignKey: 'id_user',
-      as: 'favorites_bus'
-    });
-
-    this.belongsToMany(models.bus_stops,{
-      through: models.users_bus_stops,
-      foreignKey: 'id_user',
-      as: 'favorites_bus_stops'
-    });
-
-    this.belongsToMany(models.itinerarys,{
-      through: models.users_itinerarys,
-      foreignKey: 'id_user',
-      as: 'favorites_itinerarys'
+    this.belongsTo(models.persons,{
+      foreignKey: 'id_person'
     });
 
     this.belongsToMany(models.bus_drivers,{
@@ -91,7 +89,7 @@ class Users extends Sequelize.Model {
     this.belongsToMany(models.companys,{
       through: models.users_companys,
       foreignKey: 'id_user',
-      as: 'ratings_company'
+      as: 'ratings_companys'
     });
   }
 }
