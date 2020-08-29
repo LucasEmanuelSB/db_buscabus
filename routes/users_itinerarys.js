@@ -1,50 +1,44 @@
 const express = require("express");
 const router = express.Router();
-const Bus = require("../models/bus");
-const Itinerarys = require("../models/itinerarys");
+const Users_Itinerarys = require("../models/users_itinerarys");
 
 router.post("/", async (req, res) => {
-  try {
-    console.log(req.body);
-    Bus.create(req.body);
-    return res.status(200).send("Criado com sucesso");
+
+    const {id_user, id_itinerary} = req.body;
+    const user_itinerary = null;
+
+    try {
+        user_itinerary = Users_Itinerarys.create({
+        id_user,
+        id_itinerary
+      });
+  
+      return res.status(200).send(user_itinerary);
   } catch (error) {
+    console.log(error);
     return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
   try {
-    const buses = await Bus.findAll({
-      nest: true,
-      include: [{
-        model: Itinerarys,
-        as: 'itinerarys'
-      }]
+    const users_itinerarys = await Users_Itinerarys.findAll({
+      raw: true,
     });
-      return res.status(200).send(buses);
+      return res.status(200).send(users_itinerarys);
   } catch (error) {
-    console.log(error);
+      console.log(error);
       return res.status(500).send("internal server error");
 }});
 
 router.get("/:id", async (req, res) => {
   try {
-    const bus = await Bus.findOne({
-      nest: true,
+    const user_itinerary = await Users_Itinerarys.findOne({
+      raw: true, // ???
+      // nest: true,
       where: {id: req.params.id},
-     /* include:[{
-        model: Global_Positions,
-        as: 'current_position',
-         through: { attributes: []}, 
-          query: ('SELECT * FROM global_positions WHERE max(id)', {
-          model: Global_Positions,
-          mapToModel: true 
-        }),  
-      }]*/
-      
     });
-    return res.status(200).send(bus);
+    return res.status(200).send(user_itinerary);
   } catch (error) {
     console.log(error);
     return res.status(500).send("internal server error");
@@ -53,7 +47,7 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    await Bus.update(req.body,
+    await Users_Itinerarys.update(req.body,
       { where: {id: req.params.id} }
     );
     return res.status(200).send(true);
@@ -66,7 +60,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-      await Bus.destroy({
+      await Users_Itinerarys.destroy({
         where: {id: req.params.id},
       }); 
       return res.status(200).send("Deletado com sucesso");

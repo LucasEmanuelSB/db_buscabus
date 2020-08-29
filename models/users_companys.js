@@ -10,9 +10,9 @@ class Users_Companys extends Sequelize.Model {
             primaryKey: true,
           },
           rate: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.DECIMAL(2,1),
             allowNull: true,
-          }, 
+          },
            id_user:{
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',

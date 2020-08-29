@@ -6,6 +6,7 @@ const Bus = require("../models/bus");
 const Bus_Drivers = require("../models/bus_drivers");
 const Bus_Global_Positions = require("../models/bus_global_positions");
 const Bus_Stops = require("../models/bus_stops");
+const Calendars = require("../models/calendars");
 const Companys = require("../models/companys");
 const Connections = require("../models/connections");
 const Global_Positions = require("../models/global_positions");
@@ -25,7 +26,8 @@ const models = [
     Bus, 
     Bus_Drivers,
     Bus_Global_Positions, 
-    Bus_Stops, 
+    Bus_Stops,
+    Calendars, 
     Companys, 
     Connections,  
     Global_Positions, 
@@ -47,7 +49,8 @@ class Database {
   }
 
   init() {
-    const sequelize = new Sequelize(config.sequelize);
+      const sequelize = new Sequelize(config.sequelize);
+
     models
       .map((model) => model.init(sequelize))
       //.map((model) => model.sync({ force: true }))

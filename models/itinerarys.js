@@ -17,19 +17,15 @@ class Itinerarys extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        date: {
-          type: Sequelize.DATE,
-          allowNull: false,
-        },
-        time: {
-          type: Sequelize.TIME,
-          allowNull: false,
-        },
         id_start_adress:{
           type: Sequelize.INTEGER,
           allowNull: false, 
         },
         id_end_adress:{
+          type: Sequelize.INTEGER,
+          allowNull: false, 
+        },
+        id_calendar:{
           type: Sequelize.INTEGER,
           allowNull: false, 
         },
@@ -47,6 +43,10 @@ class Itinerarys extends Sequelize.Model {
 
   static associate(models){
 
+    this.belongsTo(models.calendars,{
+      foreignKey: 'id_calendar'
+    });
+    
     this.belongsTo(models.bus_stops,{
       foreignKey: 'id_start_adress',
     });

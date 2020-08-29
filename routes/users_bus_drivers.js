@@ -1,50 +1,44 @@
 const express = require("express");
+const Users_Bus_Drivers = require("../models/users_bus_drivers");
 const router = express.Router();
-const Bus = require("../models/bus");
-const Itinerarys = require("../models/itinerarys");
 
 router.post("/", async (req, res) => {
-  try {
-    console.log(req.body);
-    Bus.create(req.body);
-    return res.status(200).send("Criado com sucesso");
+
+    const {id_user, id_bus_driver} = req.body;
+    const user_bus_driver = null;
+
+    try {
+        user_bus_driver = Users_Bus_Drivers.create({
+        id_user,
+        id_bus_driver
+      });
+  
+      return res.status(200).send(user_bus_driver);
   } catch (error) {
+    console.log(error);
     return res.status(500).send("Ocorreu um erro interno");
   }
 });
 
 router.get("/", async (req,res) => {
   try {
-    const buses = await Bus.findAll({
-      nest: true,
-      include: [{
-        model: Itinerarys,
-        as: 'itinerarys'
-      }]
+    const users_bus_drivers = await Users_Bus_Stops.findAll({
+      raw: true,
     });
-      return res.status(200).send(buses);
+      return res.status(200).send(users_bus_drivers);
   } catch (error) {
-    console.log(error);
+      console.log(error);
       return res.status(500).send("internal server error");
 }});
 
 router.get("/:id", async (req, res) => {
   try {
-    const bus = await Bus.findOne({
-      nest: true,
+    const users_bus_drivers = await Users_Bus_Drivers.findOne({
+      raw: true, // ???
+      // nest: true,
       where: {id: req.params.id},
-     /* include:[{
-        model: Global_Positions,
-        as: 'current_position',
-         through: { attributes: []}, 
-          query: ('SELECT * FROM global_positions WHERE max(id)', {
-          model: Global_Positions,
-          mapToModel: true 
-        }),  
-      }]*/
-      
     });
-    return res.status(200).send(bus);
+    return res.status(200).send(users_bus_drivers);
   } catch (error) {
     console.log(error);
     return res.status(500).send("internal server error");
@@ -53,7 +47,7 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    await Bus.update(req.body,
+    await Users_Bus_Drivers.update(req.body,
       { where: {id: req.params.id} }
     );
     return res.status(200).send(true);
@@ -66,7 +60,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-      await Bus.destroy({
+      await Users_Bus_Drivers.destroy({
         where: {id: req.params.id},
       }); 
       return res.status(200).send("Deletado com sucesso");

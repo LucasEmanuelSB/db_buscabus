@@ -9,11 +9,6 @@ class Users_Bus extends Sequelize.Model {
             autoIncrement: true,
             primaryKey: true,
           },
-          is_favorite: {
-            type: Sequelize.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
-          }, 
            id_user:{
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',
@@ -34,6 +29,12 @@ class Users_Bus extends Sequelize.Model {
       );
       return this;
     }
+
+/*     static associate(models){
+      this.belongsTo(models.users,{
+        foreignKey: 'id_user'
+      })
+    } */
 }
 
 module.exports = Users_Bus;

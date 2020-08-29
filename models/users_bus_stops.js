@@ -9,11 +9,6 @@ class Users_Bus_Stops extends Sequelize.Model {
             autoIncrement: true,
             primaryKey: true,
           },
-          is_favorite: {
-            type: Sequelize.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
-          }, 
            id_user:{
             type: Sequelize.INTEGER,
             onDelete: 'CASCADE',

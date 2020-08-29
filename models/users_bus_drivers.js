@@ -10,7 +10,7 @@ class Users_Bus_Drivers extends Sequelize.Model {
             primaryKey: true,
           },
           rate: {
-            type: Sequelize.BOOLEAN,
+            type: Sequelize.DECIMAL(2,1),
             allowNull: true,
           }, 
            id_user:{
