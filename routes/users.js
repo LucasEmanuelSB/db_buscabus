@@ -5,15 +5,23 @@ const bcrypt = require("bcrypt");
 const Persons = require("../models/persons");
 
 router.post("/", async (req, res) => {
+
+  const email = req.body.email;
   try {
+    let user = await Users.findOne({where: {email: email}});
+    if(user){
+      return res.send("email ja cadastrado");
+    } else {
     const salt = await bcrypt.genSalt(10);
 
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     req.body.password = hashedPassword;
     
-    const user = await Users.create(req.body);
+    let user = await Users.create(req.body);
     return res.status(200).send(req.body);
+
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);

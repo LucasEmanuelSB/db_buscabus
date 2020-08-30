@@ -5,10 +5,10 @@ const Bus_Global_Positions = require("../models/bus_global_positions");
 router.post("/", async (req, res) => {
   try {
     Bus_Global_Positions.create(req.body);
-    return res.status(200).send("Criado com sucesso");
+    return res.status(200).send(req.body);
   } catch (error) {
     console.log(error);
-    return res.status(500).send("Ocorreu um erro interno");
+    return res.status(500).send(error);
   }
 });
 
@@ -19,7 +19,7 @@ router.get("/", async (req,res) => {
     });
       return res.status(200).send(bus_global_positions);
   } catch (error) {
-      return res.status(500).send("internal server error");
+      return res.status(500).send(error);
 }});
 
 router.get("/:id", async (req, res) => {
@@ -31,7 +31,7 @@ router.get("/:id", async (req, res) => {
     return res.status(200).send(bus_global_position);
   } catch (error) {
     console.log(error);
-    return res.status(500).send("internal server error");
+    return res.status(500).send(error);
   }
 });
 
@@ -53,7 +53,7 @@ router.delete("/:id", async (req, res) => {
       await Bus_Global_Positions.destroy({
         where: {id: req.params.id},
       }); 
-      return res.status(200).send("Deletado com sucesso");
+      return res.status(200).send(error);
     } catch (error) {
       console.log(error);
       return res.status(500).send(error);

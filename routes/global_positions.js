@@ -26,10 +26,6 @@ router.get("/:id", async (req, res) => {
   try {
     const global_position = await Global_Positions.findOne({
       where: {id: req.params.id},
-      include: [{
-        model: Bus,
-        as: "bus",
-      }]
     });
     return res.status(200).send(global_position);
   } catch (error) {

@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Bus = require("../models/bus");
+const Global_Positions = require("../models/global_positions");
+const Sequelize = require("sequelize");
+const { max } = require("../models/bus");
+const { json } = require("sequelize");
 
 router.post("/", async (req, res) => {
   try {
@@ -31,6 +35,44 @@ router.get("/:id", async (req, res) => {
       include:[{all: true}]
       });
     return res.status(200).send(bus);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});
+
+router.get("/:id/historic_position", async (req, res) => {
+  try {
+    const bus = await Bus.findOne({
+      nest: true,
+      //raw: true,
+      where: {id: req.params.id},
+      include:[{model: Global_Positions, as: 'current_position', attributes: ['id','latitude', 'longitude'], through: { attributes: []}}]
+      });
+    return res.status(200).send(bus);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});
+
+router.get("/:id_bus/:id_global_position", async (req, res) => {
+  const { id_bus, id_global_position } = req.params;
+  try {
+    const global_position = await Bus.findOne({
+      raw: true,
+      nest: true,
+      attributes: [],
+      where: {id: id_bus},
+      include:
+      [{
+        model: Global_Positions,
+        as: 'current_position',
+       where: { id:  id_global_position },
+        attributes: ['id','latitude','longitude'],
+        through: { attributes: []}}]});
+      
+    return res.status(200).send(global_position);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
