@@ -3,9 +3,16 @@ const router = express.Router();
 const Companys = require("../models/companys");
 
 router.post("/", async (req, res) => {
+
+  const name = req.body.name;
   try {
+    const company = await Companys.findOne({where: {name: name}});
+    if(company){
+      return res.send("name already exists");
+    } else {
     Companys.create(req.body);
     return res.status(200).send(req.body);
+    }
   } catch (error) {
     return res.status(500).send(error);
   }

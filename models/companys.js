@@ -11,7 +11,8 @@ class Companys extends Sequelize.Model {
         },
         name:{
           type: Sequelize.STRING,
-          allowNull: false, 
+          allowNull: false,
+          unique: true, 
         },
         average_rate:{
           type: Sequelize.DECIMAL,

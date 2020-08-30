@@ -20,9 +20,9 @@ router.post("/", async (req, res) => {
   
   try {
     const user = await Users.findOne({
+      raw: true,
       nest: true,
-      where: { email: email },
-      include: [{all: true,through: {attributes: [ ]}}]
+      where: { email: email }
     });
 
     if (!user) 

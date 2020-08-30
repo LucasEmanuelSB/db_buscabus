@@ -17,5 +17,6 @@ router.use("/routes", require("./routes"));
 router.use("/users", require("./users"));
 router.use("/rate_company", require("./users_companys"));
 router.use("/rate_bus_driver", require("./users_bus_drivers"));
+router.use("/routes_bus_stops", require("./routes_bus_stops"));
 
 module.exports = router;

@@ -15,9 +15,9 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (res) => {
+router.get("/", async (req,res) => {
   try {
-    const buses = await Bus.findAll({
+    let buses = await Bus.findAll({
       nest: true,
       include: [{all: true}]
     });

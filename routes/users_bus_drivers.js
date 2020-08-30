@@ -4,8 +4,8 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   
-    try {
-      Users_Bus_Drivers.create(req.body);
+  try {
+    await Users_Bus_Drivers.create(req.body);
       return res.status(200).send(req.body);
   } catch (error) {
     console.log(error);
