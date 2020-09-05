@@ -5,6 +5,9 @@ const Global_Positions = require("../models/global_positions");
 const Sequelize = require("sequelize");
 const { max } = require("../models/bus");
 const { json } = require("sequelize");
+const Persons = require("../models/persons");
+const Itinerarys = require("../models/itinerarys");
+const Bus_Drivers = require("../models/bus_drivers");
 
 router.post("/", async (req, res) => {
   try {
@@ -19,7 +22,25 @@ router.get("/", async (req,res) => {
   try {
     let buses = await Bus.findAll({
       nest: true,
-      include: [ {all: true, through: {attributes: []} }, ]
+      attributes: ['id','line','is_available'],
+      include: [
+        {
+        model: Bus_Drivers,
+        as: 'bus_driver'
+        },
+        {
+        model: Itinerarys,
+        as: 'itinerary'
+        },
+        {
+        model: Global_Positions,
+        as: 'current_position', through: [ {attributes: []}]
+        },
+        {
+        model: Persons,
+        as: 'persons'
+        }
+      ]
     });
       return res.status(200).send(buses);
   } catch (error) {
@@ -32,8 +53,25 @@ router.get("/:id", async (req, res) => {
     const bus = await Bus.findOne({
       nest: true,
       where: {id: req.params.id},
-      include: [ {all: true, through: {attributes: []} }, ]
-      });
+      attributes: ['id','line','is_available'],
+      include: [
+        {
+        model: Bus_Drivers,
+        as: 'bus_driver'
+        },
+        {
+        model: Itinerarys,
+        as: 'itinerary'
+        },
+        {
+        model: Global_Positions,
+        as: 'current_position', through: [ {attributes: []}]
+        },
+        {
+        model: Persons,
+        as: 'persons'
+        }
+      ]});
     return res.status(200).send(bus);
   } catch (error) {
     console.log(error);

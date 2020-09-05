@@ -5,6 +5,9 @@ const Users = require("../models/users");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const config = require("../config.json");
+const Persons = require("../models/persons");
+const Bus_Drivers = require("../models/bus_drivers");
+const Companys = require("../models/companys");
 
 function generateAuthToken(email) {
   const token = jwt.sign({ email }, config.secure, {
@@ -23,7 +26,24 @@ router.post("/", async (req, res) => {
       raw: true,
       nest: true,
       where: { email: email },
-      include: [ {all: true, through: {attributes: []} }, ]
+      include: [
+        {
+        model: Persons,
+        as: 'person'
+        },
+        {
+        model: Bus_Drivers,
+        as: 'ratings_bus_drivers',
+        attributes: ['id','name'],
+        through: [{ atributes: ['rate']}]
+        },
+        {
+        model: Companys,
+        as: 'ratings_companys',
+        attributes: ['id','name'],
+        through: [{ atributes: ['rate']}]
+        },
+    ],
     });
 
     if (!user) 

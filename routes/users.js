@@ -3,7 +3,8 @@ const router = express.Router();
 const Users = require("../models/users");
 const bcrypt = require("bcrypt");
 const Persons = require("../models/persons");
-
+const Bus_Drivers = require("../models/bus_drivers");
+const Companys = require("../models/companys");
 router.post("/", async (req, res) => {
 
   const email = req.body.email;
@@ -32,8 +33,24 @@ router.get("/", async (req,res) => {
   try {
     const users = await Users.findAll({
       nest: true,
-      include: [{model: Persons}],
-      include: [ {all: true, through: {attributes: []} }, ]
+      include: [
+        {
+        model: Persons,
+        as: 'person'
+        },
+        {
+        model: Bus_Drivers,
+        as: 'ratings_bus_drivers',
+        attributes: ['id','name'],
+        through: [{ atributes: ['rate']}]
+        },
+        {
+        model: Companys,
+        as: 'ratings_companys',
+        attributes: ['id','name'],
+        through: [{ atributes: ['rate']}]
+        },
+    ],
     });
       return res.status(200).send(users);
   } catch (error) {
@@ -47,7 +64,24 @@ router.get("/:id", async (req, res) => {
       nest: true,
       raw: true,
       where: {id: req.params.id},
-      include: [ {all: true, through: {attributes: []} }, ]
+      include: [
+        {
+        model: Persons,
+        as: 'person'
+        },
+        {
+        model: Bus_Drivers,
+        as: 'ratings_bus_drivers',
+        attributes: ['id','name'],
+        through: [{ atributes: ['rate']}]
+        },
+        {
+        model: Companys,
+        as: 'ratings_companys',
+        attributes: ['id','name'],
+        through: [{ atributes: ['rate']}]
+        },
+    ],
     });
     return res.status(200).send(user);
   } catch (error) {

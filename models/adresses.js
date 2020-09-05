@@ -46,9 +46,10 @@ class Adresses extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.bus_stops, {
-      foreignKey: 'id',
-      //as: "adress",
+    this.hasOne(models.bus_stops, {
+      foreignKey: 'id_adress',
+      sourceKey: 'id',
+      as: 'adress',
     });
   }
 }

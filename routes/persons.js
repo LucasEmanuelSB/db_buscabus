@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Persons = require("../models/persons");
+const Bus = require("../models/bus");
 
 router.post("/", async (req, res) => {
   try {
@@ -14,7 +15,11 @@ router.post("/", async (req, res) => {
 router.get("/", async (req,res) => {
   try {
     const persons = await Persons.findAll({
-      raw: true,
+      nest: true,
+      attributes: ['id','device_adress'],
+      include: [{
+        model: Bus, as: 'bus', 
+      }]
     });
       return res.status(200).send(persons);
   } catch (error) {
@@ -25,7 +30,10 @@ router.get("/:id", async (req, res) => {
   try {
     const person = await Persons.findOne({
       where: {id: req.params.id},
-      
+      attributes: ['id','device_adress'],
+      include: [{
+        model: Bus, as: 'bus', 
+      }]
     });
     return res.status(200).send(person);
   } catch (error) {
@@ -36,8 +44,9 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    await Persons.update(req.body,
-      { where: {id: req.params.id} }
+    await Persons.update(req.body,{ 
+      where: {id: req.params.id},
+    }
     );
     return res.status(200).send(true);
   } catch (error) {

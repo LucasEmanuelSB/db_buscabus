@@ -31,7 +31,8 @@ class Persons extends Sequelize.Model {
 
   static associate(models){
     this.belongsTo(models.bus,{
-      foreignKey: 'id_bus'
+      foreignKey: 'id_bus',
+      as: 'bus'
     });
   }
 

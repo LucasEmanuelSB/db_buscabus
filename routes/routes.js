@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Routes = require("../models/routes");
+const Bus_Stops = require("../models/bus_stops");
+const Itinerarys = require("../models/itinerarys");
+const Points = require("../models/points");
 
 router.post("/", async (req, res) => {
   try {
@@ -15,7 +18,21 @@ router.get("/", async (req,res) => {
   try {
     const routes = await Routes.findAll({
       nest: true,
-      include: [{all: true}]
+      attributes: ['id'],
+      include: [{
+        model: Bus_Stops,
+        as: 'bus_stops',
+        through: [{ attributes: []}]
+      },
+      {
+        model: Itinerarys,
+        as: 'itinerarys'
+      },
+      {
+        model: Points,
+        as: 'points'
+      }
+    ]
     });
       return res.status(200).send(routes);
   } catch (error) {
@@ -25,8 +42,24 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const route = await Routes.findOne({
+      nest: true,
+      raw: true,
       where: {id: req.params.id},
-      include: [{all: true}]
+      attributes: ['id'],
+      include: [{
+        model: Bus_Stops,
+        as: 'bus_stops',
+        through: [{ attributes: []}]
+      },
+      {
+        model: Itinerarys,
+        as: 'itinerarys'
+      },
+      {
+        model: Points,
+        as: 'points'
+      }
+    ]
     });
     return res.status(200).send(route);
   } catch (error) {

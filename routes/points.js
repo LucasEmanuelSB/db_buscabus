@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Points = require("../models/points");
+const Routes = require("../models/routes");
 
 router.post("/", async (req, res) => {
   try {
@@ -15,7 +16,11 @@ router.get("/", async (req,res) => {
   try {
     const points = await Points.findAll({
       nest: true,
-      include: [{all: true}]
+      attributes: ['id','latitude','longitude'],
+      include: [{
+        model: Routes,
+        as: 'route'
+      }]
     });
       return res.status(200).send(points);
   } catch (error) {
@@ -25,8 +30,14 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const point = await Points.findOne({
+      raw: true,
+      nest: true,
       where: {id: req.params.id},
-      include: [{all: true}]
+      attributes: ['id','latitude','longitude'],
+      include: [{
+        model: Routes,
+        as: 'route'
+      }]
     });
     return res.status(200).send(point);
   } catch (error) {

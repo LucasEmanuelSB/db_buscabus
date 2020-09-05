@@ -33,6 +33,12 @@ class Points extends Sequelize.Model {
     return this;
   }
 
+  static associate(models){
+    this.belongsTo(models.routes,{
+      foreignKey: 'id_route',
+      as: 'route'
+    })
+  }
 }
 
 module.exports = Points;

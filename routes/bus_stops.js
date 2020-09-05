@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Bus_Stops = require("../models/bus_stops");
-const Adress = require("../models/adresses");
+const Adresses = require("../models/adresses");
+const Routes = require("../models/routes");
 
 router.post("/", async (req, res) => {
   try {
@@ -17,7 +18,18 @@ router.get("/", async (req,res) => {
     const bus_stops = await Bus_Stops.findAll({
       nest: true,
       //raw: true,
-      include: [ {all: true, through: {attributes: []} }, ]
+      attributes: ['id','is_terminal','latitude','longitude'],
+      include: [
+        {
+        model: Adresses,
+        as: 'adress'
+        },
+        {
+        model: Routes,
+        as: 'routes', through: [ {attributes: []}]
+        },
+    ],
+      //include: [ {all: true, through: {attributes: []} }, ]
     });
       return res.status(200).send(bus_stops);
   } catch (error) {
@@ -30,7 +42,19 @@ router.get("/:id", async (req, res) => {
       raw: true, 
       nest: true,
       where: {id: req.params.id},
-      include: [ {all: true, through: {attributes: []} }, ]
+      attributes: ['id','is_terminal','latitude','longitude'],
+      include: [
+        {
+        model: Adresses,
+        as: 'adress'
+        },
+        {
+        model: Routes,
+        as: 'routes',
+        through: [ {attributes: []}]
+        },
+    ]
+      /* include: [ {all: true, through: {attributes: []} }, ] */
     });
     return res.status(200).send(bus_stop);
   } catch (error) {

@@ -77,7 +77,8 @@ class Users extends Sequelize.Model {
   static associate(models){
 
     this.belongsTo(models.persons,{
-      foreignKey: 'id_person'
+      foreignKey: 'id_person',
+      as: 'person'
     });
 
     this.belongsToMany(models.bus_drivers,{

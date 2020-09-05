@@ -41,12 +41,12 @@ class Bus_Stops extends Sequelize.Model {
 
     this.belongsToMany(models.routes,{
       through: models.routes_bus_stops,
-      foreignKey: 'id_bus_stop'
+      foreignKey: 'id_bus_stop',
+      as: 'routes'
     })
 
-    this.hasOne(models.adresses, {
-      foreignKey: 'id',
-      sourceKey: 'id_adress',
+    this.belongsTo(models.adresses, {
+      foreignKey: 'id_adress',
       as : 'adress',
     });
 
