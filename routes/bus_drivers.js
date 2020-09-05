@@ -16,7 +16,7 @@ router.get("/", async (req,res) => {
   try {
     const bus_drivers = await Bus_Drivers.findAll({
       nest: true,
-      include: [{all: true}]
+      //include: [{all: true}]
     });
       return res.status(200).send(bus_drivers);
   } catch (error) {
