@@ -32,7 +32,8 @@ router.get("/", async (req,res) => {
   try {
     const users = await Users.findAll({
       nest: true,
-      include: [{model: Persons}]
+      include: [{model: Persons}],
+      include: [ {all: true, through: {attributes: []} }, ]
     });
       return res.status(200).send(users);
   } catch (error) {
@@ -44,8 +45,9 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await Users.findOne({
       nest: true,
+      raw: true,
       where: {id: req.params.id},
-      include: [{all: true}]
+      include: [ {all: true, through: {attributes: []} }, ]
     });
     return res.status(200).send(user);
   } catch (error) {

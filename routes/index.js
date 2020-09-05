@@ -13,6 +13,7 @@ router.use("/companys", require("./companys"));
 router.use("/global_positions", require("./global_positions"));
 router.use("/itinerarys", require("./itinerarys"));
 router.use("/persons", require("./persons"));
+router.use("/points", require("./points"));
 router.use("/routes", require("./routes"));
 router.use("/users", require("./users"));
 router.use("/rate_company", require("./users_companys"));

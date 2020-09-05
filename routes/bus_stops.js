@@ -15,7 +15,9 @@ router.post("/", async (req, res) => {
 router.get("/", async (req,res) => {
   try {
     const bus_stops = await Bus_Stops.findAll({
-      raw: true,
+      nest: true,
+      //raw: true,
+      include: [ {all: true, through: {attributes: []} }, ]
     });
       return res.status(200).send(bus_stops);
   } catch (error) {
@@ -28,7 +30,7 @@ router.get("/:id", async (req, res) => {
       raw: true, 
       nest: true,
       where: {id: req.params.id},
-      include: [{all: true}]
+      include: [ {all: true, through: {attributes: []} }, ]
     });
     return res.status(200).send(bus_stop);
   } catch (error) {

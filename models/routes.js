@@ -9,10 +9,6 @@ class Routes extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        points:{
-          type: Sequelize.JSON,
-          allowNull: false, 
-        },
       },
       {
         freezeTableName: true,
@@ -36,6 +32,12 @@ class Routes extends Sequelize.Model {
       foreignKey: 'id_route',
       sourceKey: 'id',
       as: 'itinerarys'
+    })
+
+    this.hasMany(models.points,{
+      foreignKey: 'id_route',
+      sourceKey: 'id',
+      as: 'points'
     })
   }
   

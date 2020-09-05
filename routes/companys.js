@@ -21,7 +21,8 @@ router.post("/", async (req, res) => {
 router.get("/", async (req,res) => {
   try {
     const companys = await Companys.findAll({
-      raw: true,
+      nest: true,
+      include: [ {all: true, through: {attributes: []} }, ]
     });
       return res.status(200).send(companys);
   } catch (error) {
@@ -31,7 +32,8 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const company = await Companys.findOne({
-      where: {id: req.params.id}
+      where: {id: req.params.id},
+      include: [ {all: true, through: {attributes: []} }, ]
     });
     return res.status(200).send(company);
   } catch (error) {

@@ -16,7 +16,7 @@ router.get("/", async (req,res) => {
   try {
     const bus_drivers = await Bus_Drivers.findAll({
       nest: true,
-      //include: [{all: true}]
+      include: [ {all: true, through: {attributes: []} }, ]
     });
       return res.status(200).send(bus_drivers);
   } catch (error) {
@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
     const bus_driver = await Bus_Drivers.findOne({
       nest: true,
       where: {id: req.params.id},
-      include: [{all: true}]
+      include: [ {all: true, through: {attributes: []} }, ]
     });
     return res.status(200).send(bus_driver);
   } catch (error) {

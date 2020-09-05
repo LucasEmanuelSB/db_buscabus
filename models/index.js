@@ -11,6 +11,7 @@ const Companys = require("../models/companys");
 const Global_Positions = require("../models/global_positions");
 const Itinerarys = require("../models/itinerarys");
 const Persons = require("../models/persons");
+const Points = require("../models/points");
 const Routes = require("../models/routes");
 const Routes_Bus_Stops = require("../models/routes_bus_stops")
 const Users = require("../models/users");
@@ -27,7 +28,8 @@ const models = [
     Companys, 
     Global_Positions, 
     Itinerarys, 
-    Persons, 
+    Persons,
+    Points, 
     Routes, 
     Routes_Bus_Stops, 
     Users,
@@ -45,7 +47,7 @@ class Database {
 
     models
       .map((model) => model.init(sequelize))
-      //.map((model) => model.sync({ force: true }))
+      .map((model) => model.sync({ force: true }))
       .map((model) => model.associate && model.associate(sequelize.models));
   }
 }

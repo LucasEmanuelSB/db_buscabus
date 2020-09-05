@@ -15,7 +15,7 @@ router.get("/", async (req,res) => {
   try {
     const itinerarys = await Itinerarys.findAll({
       nest: true,
-      include: [ {all: true } ]
+      include: [ {all: true, through: {attributes: []} }, ]
     });
       return res.status(200).send(itinerarys);
   } catch (error) {
@@ -26,8 +26,10 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const itinerary = await Itinerarys.findOne({
+      nest: true,
+      raw: true,
       where: {id: req.params.id},
-      include: [ {all: true } ]
+      include: [ {all: true, through: {attributes: []} }, ]
     });
     return res.status(200).send(itinerary);
   } catch (error) {

@@ -19,7 +19,7 @@ router.get("/", async (req,res) => {
   try {
     let buses = await Bus.findAll({
       nest: true,
-      include: [{all: true}]
+      include: [ {all: true, through: {attributes: []} }, ]
     });
       return res.status(200).send(buses);
   } catch (error) {
@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
     const bus = await Bus.findOne({
       nest: true,
       where: {id: req.params.id},
-      include:[{all: true}]
+      include: [ {all: true, through: {attributes: []} }, ]
       });
     return res.status(200).send(bus);
   } catch (error) {

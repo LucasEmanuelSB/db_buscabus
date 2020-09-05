@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Persons = require("../models/persons");
+const Points = require("../models/points");
 
 router.post("/", async (req, res) => {
   try {
-    Persons.create(req.body);
+    Points.create(req.body);
     return res.status(200).send(req.body);
   } catch (error) {
     return res.status(500).send(error);
@@ -13,21 +13,22 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req,res) => {
   try {
-    const persons = await Persons.findAll({
-      raw: true,
+    const points = await Points.findAll({
+      nest: true,
+      include: [{all: true}]
     });
-      return res.status(200).send(persons);
+      return res.status(200).send(points);
   } catch (error) {
       return res.status(500).send(error);
 }});
 
 router.get("/:id", async (req, res) => {
   try {
-    const person = await Persons.findOne({
+    const point = await Points.findOne({
       where: {id: req.params.id},
-      
+      include: [{all: true}]
     });
-    return res.status(200).send(person);
+    return res.status(200).send(point);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -36,10 +37,10 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    await Persons.update(req.body,
+    const point = await Points.update(req.body,
       { where: {id: req.params.id} }
     );
-    return res.status(200).send(true);
+    return res.status(200).send(point);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -49,7 +50,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-      await Persons.destroy({
+      await Points.destroy({
         where: {id: req.params.id},
       }); 
       return res.status(200).send("Deletado com sucesso");
