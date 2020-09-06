@@ -4,10 +4,9 @@ const Users_Companys = require("../models/users_companys");
 
 router.post("/", async (req, res) => {
 
-  const { id_user, id_company,rate } = req.body;
     try {
-    await Users_Companys.create(id_user,id_company,rate);
-      return res.status(200).send(req.params);
+    await Users_Companys.create(req.body);
+      return res.status(200).send(req.body);
       
   } catch (error) {
     console.log(error);

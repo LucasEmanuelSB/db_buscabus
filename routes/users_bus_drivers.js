@@ -22,10 +22,10 @@ router.get("/", async (req,res) => {
       return res.status(500).send(error);
 }});
 
-router.get("/:id", async (req, res) => {
+router.get("/:id_user/:id_bus_driver", async (req, res) => {
   try {
     const users_bus_drivers = await Users_Bus_Drivers.findOne({
-      where: {id: req.params.id},
+      where: {id_user: req.params.id_user, id_bus_driver: req.params.id_bus_driver},
     });
     return res.status(200).send(users_bus_drivers);
   } catch (error) {

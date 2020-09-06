@@ -22,11 +22,11 @@ router.get("/", async (req,res) => {
       return res.status(500).send(error);
 }});
 
-router.get("/:id", async (req, res) => {
+router.get("/:id_bus/:id_global_position", async (req, res) => {
   try {
     const bus_global_position = await Bus_Global_Positions.findOne({
       nest: true,
-      where: {id: req.params.id},
+      where: {id_bus: req.params.id_bus, id_global_position: req.params.id_global_position},
     });
     return res.status(200).send(bus_global_position);
   } catch (error) {
