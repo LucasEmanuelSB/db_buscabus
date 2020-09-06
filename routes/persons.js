@@ -29,6 +29,7 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const person = await Persons.findOne({
+      nest: true,
       where: {id: req.params.id},
       attributes: ['id','device_adress'],
       include: [{

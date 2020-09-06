@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize");
-const { options } = require("./adresses");
 
-class Calendar extends Sequelize.Model {
+class Calendars extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
@@ -40,4 +39,4 @@ class Calendar extends Sequelize.Model {
   }
 }
 
-module.exports = Calendar;
+module.exports = Calendars;

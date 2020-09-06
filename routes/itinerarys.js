@@ -53,7 +53,7 @@ router.get("/:id", async (req, res) => {
   try {
     const itinerary = await Itinerarys.findOne({
       nest: true,
-      raw: true,
+      //raw: true,
       where: {id: req.params.id},
       attributes: ['id'],
       include: [

@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 router.get("/", async (req,res) => {
   try {
     const calendars = await Calendars.findAll({
-      raw: true,
+      //raw: true,
     });
       return res.status(200).send(calendars);
   } catch (error) {

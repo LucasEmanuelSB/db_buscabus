@@ -43,7 +43,7 @@ router.get("/:id", async (req, res) => {
   try {
     const route = await Routes.findOne({
       nest: true,
-      raw: true,
+      //raw: true,
       where: {id: req.params.id},
       attributes: ['id'],
       include: [{

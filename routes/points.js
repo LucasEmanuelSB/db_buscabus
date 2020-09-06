@@ -30,7 +30,7 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const point = await Points.findOne({
-      raw: true,
+      //raw: true,
       nest: true,
       where: {id: req.params.id},
       attributes: ['id','latitude','longitude'],

@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 router.get("/", async (req,res) => {
   try {
     const bus_global_positions = await Bus_Global_Positions.findAll({
-      raw: true,
+      //raw: true,
     });
       return res.status(200).send(bus_global_positions);
   } catch (error) {

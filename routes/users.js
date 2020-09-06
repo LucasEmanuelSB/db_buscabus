@@ -62,7 +62,7 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await Users.findOne({
       nest: true,
-      raw: true,
+      //raw: true,
       where: {id: req.params.id},
       include: [
         {

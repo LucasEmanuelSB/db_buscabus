@@ -18,7 +18,7 @@ router.get("/", async (req,res) => {
   try {
     const bus_drivers = await Bus_Drivers.findAll({
       nest: true,
-      raw: true,
+      //raw: true,
       attributes: ['id','name','average_rate'],
       include: [
         {

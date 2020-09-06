@@ -39,7 +39,7 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const bus_stop = await Bus_Stops.findOne({
-      raw: true, 
+      //raw: true, 
       nest: true,
       where: {id: req.params.id},
       attributes: ['id','is_terminal','latitude','longitude'],

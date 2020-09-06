@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
   
   try {
     const user = await Users.findOne({
-      raw: true,
+      //raw: true,
       nest: true,
       where: { email: email },
       include: [

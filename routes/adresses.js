@@ -15,7 +15,8 @@ router.post("/", async (req, res) => {
 router.get("/", async (req,res) => {
   try {
     const adresses = await Adresses.findAll({
-      raw: true,
+      nest: true,
+      //raw: true,
     });
       return res.status(200).send(adresses);
   } catch (error) {

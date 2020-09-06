@@ -8,6 +8,9 @@ const { json } = require("sequelize");
 const Persons = require("../models/persons");
 const Itinerarys = require("../models/itinerarys");
 const Bus_Drivers = require("../models/bus_drivers");
+const Routes = require("../models/routes");
+const Calendars = require("../models/calendars");
+const Bus_Stops = require("../models/bus_stops");
 
 router.post("/", async (req, res) => {
   try {
@@ -21,6 +24,7 @@ router.post("/", async (req, res) => {
 router.get("/", async (req,res) => {
   try {
     let buses = await Bus.findAll({
+      //raw: true,
       nest: true,
       attributes: ['id','line','is_available'],
       include: [
@@ -30,7 +34,25 @@ router.get("/", async (req,res) => {
         },
         {
         model: Itinerarys,
-        as: 'itinerary'
+        as: 'itinerary',
+        include: [
+          {
+            model: Routes,
+            as: 'route'
+          },
+          {
+            model: Calendars,
+            as: 'calendar'
+          },
+          {
+            model: Bus_Stops,
+            as: 'start_adress'
+          },
+          {
+            model: Bus_Stops,
+            as: 'end_adress'
+          },
+        ]
         },
         {
         model: Global_Positions,
@@ -51,6 +73,7 @@ router.get("/", async (req,res) => {
 router.get("/:id", async (req, res) => {
   try {
     const bus = await Bus.findOne({
+      
       nest: true,
       where: {id: req.params.id},
       attributes: ['id','line','is_available'],
