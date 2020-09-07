@@ -4,9 +4,9 @@
         "host": "localhost",
         "dialect": "postgres",
         "database": "db_buscabus",
-        "username": "postgres",
+        "username": "lucasemanuelsb",
         "port": "5432",
-        "password": "040797lesb"
+        "password": "6109896"
         
     }
 }
