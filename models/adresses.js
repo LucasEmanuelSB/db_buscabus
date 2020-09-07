@@ -38,7 +38,7 @@ class Adresses extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "adresses",
+        modelName: "Adresses",
       }
     );
 
@@ -46,10 +46,9 @@ class Adresses extends Sequelize.Model {
   }
 
   static associate(models) {
-    this.hasOne(models.bus_stops, {
-      foreignKey: 'id_adress',
+    this.hasOne(models.BusStops, {
+      foreignKey: 'adressId',
       sourceKey: 'id',
-      as: 'adress',
     });
   }
 }

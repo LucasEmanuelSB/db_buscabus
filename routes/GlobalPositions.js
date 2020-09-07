@@ -1,33 +1,35 @@
 const express = require("express");
-const Users_Bus_Drivers = require("../models/users_bus_drivers");
 const router = express.Router();
+const GlobalPositions = require("../models/GlobalPositions");
+const Buses = require("../models/Buses");
 
 router.post("/", async (req, res) => {
-  
   try {
-    await Users_Bus_Drivers.create(req.body);
-      return res.status(200).send(req.body);
+    GlobalPositions.create(req.body);
+    return res.status(200).send(req.body);
   } catch (error) {
-    console.log(error);
     return res.status(500).send(error);
   }
 });
 
 router.get("/", async (req,res) => {
   try {
-    const users_bus_drivers = await Users_Bus_Drivers.findAll({});
-      return res.status(200).send(users_bus_drivers);
+    const globalPositions = await GlobalPositions.findAll({
+      include: [ {all: true, through: {attributes: []} }, ]
+    });
+      return res.status(200).send(globalPositions);
   } catch (error) {
-      console.log(error);
+    console.log(error);
       return res.status(500).send(error);
 }});
 
-router.get("/:id_user/:id_bus_driver", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const users_bus_drivers = await Users_Bus_Drivers.findOne({
-      where: {id_user: req.params.id_user, id_bus_driver: req.params.id_bus_driver},
+    const globalPostion = await GlobalPositions.findOne({
+      where: {id: req.params.id},
+      include: [ {all: true, through: {attributes: []} }, ]
     });
-    return res.status(200).send(users_bus_drivers);
+    return res.status(200).send(globalPostion);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -36,10 +38,10 @@ router.get("/:id_user/:id_bus_driver", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const user_bus_driver = await Users_Bus_Drivers.update(req.body,
+    const gps = await GlobalPositions.update(req.body,
       { where: {id: req.params.id} }
     );
-    return res.status(200).send(user_bus_driver);
+    return res.status(200).send(gps);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -49,7 +51,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-      await Users_Bus_Drivers.destroy({
+      await GlobalPositions.destroy({
         where: {id: req.params.id},
       }); 
       return res.status(200).send("Deletado com sucesso");

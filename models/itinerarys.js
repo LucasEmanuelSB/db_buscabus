@@ -9,23 +9,23 @@ class Itinerarys extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        id_bus: {
+        busId: {
           type: Sequelize.INTEGER,
           allowNull: true
         },
-        id_route: {
+        routeId: {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
-        id_start_adress:{
+        startBusStopId:{
           type: Sequelize.INTEGER,
           allowNull: true, 
         },
-        id_end_adress:{
+        endBusStopId:{
           type: Sequelize.INTEGER,
           allowNull: true, 
         },
-        id_calendar:{
+        calendarId:{
           type: Sequelize.INTEGER,
           allowNull: true, 
         },
@@ -34,7 +34,7 @@ class Itinerarys extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "itinerarys",
+        modelName: "Itinerarys",
       }
     );
 
@@ -43,26 +43,29 @@ class Itinerarys extends Sequelize.Model {
 
   static associate(models){
 
-    this.belongsTo(models.bus,{
-      foreignKey: 'id_bus'
+    this.belongsTo(models.Buses,{
+      foreignKey: 'busId',
+      as: 'bus'
     });
 
-    this.belongsTo(models.routes,{
-      foreignKey: 'id_route'
+    this.belongsTo(models.Routes,{
+      foreignKey: 'routeId',
+      as: 'route'
     });
 
-    this.belongsTo(models.calendars,{
-      foreignKey: 'id_calendar'
+    this.belongsTo(models.Calendars,{
+      foreignKey: 'calendarId',
+      as: 'calendar'
     });
 
-    this.belongsTo(models.bus_stops,{
-      foreignKey: 'id_start_adress',
-      as: 'start_adress'
+    this.belongsTo(models.BusStops,{
+      foreignKey: 'startBusStopId',
+      as: 'startBusStop'
     });
     
-    this.belongsTo(models.bus_stops,{
-      foreignKey: 'id_end_adress',
-      as: 'end_adress'
+    this.belongsTo(models.BusStops,{
+      foreignKey: 'endBusStopId',
+      as: 'endBusStop'
     });
 
   }

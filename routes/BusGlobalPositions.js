@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Bus_Global_Positions = require("../models/bus_global_positions");
+const BusGlobalPositions = require("../models/BusGlobalPositions");
 
 router.post("/", async (req, res) => {
   try {
-    Bus_Global_Positions.create(req.body);
+    BusGlobalPositions.create(req.body);
     return res.status(200).send(req.body);
   } catch (error) {
     console.log(error);
@@ -14,21 +14,21 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req,res) => {
   try {
-    const bus_global_positions = await Bus_Global_Positions.findAll({
+    const busGlobalPositions = await BusGlobalPositions.findAll({
       //raw: true,
     });
-      return res.status(200).send(bus_global_positions);
+      return res.status(200).send(busGlobalPositions);
   } catch (error) {
       return res.status(500).send(error);
 }});
 
-router.get("/:id_bus/:id_global_position", async (req, res) => {
+router.get("/:busId/:globalPositionId", async (req, res) => {
   try {
-    const bus_global_position = await Bus_Global_Positions.findOne({
+    const busGlobalPosition = await BusGlobalPositions.findOne({
       nest: true,
-      where: {id_bus: req.params.id_bus, id_global_position: req.params.id_global_position},
+      where: {busId: req.params.busId, globalPositionId: req.params.globalPositionId},
     });
-    return res.status(200).send(bus_global_position);
+    return res.status(200).send(busGlobalPosition);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -37,7 +37,7 @@ router.get("/:id_bus/:id_global_position", async (req, res) => {
 
 /* router.put("/:id", async (req, res) => {
   try {
-    await Bus_Global_Positions.update(req.body,
+    await BusGlobalPositions.update(req.body,
       { where: {id: req.params.id} }
     );
     return res.status(200).send(true);
@@ -50,7 +50,7 @@ router.get("/:id_bus/:id_global_position", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-      await Bus_Global_Positions.destroy({
+      await BusGlobalPositions.destroy({
         where: {id: req.params.id},
       }); 
       return res.status(200).send(error);

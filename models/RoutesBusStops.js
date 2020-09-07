@@ -1,14 +1,14 @@
 const Sequelize = require("sequelize");
 
-class Routes_Bus_Stops extends Sequelize.Model {
+class RoutesBusStops extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id_route:{
+        routeId:{
           type: Sequelize.INTEGER,
           primaryKey: true, 
         },
-        id_bus_stop:{
+        busStopId:{
           type: Sequelize.INTEGER,
           primaryKey: true,
         },
@@ -17,7 +17,7 @@ class Routes_Bus_Stops extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "routes_bus_stops",
+        modelName: "RoutesBusStops",
       }
     );
 
@@ -25,4 +25,4 @@ class Routes_Bus_Stops extends Sequelize.Model {
   }
 }
 
-module.exports = Routes_Bus_Stops;
+module.exports = RoutesBusStops;

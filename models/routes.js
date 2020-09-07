@@ -14,7 +14,7 @@ class Routes extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "routes",
+        modelName: "Routes",
       }
     );
 
@@ -23,20 +23,20 @@ class Routes extends Sequelize.Model {
 
   static associate(models){
 
-    this.belongsToMany(models.bus_stops,{
-      through: models.routes_bus_stops,
-      foreignKey: 'id_route',
-      as: 'bus_stops'
+    this.belongsToMany(models.BusStops,{
+      through: models.RoutesBusStops,
+      foreignKey: 'routeId',
+      as: 'busStops'
     })
 
-    this.hasMany(models.itinerarys,{
-      foreignKey: 'id_route',
+    this.hasMany(models.Itinerarys,{
+      foreignKey: 'routeId',
       sourceKey: 'id',
       as: 'itinerarys'
     })
 
-    this.hasMany(models.points,{
-      foreignKey: 'id_route',
+    this.hasMany(models.Points,{
+      foreignKey: 'routeId',
       sourceKey: 'id',
       as: 'points'
     })

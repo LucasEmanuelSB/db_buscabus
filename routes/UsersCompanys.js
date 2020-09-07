@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Users_Companys = require("../models/users_companys");
+const UsersCompanys = require("../models/UsersCompanys");
 
 router.post("/", async (req, res) => {
 
     try {
-    await Users_Companys.create(req.body);
+    await UsersCompanys.create(req.body);
       return res.status(200).send(req.body);
       
   } catch (error) {
@@ -17,27 +17,27 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req,res) => {
   try {
-    const users_companys = await Users_Companys.findAll({
+    const usersCompanys = await UsersCompanys.findAll({
       nest: true,
     });
-      return res.status(200).send(users_companys);
+      return res.status(200).send(usersCompanys);
   } catch (error) {
       console.log(error);
       return res.status(500).send(error);
 }});
 
-router.get("/:id_user/:id_company/", async (req, res) => {
+router.get("/:userId/:companyId/", async (req, res) => {
 
-  const { id_user, id_company } = req.params;
+  const { userId, companyId } = req.params;
   
   try {
-    const user_company = await Users_Companys.findOne({
+    const userCompany = await UsersCompanys.findOne({
       where: {
-        id_user: id_user,
-        id_company: id_company
+        userId: userId,
+        companyId: companyId
       },
     });
-    return res.status(200).send(user_company);
+    return res.status(200).send(userCompany);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -46,10 +46,10 @@ router.get("/:id_user/:id_company/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const user_company = await Users_Companys.update(req.body,
+    const userCompany = await UsersCompanys.update(req.body,
       { where: {id: req.params.id} }
     );
-    return res.status(200).send(user_company);
+    return res.status(200).send(userCompany);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -59,7 +59,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-      await Users_Companys.destroy({
+      await UsersCompanys.destroy({
         where: {id: req.params.id},
       }); 
       return res.status(200).send("Deletado com sucesso");

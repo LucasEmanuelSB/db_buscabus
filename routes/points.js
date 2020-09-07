@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Points = require("../models/points");
-const Routes = require("../models/routes");
+const Points = require("../models/Points");
+const Routes = require("../models/Routes");
 
 router.post("/", async (req, res) => {
   try {

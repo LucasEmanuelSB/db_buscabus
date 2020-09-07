@@ -9,7 +9,7 @@ class Users extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        id_person: {
+        personId: {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
@@ -30,7 +30,7 @@ class Users extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        birth_date: {
+        birthDate: {
           type: Sequelize.DATE,
           allowNull: false,
         },
@@ -49,12 +49,12 @@ class Users extends Sequelize.Model {
           allowNull: false,
           defaultValue: 0.0
         },
-        is_online: {
+        isOnline: {
           type: Sequelize.BOOLEAN,
           allowNull: false,
           defaultValue: false
         },
-        device_adress: {
+        deviceAdress: {
           type: Sequelize.STRING,
           allowNull: true,
         },
@@ -67,7 +67,7 @@ class Users extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "users",
+        modelName: "Users",
       }
     );
 
@@ -76,21 +76,21 @@ class Users extends Sequelize.Model {
 
   static associate(models){
 
-    this.belongsTo(models.persons,{
-      foreignKey: 'id_person',
+    this.belongsTo(models.Persons,{
+      foreignKey: 'personId',
       as: 'person'
     });
 
-    this.belongsToMany(models.bus_drivers,{
-      through: models.users_bus_drivers,
-      foreignKey: 'id_user',
-      as: 'ratings_bus_drivers'
+    this.belongsToMany(models.BusDrivers,{
+      through: models.UsersBusDrivers,
+      foreignKey: 'userId',
+      as: 'ratingsBusDrivers'
     });
 
-    this.belongsToMany(models.companys,{
-      through: models.users_companys,
-      foreignKey: 'id_user',
-      as: 'ratings_companys'
+    this.belongsToMany(models.Companys,{
+      through: models.UsersCompanys,
+      foreignKey: 'userId',
+      as: 'ratingsCompanys'
     });
   }
 }

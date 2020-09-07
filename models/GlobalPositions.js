@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class Global_Positions extends Sequelize.Model {
+class GlobalPositions extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
@@ -17,7 +17,7 @@ class Global_Positions extends Sequelize.Model {
           type: Sequelize.FLOAT,
           allowNull: false, 
         },
-        time_sample:{
+        timeSample:{
           type: Sequelize.TIME,
           allowNull: false, 
         },
@@ -26,7 +26,7 @@ class Global_Positions extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "global_positions",
+        modelName: "GlobalPositions",
       }
     );
 
@@ -35,12 +35,13 @@ class Global_Positions extends Sequelize.Model {
 
   static associate(models){
 
-    this.belongsToMany(models.bus,{
-      through: models.bus_global_positions,
-      foreignKey: 'id_global_position',
+    this.belongsToMany(models.Buses,{
+      through: models.BusGlobalPositions,
+      foreignKey: 'globalPositionId',
+      as: 'buses'
     });
   }
   
 }
 
-module.exports = Global_Positions;
+module.exports = GlobalPositions;

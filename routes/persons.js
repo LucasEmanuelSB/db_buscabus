@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Persons = require("../models/persons");
-const Bus = require("../models/bus");
+const Persons = require("../models/Persons");
+const Buses = require("../models/Buses");
 
 router.post("/", async (req, res) => {
   try {
@@ -16,9 +16,9 @@ router.get("/", async (req,res) => {
   try {
     const persons = await Persons.findAll({
       nest: true,
-      attributes: ['id','device_adress'],
+      attributes: ['id','deviceAdress'],
       include: [{
-        model: Bus, as: 'bus', 
+        model: Buses, as: 'bus', 
       }]
     });
       return res.status(200).send(persons);
@@ -31,9 +31,9 @@ router.get("/:id", async (req, res) => {
     const person = await Persons.findOne({
       nest: true,
       where: {id: req.params.id},
-      attributes: ['id','device_adress'],
+      attributes: ['id','deviceAdress'],
       include: [{
-        model: Bus, as: 'bus', 
+        model: Buses, as: 'bus', 
       }]
     });
     return res.status(200).send(person);

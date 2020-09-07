@@ -1,13 +1,13 @@
 const express = require("express");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
-const Users = require("../models/users");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const config = require("../config.json");
-const Persons = require("../models/persons");
-const Bus_Drivers = require("../models/bus_drivers");
-const Companys = require("../models/companys");
+const Users = require("../models/Users");
+const Persons = require("../models/Persons");
+const BusDrivers = require("../models/BusDrivers");
+const Companys = require("../models/Companys");
 
 function generateAuthToken(email) {
   const token = jwt.sign({ email }, config.secure, {
@@ -32,14 +32,14 @@ router.post("/", async (req, res) => {
         as: 'person'
         },
         {
-        model: Bus_Drivers,
-        as: 'ratings_bus_drivers',
+        model: BusDrivers,
+        as: 'ratingsBusDrivers',
         attributes: ['id','name'],
         through: [{ atributes: ['rate']}]
         },
         {
         model: Companys,
-        as: 'ratings_companys',
+        as: 'ratingsCompanys',
         attributes: ['id','name'],
         through: [{ atributes: ['rate']}]
         },

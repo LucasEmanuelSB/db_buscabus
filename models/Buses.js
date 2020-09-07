@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class Bus extends Sequelize.Model {
+class Buses extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
@@ -13,11 +13,11 @@ class Bus extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
-        is_available:{
+        isAvailable:{
           type: Sequelize.BOOLEAN,
           allowNull: false, 
         },
-        id_bus_driver:{
+        busDriverId:{
           type: Sequelize.INTEGER,
           allowNull: true,
           onDelete: 'CASCADE'
@@ -27,7 +27,7 @@ class Bus extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "bus",
+        modelName: "Buses",
       }
     );
 
@@ -36,29 +36,29 @@ class Bus extends Sequelize.Model {
 
   static associate(models){
     
-    this.belongsTo(models.bus_drivers,{
-      foreignKey: 'id_bus_driver',
-      as: 'bus_driver'
+    this.belongsTo(models.BusDrivers,{
+      foreignKey: 'busDriverId',
+      as: 'busDriver'
     });
 
-    this.hasOne(models.itinerarys,{
-      foreignKey: 'id_bus',
+    this.hasOne(models.Itinerarys,{
+      foreignKey: 'busId',
       sourceKey: 'id',
       as: 'itinerary'
     });
 
-    this.belongsToMany(models.global_positions,{
-      through: models.bus_global_positions,
-      foreignKey: 'id_bus',
-      as: 'current_position'
+    this.belongsToMany(models.GlobalPositions,{
+      through: models.BusGlobalPositions,
+      foreignKey: 'busId',
+      as: 'globalPositions'
     });
 
-    this.hasMany(models.persons,{
-      foreignKey: 'id_bus',
+    this.hasMany(models.Persons,{
+      foreignKey: 'busId',
       as: 'persons'
     });
   }
 
 }
 
-module.exports = Bus;
+module.exports = Buses;

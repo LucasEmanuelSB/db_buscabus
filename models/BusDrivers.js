@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class Bus_Drivers extends Sequelize.Model {
+class BusDrivers extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
@@ -13,7 +13,7 @@ class Bus_Drivers extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        average_rate:{
+        averageRate:{
           type: Sequelize.DECIMAL,
           allowNull: true, 
         },
@@ -22,7 +22,7 @@ class Bus_Drivers extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "bus_drivers",
+        modelName: "BusDrivers",
       }
     );
 
@@ -31,18 +31,18 @@ class Bus_Drivers extends Sequelize.Model {
 
   static associate(models){
     
-    this.hasMany(models.bus,{
-      foreignKey: 'id_bus_driver',
+    this.hasMany(models.Buses,{
+      foreignKey: 'busDriverId',
       sourceKey: 'id',
-      as: 'bus'
+      as: 'buses'
     });
 
-    this.belongsToMany(models.users,{
-      through: models.users_bus_drivers,
-      foreignKey: 'id_bus_driver',
-      as: 'users_ratings'
+    this.belongsToMany(models.Users,{
+      through: models.UsersBusDrivers,
+      foreignKey: 'busDriverId',
+      as: 'usersRatings'
     });
   }
 }
 
-module.exports = Bus_Drivers;
+module.exports = BusDrivers;

@@ -13,7 +13,7 @@ class Calendars extends Sequelize.Model {
             type: Sequelize.ARRAY(Sequelize.DataTypes.TIME),
             allowNull: false,
         },
-        weekends_holidays: {
+        weekendsHolidays: {
             type: Sequelize.ARRAY(Sequelize.DataTypes.TIME),
             allowNull: false
         }
@@ -22,7 +22,7 @@ class Calendars extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "calendars",
+        modelName: "Calendars",
       }
     );
 
@@ -31,8 +31,8 @@ class Calendars extends Sequelize.Model {
 
   static associate(models){
 
-    this.hasOne(models.itinerarys,{
-      foreignKey: 'id_calendar',
+    this.hasOne(models.Itinerarys,{
+      foreignKey: 'calendarId',
       sourceKey: 'id'
     });
     

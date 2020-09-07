@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Routes = require("../models/routes");
-const Bus_Stops = require("../models/bus_stops");
-const Itinerarys = require("../models/itinerarys");
-const Points = require("../models/points");
+const Routes = require("../models/Routes");
+const BusStops = require("../models/BusStops");
+const Itinerarys = require("../models/Itinerarys");
+const Points = require("../models/Points");
 
 router.post("/", async (req, res) => {
   try {
@@ -20,8 +20,8 @@ router.get("/", async (req,res) => {
       nest: true,
       attributes: ['id'],
       include: [{
-        model: Bus_Stops,
-        as: 'bus_stops',
+        model: BusStops,
+        as: 'busStops',
         through: [{ attributes: []}]
       },
       {
@@ -47,8 +47,8 @@ router.get("/:id", async (req, res) => {
       where: {id: req.params.id},
       attributes: ['id'],
       include: [{
-        model: Bus_Stops,
-        as: 'bus_stops',
+        model: BusStops,
+        as: 'busStops',
         through: [{ attributes: []}]
       },
       {

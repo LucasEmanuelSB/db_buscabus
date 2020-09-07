@@ -1,33 +1,29 @@
 const Sequelize = require("sequelize");
 
-class Users_Bus_Drivers extends Sequelize.Model {
+class BusGlobalPositions extends Sequelize.Model {
     static init(sequelize) {
       super.init(
         {
-           id_user:{
+          busId:{
             type: Sequelize.INTEGER,
-            primaryKey: true,
             onDelete: 'CASCADE',
+            primaryKey: true,
           },
-          id_bus_driver:{
+          globalPositionId:{
             type: Sequelize.INTEGER,
-            primaryKey: true,
             onDelete: 'CASCADE',
-          },
-          rate: {
-            type: Sequelize.DECIMAL,
-            allowNull: false,
-          },  
+            primaryKey: true,
+          } 
         },
         {
           freezeTableName: true,
           timestamps: false,
           sequelize,
-          modelName: "users_bus_drivers",
+          modelName: "BusGlobalPositions",
         }
       );
       return this;
     }
 }
 
-module.exports = Users_Bus_Drivers;
+module.exports = BusGlobalPositions;

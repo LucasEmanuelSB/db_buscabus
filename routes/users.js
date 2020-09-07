@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Users = require("../models/users");
+const Users = require("../models/Users");
 const bcrypt = require("bcrypt");
-const Persons = require("../models/persons");
-const Bus_Drivers = require("../models/bus_drivers");
-const Companys = require("../models/companys");
+const Persons = require("../models/Persons");
+const BusDrivers = require("../models/BusDrivers");
+const Companys = require("../models/Companys");
 router.post("/", async (req, res) => {
 
   const email = req.body.email;
@@ -39,14 +39,14 @@ router.get("/", async (req,res) => {
         as: 'person'
         },
         {
-        model: Bus_Drivers,
-        as: 'ratings_bus_drivers',
+        model: BusDrivers,
+        as: 'ratingsBusDrivers',
         attributes: ['id','name'],
         through: [{ atributes: ['rate']}]
         },
         {
         model: Companys,
-        as: 'ratings_companys',
+        as: 'ratingsCompanys',
         attributes: ['id','name'],
         through: [{ atributes: ['rate']}]
         },
@@ -70,14 +70,14 @@ router.get("/:id", async (req, res) => {
         as: 'person'
         },
         {
-        model: Bus_Drivers,
-        as: 'ratings_bus_drivers',
+        model: BusDrivers,
+        as: 'ratingsBusDrivers',
         attributes: ['id','name'],
         through: [{ atributes: ['rate']}]
         },
         {
         model: Companys,
-        as: 'ratings_companys',
+        as: 'ratingsCompanys',
         attributes: ['id','name'],
         through: [{ atributes: ['rate']}]
         },

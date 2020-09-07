@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class Bus_Stops extends Sequelize.Model {
+class BusStops extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
@@ -9,7 +9,7 @@ class Bus_Stops extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        is_terminal: {
+        isTerminal: {
           type: Sequelize.BOOLEAN,
           allowNull: false,
         },
@@ -21,7 +21,7 @@ class Bus_Stops extends Sequelize.Model {
           type: Sequelize.FLOAT,
           allowNull: false,
         },
-        id_adress: {
+        adressId: {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
@@ -30,7 +30,7 @@ class Bus_Stops extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "bus_stops",
+        modelName: "BusStops",
       }
     );
 
@@ -39,14 +39,14 @@ class Bus_Stops extends Sequelize.Model {
   
   static associate(models) {
 
-    this.belongsToMany(models.routes,{
-      through: models.routes_bus_stops,
-      foreignKey: 'id_bus_stop',
+    this.belongsToMany(models.Routes,{
+      through: models.RoutesBusStops,
+      foreignKey: 'busStopId',
       as: 'routes'
     })
 
-    this.belongsTo(models.adresses, {
-      foreignKey: 'id_adress',
+    this.belongsTo(models.Adresses, {
+      foreignKey: 'adressId',
       as : 'adress',
     });
 
@@ -54,4 +54,4 @@ class Bus_Stops extends Sequelize.Model {
 
 }
 
-module.exports = Bus_Stops;
+module.exports = BusStops;

@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Calendars = require("../models/calendars");
+const Calendars = require("../models/Calendars");
 
 router.post("/", async (req, res) => {
   try {
-    const calendars = await Calendars.create(req.body);
-    return res.status(200).send(calendars);
+    const calendar = await Calendars.create(req.body);
+    return res.status(200).send(calendar);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);

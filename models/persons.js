@@ -9,11 +9,11 @@ class Persons extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        id_bus: {
+        busId: {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        device_adress: {
+        deviceAdress: {
           type: Sequelize.STRING,
           allowNull: false,
         },
@@ -22,7 +22,7 @@ class Persons extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "persons",
+        modelName: "Persons",
       }
     );
 
@@ -30,8 +30,8 @@ class Persons extends Sequelize.Model {
   }
 
   static associate(models){
-    this.belongsTo(models.bus,{
-      foreignKey: 'id_bus',
+    this.belongsTo(models.Buses,{
+      foreignKey: 'busId',
       as: 'bus'
     });
   }

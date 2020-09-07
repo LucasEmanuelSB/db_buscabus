@@ -17,7 +17,7 @@ class Points extends Sequelize.Model {
           type: Sequelize.FLOAT,
           allowNull: false,
         },
-        id_route: {
+        routeId: {
           type: Sequelize.INTEGER,
           allowNull: true
         }
@@ -26,7 +26,7 @@ class Points extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "points",
+        modelName: "Points",
       }
     );
 
@@ -34,8 +34,8 @@ class Points extends Sequelize.Model {
   }
 
   static associate(models){
-    this.belongsTo(models.routes,{
-      foreignKey: 'id_route',
+    this.belongsTo(models.Routes,{
+      foreignKey: 'routeId',
       as: 'route'
     })
   }

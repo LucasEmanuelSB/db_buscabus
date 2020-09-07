@@ -14,7 +14,7 @@ class Companys extends Sequelize.Model {
           allowNull: false,
           unique: true, 
         },
-        average_rate:{
+        averageRate:{
           type: Sequelize.DECIMAL,
           allowNull: true,
         },
@@ -23,7 +23,7 @@ class Companys extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "companys",
+        modelName: "Companys",
       }
     );
 
@@ -32,10 +32,10 @@ class Companys extends Sequelize.Model {
 
   static associate(models){
     
-    this.belongsToMany(models.users,{
-      through: models.users_companys,
-      foreignKey: 'id_company',
-      as: 'users_ratings'
+    this.belongsToMany(models.Users,{
+      through: models.UsersCompanys,
+      foreignKey: 'companyId',
+      as: 'usersRatings'
     });
   }
 }

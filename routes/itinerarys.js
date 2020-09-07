@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Itinerarys = require("../models/itinerarys");
-const Bus = require("../models/bus");
-const Routes = require("../models/routes");
-const Calendars = require("../models/calendars");
-const Bus_Stops = require("../models/bus_stops");
+const Itinerarys = require("../models/Itinerarys");
+const Buses = require("../models/Buses");
+const Routes = require("../models/Routes");
+const Calendars = require("../models/Calendars");
+const BusStops = require("../models/BusStops");
 
 router.post("/", async (req, res) => {
   try {
@@ -22,7 +22,7 @@ router.get("/", async (req,res) => {
       attributes: ['id'],
       include: [
         {
-          model: Bus,
+          model: Buses,
           as: 'bus'
         },
         {
@@ -34,12 +34,12 @@ router.get("/", async (req,res) => {
           as: 'calendar'
         },
         {
-          model: Bus_Stops,
-          as: 'start_adress'
+          model: BusStops,
+          as: 'startBusStop'
         },
         {
-          model: Bus_Stops,
-          as: 'end_adress'
+          model: BusStops,
+          as: 'endBusStop'
         },
       ]
     });
@@ -58,7 +58,7 @@ router.get("/:id", async (req, res) => {
       attributes: ['id'],
       include: [
         {
-          model: Bus,
+          model: Buses,
           as: 'bus'
         },
         {
@@ -70,12 +70,12 @@ router.get("/:id", async (req, res) => {
           as: 'calendar'
         },
         {
-          model: Bus_Stops,
-          as: 'start_adress'
+          model: BusStops,
+          as: 'startBusStop'
         },
         {
-          model: Bus_Stops,
-          as: 'end_adress'
+          model: BusStops,
+          as: 'endBusStop'
         },
       ]
     });

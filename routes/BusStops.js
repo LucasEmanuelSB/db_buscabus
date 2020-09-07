@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const Bus_Stops = require("../models/bus_stops");
-const Adresses = require("../models/adresses");
-const Routes = require("../models/routes");
+const BusStops = require("../models/BusStops");
+const Adresses = require("../models/Adresses");
+const Routes = require("../models/Routes");
 
 router.post("/", async (req, res) => {
   try {
-    Bus_Stops.create(req.body);
+    BusStops.create(req.body);
     return res.status(200).send(req.body);
   } catch (error) {
     return res.status(500).send(error);
@@ -15,10 +15,10 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req,res) => {
   try {
-    const bus_stops = await Bus_Stops.findAll({
+    const busStops = await BusStops.findAll({
       nest: true,
       //raw: true,
-      attributes: ['id','is_terminal','latitude','longitude'],
+      attributes: ['id','isTerminal','latitude','longitude'],
       include: [
         {
         model: Adresses,
@@ -31,18 +31,18 @@ router.get("/", async (req,res) => {
     ],
       //include: [ {all: true, through: {attributes: []} }, ]
     });
-      return res.status(200).send(bus_stops);
+      return res.status(200).send(busStops);
   } catch (error) {
       return res.status(500).send(error);
 }});
 
 router.get("/:id", async (req, res) => {
   try {
-    const bus_stop = await Bus_Stops.findOne({
+    const busStop = await BusStops.findOne({
       //raw: true, 
       nest: true,
       where: {id: req.params.id},
-      attributes: ['id','is_terminal','latitude','longitude'],
+      attributes: ['id','isTerminal','latitude','longitude'],
       include: [
         {
         model: Adresses,
@@ -56,7 +56,7 @@ router.get("/:id", async (req, res) => {
     ]
       /* include: [ {all: true, through: {attributes: []} }, ] */
     });
-    return res.status(200).send(bus_stop);
+    return res.status(200).send(busStop);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -65,10 +65,10 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const bus_stop = await Bus_Stops.update(req.body,
+    const busStop = await BusStops.update(req.body,
       { where: {id: req.params.id} }
     );
-    return res.status(200).send(bus_stop);
+    return res.status(200).send(busStop);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -78,7 +78,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-      await Bus_Stops.destroy({
+      await BusStops.destroy({
         where: {id: req.params.id},
       }); 
       return res.status(200).send("Deletado com sucesso");
