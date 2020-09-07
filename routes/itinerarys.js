@@ -5,6 +5,7 @@ const Buses = require("../models/Buses");
 const Routes = require("../models/Routes");
 const Calendars = require("../models/Calendars");
 const BusStops = require("../models/BusStops");
+const Adresses = require("../models/Adresses");
 
 router.post("/", async (req, res) => {
   try {
@@ -35,11 +36,19 @@ router.get("/", async (req,res) => {
         },
         {
           model: BusStops,
-          as: 'startBusStop'
+          as: 'startBusStop',
+          include: [{
+            model: Adresses,
+            as: 'adress'
+          }]
         },
         {
           model: BusStops,
-          as: 'endBusStop'
+          as: 'endBusStop',
+          include: [{
+            model: Adresses,
+            as: 'adress'
+          }]
         },
       ]
     });
