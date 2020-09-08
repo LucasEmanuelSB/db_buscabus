@@ -6,7 +6,6 @@ router.use("/adresses", require("./Adresses"));
 router.use("/auth", require("./Auth"));
 router.use("/buses", require("./Buses"));
 router.use("/busDrivers", require("./BusDrivers"));
-router.use("/busGlobalPositions", require("./BusGlobalPositions"));
 router.use("/busStops", require("./BusStops"));
 router.use("/calendars", require("./Calendars"));
 router.use("/companys", require("./Companys"));

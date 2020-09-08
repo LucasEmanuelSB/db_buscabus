@@ -14,19 +14,17 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req,res) => {
   try {
-    const globalPositions = await GlobalPositions.findAll({
-      include: [ {all: true, through: {attributes: []} }, ]
-    });
+    const globalPositions = await GlobalPositions.findAll();
       return res.status(200).send(globalPositions);
   } catch (error) {
     console.log(error);
       return res.status(500).send(error);
 }});
 
-router.get("/:id", async (req, res) => {
+router.get("/:busId", async (req, res) => {
   try {
     const globalPostion = await GlobalPositions.findOne({
-      where: {id: req.params.id},
+      where: {busId: req.params.busId},
       include: [ {all: true, through: {attributes: []} }, ]
     });
     return res.status(200).send(globalPostion);
@@ -36,10 +34,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:busId", async (req, res) => {
   try {
     const gps = await GlobalPositions.update(req.body,
-      { where: {id: req.params.id} }
+      { where: {busId: req.params.busId} }
     );
     return res.status(200).send(gps);
   } catch (error) {
@@ -49,10 +47,10 @@ router.put("/:id", async (req, res) => {
 
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:busId", async (req, res) => {
     try {
       await GlobalPositions.destroy({
-        where: {id: req.params.id},
+        where: {busId: req.params.busId},
       }); 
       return res.status(200).send("Deletado com sucesso");
     } catch (error) {

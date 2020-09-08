@@ -47,10 +47,10 @@ class Buses extends Sequelize.Model {
       as: 'itinerary'
     });
 
-    this.belongsToMany(models.GlobalPositions,{
-      through: models.BusGlobalPositions,
+    this.hasOne(models.GlobalPositions,{
       foreignKey: 'busId',
-      as: 'globalPositions'
+      sourceKey: 'id',
+      as: 'currentPosition'
     });
 
     this.hasMany(models.Persons,{

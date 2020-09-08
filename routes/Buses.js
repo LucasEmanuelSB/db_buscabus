@@ -53,7 +53,7 @@ router.get("/", async (req,res) => {
         },
         {
         model: GlobalPositions,
-        as: 'globalPositions', through: [ {attributes: []}]
+        as: 'currentPosition',
         },
         {
         model: Persons,
@@ -85,7 +85,7 @@ router.get("/:id", async (req, res) => {
         },
         {
         model: GlobalPositions,
-        as: 'globalPositions', through: [ {attributes: []}]
+        as: 'currentPosition',
         },
         {
         model: Persons,
@@ -93,44 +93,6 @@ router.get("/:id", async (req, res) => {
         }
       ]});
     return res.status(200).send(bus);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send(error);
-  }
-});
-
-router.get("/:id/historic_position", async (req, res) => {
-  try {
-    const bus = await Buses.findOne({
-      nest: true,
-      //raw: true,
-      where: {id: req.params.id},
-      include:[{model: GlobalPositions, as: 'GlobalPositions', attributes: ['id','latitude', 'longitude'], through: { attributes: []}}]
-      });
-    return res.status(200).send(bus);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send(error);
-  }
-});
-
-router.get("/:busId/:globalPositionId", async (req, res) => {
-  const { busId, globalPositionId } = req.params;
-  try {
-    const globalPostion = await Buses.findOne({
-      raw: true,
-      nest: true,
-      attributes: [],
-      where: {id: busId},
-      include:
-      [{
-        model: GlobalPositions,
-        as: 'GlobalPositions',
-       where: { id:  globalPositionId },
-        attributes: ['id','latitude','longitude'],
-        through: { attributes: []}}]});
-      
-    return res.status(200).send(globalPostion);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);

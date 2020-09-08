@@ -4,7 +4,6 @@ const config = require("../config.json"); // ???
 const Adresses  = require("../models/Adresses");
 const Buses = require("../models/Buses");
 const BusDrivers = require("../models/BusDrivers");
-const BusGlobalPositions = require("../models/BusGlobalPositions");
 const BusStops = require("../models/BusStops");
 const Calendars = require("../models/Calendars");
 const Companys = require("../models/Companys");
@@ -22,7 +21,6 @@ const models = [
   Adresses,
   Buses,
   BusDrivers,
-  BusGlobalPositions,
   BusStops,
   Calendars,
   Companys,

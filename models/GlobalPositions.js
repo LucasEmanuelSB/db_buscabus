@@ -4,10 +4,10 @@ class GlobalPositions extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        id: {
+        busId: {
           type: Sequelize.INTEGER,
-          autoIncrement: true,
           primaryKey: true,
+          allowNull: false,
         },
         latitude:{
           type: Sequelize.FLOAT,
@@ -17,14 +17,14 @@ class GlobalPositions extends Sequelize.Model {
           type: Sequelize.FLOAT,
           allowNull: false, 
         },
-        timeSample:{
-          type: Sequelize.TIME,
+/*         createdAt:{
+          type: 'TIMESTAMP',
           allowNull: false, 
-        },
+        }, */
       },
       {
         freezeTableName: true,
-        timestamps: false,
+        timestamps: true,
         sequelize,
         modelName: "GlobalPositions",
       }
@@ -35,10 +35,9 @@ class GlobalPositions extends Sequelize.Model {
 
   static associate(models){
 
-    this.belongsToMany(models.Buses,{
-      through: models.BusGlobalPositions,
-      foreignKey: 'globalPositionId',
-      as: 'buses'
+    this.belongsTo(models.Buses,{
+      foreignKey: 'busId',
+      as: 'bus'
     });
   }
   
