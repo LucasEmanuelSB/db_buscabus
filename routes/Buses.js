@@ -43,11 +43,19 @@ router.get("/", async (req,res) => {
           },
           {
             model: BusStops,
-            as: 'startBusStop'
+            as: 'startBusStop',
+            include: [{
+              model: Adresses,
+              as: 'adress'
+            }]
           },
           {
             model: BusStops,
-            as: 'endBusStop'
+            as: 'endBusStop',
+            include: [{
+              model: Adresses,
+              as: 'adress'
+            }]
           },
         ]
         },

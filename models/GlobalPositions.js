@@ -17,10 +17,6 @@ class GlobalPositions extends Sequelize.Model {
           type: Sequelize.FLOAT,
           allowNull: false, 
         },
-/*         createdAt:{
-          type: 'TIMESTAMP',
-          allowNull: false, 
-        }, */
       },
       {
         freezeTableName: true,

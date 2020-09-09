@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const GlobalPositions = require("../models/GlobalPositions");
-const Buses = require("../models/Buses");
 
 router.post("/", async (req, res) => {
   try {
