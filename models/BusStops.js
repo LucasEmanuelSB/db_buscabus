@@ -13,14 +13,6 @@ class BusStops extends Sequelize.Model {
           type: Sequelize.BOOLEAN,
           allowNull: false,
         },
-        latitude: {
-          type: Sequelize.FLOAT,
-          allowNull: false,
-        },
-        longitude: {
-          type: Sequelize.FLOAT,
-          allowNull: false,
-        },
         adressId: {
           type: Sequelize.INTEGER,
           allowNull: true,

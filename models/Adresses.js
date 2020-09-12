@@ -33,6 +33,22 @@ class Adresses extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        number: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        number: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+        },
+        latitude:{
+          type: Sequelize.FLOAT,
+          allowNull: false, 
+        },
+        longitude:{
+          type: Sequelize.FLOAT,
+          allowNull: false, 
+        },
       },
       {
         freezeTableName: true,
