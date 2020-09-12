@@ -18,7 +18,7 @@ router.get("/", async (req,res) => {
     const busStops = await BusStops.findAll({
       nest: true,
       //raw: true,
-      attributes: ['id','isTerminal','latitude','longitude'],
+      attributes: ['id','isTerminal'],
       include: [
         {
         model: Adresses,
@@ -42,7 +42,7 @@ router.get("/:id", async (req, res) => {
       //raw: true, 
       nest: true,
       where: {id: req.params.id},
-      attributes: ['id','isTerminal','latitude','longitude'],
+      attributes: ['id','isTerminal'],
       include: [
         {
         model: Adresses,
