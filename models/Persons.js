@@ -16,6 +16,7 @@ class Persons extends Sequelize.Model {
         deviceAdress: {
           type: Sequelize.STRING,
           allowNull: false,
+          unique: true 
         },
       },
       {

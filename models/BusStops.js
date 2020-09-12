@@ -16,6 +16,7 @@ class BusStops extends Sequelize.Model {
         adressId: {
           type: Sequelize.INTEGER,
           allowNull: true,
+          unique: true,
         },
       },
       {

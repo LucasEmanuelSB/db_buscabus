@@ -30,15 +30,11 @@ class Adresses extends Sequelize.Model {
           allowNull: false,
         },
         cep: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING,
           allowNull: false,
         },
         number: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
-        number: {
-          type: Sequelize.INTEGER,
+          type: Sequelize.STRING,
           allowNull: false,
         },
         latitude:{

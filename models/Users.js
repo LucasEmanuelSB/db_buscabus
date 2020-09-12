@@ -57,6 +57,7 @@ class Users extends Sequelize.Model {
         deviceAdress: {
           type: Sequelize.STRING,
           allowNull: true,
+          unique: true 
         },
         favorites: {
           type: Sequelize.JSON,
