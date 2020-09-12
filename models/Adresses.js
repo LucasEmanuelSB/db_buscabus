@@ -14,7 +14,7 @@ class Adresses extends Sequelize.Model {
           allowNull: false,
         },
         uf: {
-          type: Sequelize.CHAR(2),
+          type: Sequelize.STRING,
           allowNull: false,
         },
         city: {
@@ -54,11 +54,6 @@ class Adresses extends Sequelize.Model {
   }
 
   static associate(models) {
-
-    this.hasOne(models.BusStops, {
-      foreignKey: 'adressId',
-      sourceKey: 'id',
-    });
 
     this.belongsTo(models.GlobalPositions, {
       foreignKey: 'globalPositionId',

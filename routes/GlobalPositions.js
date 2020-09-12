@@ -14,7 +14,6 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const globalPositions = await GlobalPositions.findAll(
-      { include: [{ all: true, through: { attributes: [] } },] }
     );
     return res.status(200).send(globalPositions);
   } catch (error) {
@@ -27,7 +26,7 @@ router.get("/:busId", async (req, res) => {
   try {
     const globalPostion = await GlobalPositions.findOne({
       where: { busId: req.params.busId },
-      include: [{ all: true, through: { attributes: [] } },]
+
     });
     return res.status(200).send(globalPostion);
   } catch (error) {

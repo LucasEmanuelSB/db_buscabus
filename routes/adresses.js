@@ -35,7 +35,7 @@ router.get("/:id", async (req, res) => {
     const adress = await Adresses.findOne({
       where: {id: req.params.id},
       include: [{
-        model: Adresses,
+        model: GlobalPositions,
         as: 'globalPosition'
       }]
     });

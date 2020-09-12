@@ -29,20 +29,6 @@ class GlobalPositions extends Sequelize.Model {
     return this;
   }
 
-  static associate(models) {
-
-    this.hasOne(models.Buses, {
-      foreignKey: 'globalPositionId',
-      sourceKey: 'id',
-      as: 'bus'
-    });
-
-    this.hasOne(models.Adresses, {
-      foreignKey: 'globalPositionId',
-      sourceKey: 'id',
-      as: 'adress'
-    });
-  }
 
 }
 
