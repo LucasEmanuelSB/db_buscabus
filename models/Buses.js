@@ -22,6 +22,10 @@ class Buses extends Sequelize.Model {
           allowNull: true,
           onDelete: 'CASCADE'
         },
+        globalPositionId: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+        },
       },
       {
         freezeTableName: true,
@@ -36,6 +40,7 @@ class Buses extends Sequelize.Model {
 
   static associate(models){
     
+    
     this.belongsTo(models.BusDrivers,{
       foreignKey: 'busDriverId',
       as: 'busDriver'
@@ -47,17 +52,18 @@ class Buses extends Sequelize.Model {
       as: 'itinerary'
     });
 
-    this.hasOne(models.GlobalPositions,{
-      foreignKey: 'busId',
-      sourceKey: 'id',
-      as: 'currentPosition'
-    });
-
     this.hasMany(models.Persons,{
       foreignKey: 'busId',
       as: 'persons'
     });
+
+    this.belongsTo(models.GlobalPositions, {
+      foreignKey: 'globalPositionId',
+      as: 'currentPosition'
+    });
   }
+
+
 
 }
 

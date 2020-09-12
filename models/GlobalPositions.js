@@ -4,18 +4,18 @@ class GlobalPositions extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
-        busId: {
+        id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
-          allowNull: false,
+          autoIncrement: true,
         },
-        latitude:{
+        latitude: {
           type: Sequelize.FLOAT,
-          allowNull: false, 
+          allowNull: true,
         },
-        longitude:{
+        longitude: {
           type: Sequelize.FLOAT,
-          allowNull: false, 
+          allowNull: true,
         },
       },
       {
@@ -29,14 +29,21 @@ class GlobalPositions extends Sequelize.Model {
     return this;
   }
 
-  static associate(models){
+  static associate(models) {
 
-    this.belongsTo(models.Buses,{
-      foreignKey: 'busId',
+    this.hasOne(models.Buses, {
+      foreignKey: 'globalPositionId',
+      sourceKey: 'id',
       as: 'bus'
     });
+
+    this.hasOne(models.Adresses, {
+      foreignKey: 'globalPositionId',
+      sourceKey: 'id',
+      as: 'adress'
+    });
   }
-  
+
 }
 
 module.exports = GlobalPositions;

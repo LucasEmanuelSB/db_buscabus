@@ -37,15 +37,9 @@ class Adresses extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        latitude:{
-          type: Sequelize.FLOAT,
-          allowNull: false,
-          unique: true, 
-        },
-        longitude:{
-          type: Sequelize.FLOAT,
-          allowNull: false,
-          unique: true,  
+        globalPositionId: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
         },
       },
       {
@@ -60,9 +54,15 @@ class Adresses extends Sequelize.Model {
   }
 
   static associate(models) {
+
     this.hasOne(models.BusStops, {
       foreignKey: 'adressId',
       sourceKey: 'id',
+    });
+
+    this.belongsTo(models.GlobalPositions, {
+      foreignKey: 'globalPositionId',
+      as: 'globalPosition'
     });
   }
 }
