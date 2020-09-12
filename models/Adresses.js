@@ -43,11 +43,13 @@ class Adresses extends Sequelize.Model {
         },
         latitude:{
           type: Sequelize.FLOAT,
-          allowNull: false, 
+          allowNull: false,
+          unique: true, 
         },
         longitude:{
           type: Sequelize.FLOAT,
-          allowNull: false, 
+          allowNull: false,
+          unique: true,  
         },
       },
       {
