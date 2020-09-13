@@ -3,7 +3,7 @@ const router = express.Router();
 const BusStops = require("../models/BusStops");
 const Adresses = require("../models/Adresses");
 const Routes = require("../models/Routes");
-
+const GlobalPositions = require("../models/GlobalPositions");
 router.post("/", async (req, res) => {
   try {
     BusStops.create(req.body);
@@ -21,9 +21,13 @@ router.get("/", async (req,res) => {
       attributes: ['id','isTerminal'],
       include: [
         {
-        model: Adresses,
-        as: 'adress'
-        },
+          model: Adresses,
+          as: 'adress',
+          include: [{
+            model: GlobalPositions,
+            as: 'globalPosition'
+          }]
+          },
         {
         model: Routes,
         as: 'routes', through: [ {attributes: []}]
@@ -46,7 +50,11 @@ router.get("/:id", async (req, res) => {
       include: [
         {
         model: Adresses,
-        as: 'adress'
+        as: 'adress',
+        include: [{
+          model: GlobalPositions,
+          as: 'globalPosition'
+        }]
         },
         {
         model: Routes,
