@@ -1,11 +1,15 @@
 const express = require("express");
+const { create } = require("../models/GlobalPositions");
 const router = express.Router();
 const GlobalPositions = require("../models/GlobalPositions");
 
 router.post("/", async (req, res) => {
   try {
     GlobalPositions.create(req.body);
-    return res.status(200).send(req.body);
+    const globalPosition = await GlobalPositions.findOne({
+      where: {latitude: req.body.latitude, longitude: req.body.longitude}
+    });
+    return res.send(globalPosition);
   } catch (error) {
     return res.status(500).send(error);
   }

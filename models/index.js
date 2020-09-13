@@ -45,7 +45,7 @@ class Database {
 
     models
       .map((model) => model.init(sequelize))
-      .map((model) => model.sync({ force: true }))
+      //.map((model) => model.sync({ force: true }))
       .map((model) => model.associate && model.associate(sequelize.models));
   }
 }
