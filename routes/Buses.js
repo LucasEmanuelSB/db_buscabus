@@ -19,58 +19,16 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req,res) => {
+router.get("/", async (req, res) => {
   try {
     let buses = await Buses.findAll({
       //raw: true,
       nest: true,
-      attributes: ['id','line','isAvailable'],
+      attributes: ['id', 'line', 'isAvailable'],
       include: [
         {
-        model: BusDrivers,
-        as: 'busDriver'
-        },
-        {
-        model: Itinerarys,
-        as: 'itinerary',
-        include: [
-          {
-            model: Routes,
-            as: 'route'
-          },
-          {
-            model: Calendars,
-            as: 'calendar'
-          },
-        ]
-        },
-        {
-        model: GlobalPositions,
-        as: 'currentPosition',
-        },
-        {
-        model: Persons,
-        as: 'persons'
-        }
-      ]
-    });
-      return res.status(200).send(buses);
-  } catch (error) {
-    console.log(error);
-      return res.status(500).send(error);
-}});
-
-router.get("/:id", async (req, res) => {
-  try {
-    const bus = await Buses.findOne({
-      
-      nest: true,
-      where: {id: req.params.id},
-      attributes: ['id','line','isAvailable'],
-      include: [
-        {
-        model: BusDrivers,
-        as: 'busDriver'
+          model: BusDrivers,
+          as: 'busDriver'
         },
         {
           model: Itinerarys,
@@ -78,23 +36,77 @@ router.get("/:id", async (req, res) => {
           include: [
             {
               model: Routes,
-              as: 'route'
+              as: 'route',
+              include: [{
+                model: BusStops,
+                as: 'busStops',
+                through: [{ attributes: [] }]
+              }],
             },
             {
               model: Calendars,
               as: 'calendar'
             },
           ]
-          },
-        {
-        model: GlobalPositions,
-        as: 'currentPosition',
         },
         {
-        model: Persons,
-        as: 'persons'
+          model: GlobalPositions,
+          as: 'currentPosition',
+        },
+        {
+          model: Persons,
+          as: 'persons'
         }
-      ]});
+      ]
+    });
+    return res.status(200).send(buses);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const bus = await Buses.findOne({
+
+      nest: true,
+      where: { id: req.params.id },
+      attributes: ['id', 'line', 'isAvailable'],
+      include: [
+        {
+          model: BusDrivers,
+          as: 'busDriver'
+        },
+        {
+          model: Itinerarys,
+          as: 'itinerary',
+          include: [
+            {
+              model: Routes,
+              as: 'route',
+              include: [{
+                model: BusStops,
+                as: 'busStops',
+                through: [{ attributes: [] }]
+              }],
+            },
+            {
+              model: Calendars,
+              as: 'calendar'
+            },
+          ]
+        },
+        {
+          model: GlobalPositions,
+          as: 'currentPosition',
+        },
+        {
+          model: Persons,
+          as: 'persons'
+        }
+      ]
+    });
     return res.status(200).send(bus);
   } catch (error) {
     console.log(error);
@@ -105,7 +117,7 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const bus = await Buses.update(req.body,
-      { where: {id: req.params.id} }
+      { where: { id: req.params.id } }
     );
     return res.status(200).send(bus);
   } catch (error) {
@@ -116,15 +128,15 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-    try {
-      await Buses.destroy({
-        where: {id: req.params.id},
-      }); 
-      return res.status(200).send("Deletado com sucesso");
-    } catch (error) {
-      console.log(error);
-      return res.status(500).send(error);
-    }
+  try {
+    await Buses.destroy({
+      where: { id: req.params.id },
+    });
+    return res.status(200).send("Deletado com sucesso");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
 });
 
 module.exports = router;
