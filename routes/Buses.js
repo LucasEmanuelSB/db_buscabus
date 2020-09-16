@@ -42,22 +42,6 @@ router.get("/", async (req,res) => {
             model: Calendars,
             as: 'calendar'
           },
-          {
-            model: BusStops,
-            as: 'startBusStop',
-            include: [{
-              model: Adresses,
-              as: 'adress'
-            }]
-          },
-          {
-            model: BusStops,
-            as: 'endBusStop',
-            include: [{
-              model: Adresses,
-              as: 'adress'
-            }]
-          },
         ]
         },
         {
@@ -89,9 +73,19 @@ router.get("/:id", async (req, res) => {
         as: 'busDriver'
         },
         {
-        model: Itinerarys,
-        as: 'itinerary'
-        },
+          model: Itinerarys,
+          as: 'itinerary',
+          include: [
+            {
+              model: Routes,
+              as: 'route'
+            },
+            {
+              model: Calendars,
+              as: 'calendar'
+            },
+          ]
+          },
         {
         model: GlobalPositions,
         as: 'currentPosition',
