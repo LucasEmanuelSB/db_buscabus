@@ -40,7 +40,11 @@ router.get("/", async (req, res) => {
               include: [{
                 model: BusStops,
                 as: 'busStops',
-                through: [{ attributes: [] }]
+                through: [{ attributes: [] }],
+                include: [{
+                  model: Adresses,
+                  as: 'adress',
+                }]
               }],
             },
             {
@@ -88,7 +92,11 @@ router.get("/:id", async (req, res) => {
               include: [{
                 model: BusStops,
                 as: 'busStops',
-                through: [{ attributes: [] }]
+                through: [{ attributes: [] }],
+                include: [{
+                  model: Adresses,
+                  as: 'adress',
+                }]
               }],
             },
             {
