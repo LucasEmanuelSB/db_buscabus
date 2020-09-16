@@ -3,6 +3,7 @@ const router = express.Router();
 const Itinerarys = require("../models/Itinerarys");
 const Routes = require("../models/Routes");
 const Calendars = require("../models/Calendars");
+const BusStops = require("../models/BusStops");
 
 router.post("/", async (req, res) => {
   try {
@@ -21,7 +22,12 @@ router.get("/", async (req,res) => {
       include: [
         {
           model: Routes,
-          as: 'route'
+          as: 'route',
+          include: [{
+            model: BusStops,
+            as: 'busStops',
+            through: [{ attributes: []}]
+          }]
         },
         {
           model: Calendars,
@@ -45,7 +51,12 @@ router.get("/:id", async (req, res) => {
       include: [
         {
           model: Routes,
-          as: 'route'
+          as: 'route',
+          include: [{
+            model: BusStops,
+            as: 'busStops',
+            through: [{ attributes: []}]
+          }]
         },
         {
           model: Calendars,
