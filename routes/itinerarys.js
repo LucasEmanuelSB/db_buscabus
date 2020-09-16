@@ -1,11 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Itinerarys = require("../models/Itinerarys");
-const Buses = require("../models/Buses");
 const Routes = require("../models/Routes");
 const Calendars = require("../models/Calendars");
-const BusStops = require("../models/BusStops");
-const Adresses = require("../models/Adresses");
 
 router.post("/", async (req, res) => {
   try {
@@ -23,32 +20,12 @@ router.get("/", async (req,res) => {
       attributes: ['id'],
       include: [
         {
-          model: Buses,
-          as: 'bus'
-        },
-        {
           model: Routes,
           as: 'route'
         },
         {
           model: Calendars,
           as: 'calendar'
-        },
-        {
-          model: BusStops,
-          as: 'startBusStop',
-          include: [{
-            model: Adresses,
-            as: 'adress'
-          }]
-        },
-        {
-          model: BusStops,
-          as: 'endBusStop',
-          include: [{
-            model: Adresses,
-            as: 'adress'
-          }]
         },
       ]
     });
@@ -67,32 +44,12 @@ router.get("/:id", async (req, res) => {
       attributes: ['id'],
       include: [
         {
-          model: Buses,
-          as: 'bus'
-        },
-        {
           model: Routes,
           as: 'route'
         },
         {
           model: Calendars,
           as: 'calendar'
-        },
-        {
-          model: BusStops,
-          as: 'startBusStop',
-          include: [{
-            model: Adresses,
-            as: 'adress'
-          }]
-        },
-        {
-          model: BusStops,
-          as: 'endBusStop',
-          include: [{
-            model: Adresses,
-            as: 'adress'
-          }]
         },
       ]
     });

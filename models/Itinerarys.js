@@ -17,14 +17,6 @@ class Itinerarys extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
-        startBusStopId:{
-          type: Sequelize.INTEGER,
-          allowNull: true, 
-        },
-        endBusStopId:{
-          type: Sequelize.INTEGER,
-          allowNull: true, 
-        },
         calendarId:{
           type: Sequelize.INTEGER,
           allowNull: true, 
@@ -56,16 +48,6 @@ class Itinerarys extends Sequelize.Model {
     this.belongsTo(models.Calendars,{
       foreignKey: 'calendarId',
       as: 'calendar'
-    });
-
-    this.belongsTo(models.BusStops,{
-      foreignKey: 'startBusStopId',
-      as: 'startBusStop'
-    });
-    
-    this.belongsTo(models.BusStops,{
-      foreignKey: 'endBusStopId',
-      as: 'endBusStop'
     });
 
   }
