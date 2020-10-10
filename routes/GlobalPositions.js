@@ -7,7 +7,6 @@ router.post("/", async (req, res) => {
   try {
     GlobalPositions.create(req.body);
     const globalPosition = await GlobalPositions.findOne({
-      where: {latitude: req.body.latitude, longitude: req.body.longitude}
     });
     return res.send(globalPosition);
   } catch (error) {
@@ -26,10 +25,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:busId", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const globalPostion = await GlobalPositions.findOne({
-      where: { busId: req.params.busId },
+      where: { id: req.params.id },
 
     });
     return res.status(200).send(globalPostion);
@@ -39,10 +38,10 @@ router.get("/:busId", async (req, res) => {
   }
 });
 
-router.put("/:busId", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const gps = await GlobalPositions.update(req.body,
-      { where: { busId: req.params.busId } }
+      { where: { id: req.params.id } }
     );
     return res.status(200).send(gps);
   } catch (error) {
@@ -52,10 +51,10 @@ router.put("/:busId", async (req, res) => {
 
 });
 
-router.delete("/:busId", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await GlobalPositions.destroy({
-      where: { busId: req.params.busId },
+      where: { id: req.params.id },
     });
     return res.status(200).send("Deletado com sucesso");
   } catch (error) {
