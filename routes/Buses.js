@@ -70,6 +70,36 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/short/", async (req, res) => {
+  try {
+    let buses = await Buses.findAll({
+      //raw: true,
+      nest: true,
+      attributes: ['id', 'line', 'isAvailable'],
+      include: [
+        {
+          model: BusDrivers,
+          as: 'busDriver'
+        },
+        {
+          model: Itinerarys,
+          as: 'itinerary',
+          include: [
+            {
+              model: Calendars,
+              as: 'calendar'
+            },
+          ]
+        },
+      ]
+    });
+    return res.status(200).send(buses);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
     const bus = await Buses.findOne({
