@@ -3,13 +3,13 @@ const express = require("express");
 const router = express.Router();
 
 router.use("/adresses", require("./adresses"));
-router.use("/buses", require("./Buses"));
-router.use("/busDrivers", require("./BusDrivers"));
-router.use("/busStops", require("./BusStops"));
-router.use("/calendars", require("./Calendars"));
-router.use("/globalPositions", require("./GlobalPositions"));
-router.use("/itinerarys", require("./Itinerarys"));
-router.use("/routes", require("./Routes"));
-router.use("/routesBusStops", require("./RoutesBusStops"));
+router.use("/buses", require("./buses"));
+router.use("/busDrivers", require("./busDrivers"));
+router.use("/busStops", require("./busStops"));
+router.use("/calendars", require("./calendars"));
+router.use("/globalPositions", require("./globalPositions"));
+router.use("/itinerarys", require("./itinerarys"));
+router.use("/routes", require("./routes"));
+router.use("/routesBusStops", require("./routesBusStops"));
 
 module.exports = router;
