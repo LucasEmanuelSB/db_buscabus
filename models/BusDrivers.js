@@ -13,16 +13,12 @@ class BusDrivers extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        averageRate:{
-          type: Sequelize.DECIMAL,
-          allowNull: true, 
-        },
       },
       {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "BusDrivers",
+        modelName: "busDrivers",
       }
     );
 
@@ -31,7 +27,7 @@ class BusDrivers extends Sequelize.Model {
 
   static associate(models){
     
-    this.hasMany(models.Buses,{
+    this.hasMany(models.buses,{
       foreignKey: 'busDriverId',
       sourceKey: 'id',
       as: 'buses'

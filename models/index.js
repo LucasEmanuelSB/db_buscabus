@@ -8,7 +8,6 @@ const BusStops = require("./busStops");
 const Calendars = require("./calendars");
 const GlobalPositions = require("./globalPositions");
 const Itinerarys = require("./itinerarys");
-const Points = require("./points");
 const Routes = require("./routes");
 const RoutesBusStops = require("./routesBusStops")
 
@@ -20,10 +19,8 @@ const models = [
   Calendars,
   GlobalPositions,
   Itinerarys,
-  Points,
   Routes,
   RoutesBusStops,
-
 ];
 
 class Database {

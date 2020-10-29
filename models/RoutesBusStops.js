@@ -17,7 +17,7 @@ class RoutesBusStops extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "RoutesBusStops",
+        modelName: "routesBusStops",
       }
     );
 

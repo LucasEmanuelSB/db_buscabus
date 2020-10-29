@@ -9,7 +9,6 @@ router.use("/busStops", require("./BusStops"));
 router.use("/calendars", require("./Calendars"));
 router.use("/globalPositions", require("./GlobalPositions"));
 router.use("/itinerarys", require("./Itinerarys"));
-router.use("/points", require("./Points"));
 router.use("/routes", require("./Routes"));
 router.use("/routesBusStops", require("./RoutesBusStops"));
 

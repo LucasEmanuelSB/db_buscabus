@@ -18,12 +18,20 @@ class BusStops extends Sequelize.Model {
           allowNull: true,
           unique: true,
         },
+        latitude: {
+          type: Sequelize.FLOAT,
+          allowNull: false,
+        },
+        longitude: {
+          type: Sequelize.FLOAT,
+          allowNull: false,
+        },
       },
       {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "BusStops",
+        modelName: "busStops",
       }
     );
 
@@ -32,13 +40,13 @@ class BusStops extends Sequelize.Model {
   
   static associate(models) {
 
-    this.belongsToMany(models.Routes,{
-      through: models.RoutesBusStops,
+    this.belongsToMany(models.routes,{
+      through: models.routesBusStops,
       foreignKey: 'busStopId',
       as: 'routes'
     })
 
-    this.belongsTo(models.Adresses, {
+    this.belongsTo(models.adresses, {
       foreignKey: 'adressId',
       as : 'adress',
     });

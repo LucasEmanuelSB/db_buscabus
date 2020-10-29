@@ -42,7 +42,7 @@ class Adresses extends Sequelize.Model {
         freezeTableName: true,	
         timestamps: false,	
         sequelize,	
-        modelName: "Adresses",	
+        modelName: "adresses",	
       }	
     );	
 

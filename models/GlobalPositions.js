@@ -22,7 +22,7 @@ class GlobalPositions extends Sequelize.Model {
         freezeTableName: true,
         timestamps: true,
         sequelize,
-        modelName: "GlobalPositions",
+        modelName: "globalPositions",
       }
     );
 

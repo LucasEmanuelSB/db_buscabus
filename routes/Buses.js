@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Buses = require("../models/Buses");
+const Buses = require("../models/buses");
 const GlobalPositions = require("../models/globalPositions");
 const Itinerarys = require("../models/itinerarys");
 const BusDrivers = require("../models/busDrivers");
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
     let buses = await Buses.findAll({
       //raw: true,
       nest: true,
-      attributes: ['id', 'line', 'isAvailable','velocity','nDevices'],
+      attributes: ['id', 'line', 'isAvailable', 'velocity', 'nDevices'],
       include: [
         {
           model: BusDrivers,
@@ -34,22 +34,43 @@ router.get("/", async (req, res) => {
           as: 'itinerary',
           include: [
             {
-              model: Routes,
-              as: 'route',
-              include: [{
-                model: BusStops,
-                as: 'busStops',
-                through: { attributes: [] },
-                include: [{
-                  model: Adresses,
-                  as: 'adress',
-                }]
-              }],
-            },
-            {
               model: Calendars,
               as: 'calendar'
             },
+            {
+              model: Routes,
+              as: 'route',
+              include: [
+                {
+                  model: BusStops,
+                  as: 'start',
+                  attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+                  include: [{
+                    model: Adresses,
+                    as: 'adress'
+                  }]
+                },
+                {
+                  model: BusStops,
+                  as: 'end',
+                  attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+                  include: [{
+                    model: Adresses,
+                    as: 'adress'
+                  }]
+                },
+                {
+                  model: BusStops,
+                  as: 'path',
+                  attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+                  through: { atributes: [] },
+                  include: [{
+                    model: Adresses,
+                    as: 'adress'
+                  }]
+                },
+              ]
+            }
           ]
         },
         {
@@ -71,7 +92,7 @@ router.get("/:id", async (req, res) => {
 
       nest: true,
       where: { id: req.params.id },
-      attributes: ['id', 'line', 'isAvailable','velocity','nDevices'],
+      attributes: ['id', 'line', 'isAvailable', 'velocity', 'nDevices'],
       include: [
         {
           model: BusDrivers,
@@ -82,22 +103,43 @@ router.get("/:id", async (req, res) => {
           as: 'itinerary',
           include: [
             {
-              model: Routes,
-              as: 'route',
-              include: [{
-                model: BusStops,
-                as: 'busStops',
-                through: { attributes: [] },
-                include: [{
-                  model: Adresses,
-                  as: 'adress',
-                }]
-              }],
-            },
-            {
               model: Calendars,
               as: 'calendar'
             },
+            {
+              model: Routes,
+              as: 'route',
+              include: [
+                {
+                  model: BusStops,
+                  as: 'start',
+                  attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+                  include: [{
+                    model: Adresses,
+                    as: 'adress'
+                  }]
+                },
+                {
+                  model: BusStops,
+                  as: 'end',
+                  attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+                  include: [{
+                    model: Adresses,
+                    as: 'adress'
+                  }]
+                },
+                {
+                  model: BusStops,
+                  as: 'path',
+                  attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+                  through: { atributes: [] },
+                  include: [{
+                    model: Adresses,
+                    as: 'adress'
+                  }]
+                },
+              ]
+            }
           ]
         },
         {

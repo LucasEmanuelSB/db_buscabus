@@ -9,12 +9,22 @@ class Routes extends Sequelize.Model {
           autoIncrement: true,
           primaryKey: true,
         },
+        startId: {
+          type: Sequelize.INTEGER,
+          autoIncrement: false,
+          allowNull: true
+        },
+        endId: {
+          type: Sequelize.INTEGER,
+          autoIncrement: false,
+          allowNull: true
+        },
       },
       {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "Routes",
+        modelName: "routes",
       }
     );
 
@@ -23,22 +33,26 @@ class Routes extends Sequelize.Model {
 
   static associate(models){
 
-    this.belongsToMany(models.BusStops,{
-      through: models.RoutesBusStops,
-      foreignKey: 'routeId',
-      as: 'busStops'
+    this.belongsTo(models.busStops,{
+      foreignKey: 'startId',
+      as: 'start'
     })
 
-    this.hasMany(models.Itinerarys,{
+    this.belongsTo(models.busStops,{
+      foreignKey: 'endId',
+      as: 'end'
+    })
+
+    this.belongsToMany(models.busStops,{
+      through: 'routesBusStops',
+      foreignKey: 'routeId',
+      as: 'path'
+    })
+
+    this.hasMany(models.itinerarys,{
       foreignKey: 'routeId',
       sourceKey: 'id',
       as: 'itinerarys'
-    })
-
-    this.hasMany(models.Points,{
-      foreignKey: 'routeId',
-      sourceKey: 'id',
-      as: 'points'
     })
   }
   

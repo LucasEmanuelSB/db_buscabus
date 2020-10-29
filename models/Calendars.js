@@ -22,7 +22,7 @@ class Calendars extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "Calendars",
+        modelName: "calendars",
       }
     );
 
@@ -31,7 +31,7 @@ class Calendars extends Sequelize.Model {
 
   static associate(models){
 
-    this.hasOne(models.Itinerarys,{
+    this.hasOne(models.itinerarys,{
       foreignKey: 'calendarId',
       sourceKey: 'id'
     });

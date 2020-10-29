@@ -26,7 +26,7 @@ class Itinerarys extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "Itinerarys",
+        modelName: "itinerarys",
       }
     );
 
@@ -35,17 +35,17 @@ class Itinerarys extends Sequelize.Model {
 
   static associate(models){
 
-    this.belongsTo(models.Buses,{
+    this.belongsTo(models.buses,{
       foreignKey: 'busId',
       as: 'bus'
     });
 
-    this.belongsTo(models.Routes,{
+    this.belongsTo(models.routes,{
       foreignKey: 'routeId',
       as: 'route'
     });
 
-    this.belongsTo(models.Calendars,{
+    this.belongsTo(models.calendars,{
       foreignKey: 'calendarId',
       as: 'calendar'
     });

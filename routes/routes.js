@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Routes = require("../models/routes");
 const BusStops = require("../models/busStops");
-const Itinerarys = require("../models/itinerarys");
-const Points = require("../models/points");
+const Adresses = require("../models/adresses");
 
 router.post("/", async (req, res) => {
   try {
@@ -21,17 +20,32 @@ router.get("/", async (req,res) => {
       attributes: ['id'],
       include: [{
         model: BusStops,
-        as: 'busStops',
-        through: [{ attributes: []}]
+        as: 'start',
+        attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+        include: [{
+          model: Adresses,
+          as: 'adress'
+        }]
       },
       {
-        model: Itinerarys,
-        as: 'itinerarys'
+        model: BusStops,
+        as: 'end',
+        attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+        include: [{
+          model: Adresses,
+          as: 'adress'
+        }]
       },
       {
-        model: Points,
-        as: 'points'
-      }
+        model: BusStops,
+        as: 'path',
+        attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+        through: { atributes: []}, 
+        include: [{
+          model: Adresses,
+          as: 'adress'
+        }]
+      },
     ]
     });
       return res.status(200).send(routes);
@@ -48,17 +62,32 @@ router.get("/:id", async (req, res) => {
       attributes: ['id'],
       include: [{
         model: BusStops,
-        as: 'busStops',
-        through: [{ attributes: []}]
+        as: 'start',
+        attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+        include: [{
+          model: Adresses,
+          as: 'adress'
+        }]
       },
       {
-        model: Itinerarys,
-        as: 'itinerarys'
+        model: BusStops,
+        as: 'end',
+        attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+        include: [{
+          model: Adresses,
+          as: 'adress'
+        }]
       },
       {
-        model: Points,
-        as: 'points'
-      }
+        model: BusStops,
+        as: 'path',
+        attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
+        through: { atributes: []}, 
+        include: [{
+          model: Adresses,
+          as: 'adress'
+        }]
+      },
     ]
     });
     return res.status(200).send(route);

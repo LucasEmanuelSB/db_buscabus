@@ -18,15 +18,11 @@ router.get("/", async (req,res) => {
     const busDrivers = await BusDrivers.findAll({
       nest: true,
       //raw: true,
-      attributes: ['id','name','averageRate'],
       include: [
         {
-          model: Users,
-          as: 'usersRatings', through: [{attributes: ['rate']}]
-        },
-        {
           model: Buses,
-          as: 'buses'
+          as: 'buses',
+          attributes: ['id']
         }
        ]
     });
@@ -43,12 +39,9 @@ router.get("/:id", async (req, res) => {
       attributes: ['id','name','averageRate'],
       include: [
         {
-          model: Users,
-          as: 'usersRatings', through: [{attributes: ['rate']}]
-        },
-        {
           model: Buses,
-          as: 'buses'
+          as: 'buses',
+          attributes: ['id']
         }
        ]
     });

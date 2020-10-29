@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Adresses = require("../models/adresses");
-const GlobalPositions = require("../models/globalPositions");
 
 router.post("/", async (req, res) => {
   try {
@@ -17,12 +16,6 @@ router.get("/", async (req,res) => {
   try {
     const adresses = await Adresses.findAll({
       nest: true,
-      attributes: ['id','country','uf','city','neighborhood','street','cep','number'],
-      //raw: true,
-      include: [{
-        model: GlobalPositions,
-        as: 'globalPosition'
-      }]
     });
       return res.status(200).send(adresses);
   } catch (error) {
@@ -34,10 +27,6 @@ router.get("/:id", async (req, res) => {
   try {
     const adress = await Adresses.findOne({
       where: {id: req.params.id},
-      include: [{
-        model: GlobalPositions,
-        as: 'globalPosition'
-      }]
     });
     return res.status(200).send(adress);
   } catch (error) {

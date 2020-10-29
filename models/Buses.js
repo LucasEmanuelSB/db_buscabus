@@ -39,7 +39,7 @@ class Buses extends Sequelize.Model {
         freezeTableName: true,
         timestamps: false,
         sequelize,
-        modelName: "Buses",
+        modelName: "buses",
       }
     );
 
@@ -49,18 +49,18 @@ class Buses extends Sequelize.Model {
   static associate(models){
     
     
-    this.belongsTo(models.BusDrivers,{
+    this.belongsTo(models.busDrivers,{
       foreignKey: 'busDriverId',
       as: 'busDriver'
     });
 
-    this.hasOne(models.Itinerarys,{
+    this.hasOne(models.itinerarys,{
       foreignKey: 'busId',
       sourceKey: 'id',
       as: 'itinerary'
     });
 
-    this.belongsTo(models.GlobalPositions, {
+    this.belongsTo(models.globalPositions, {
       foreignKey: 'globalPositionId',
       as: 'currentPosition'
     });
