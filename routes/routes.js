@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Routes = require("../models/Routes");
-const BusStops = require("../models/BusStops");
-const Itinerarys = require("../models/Itinerarys");
-const Points = require("../models/Points");
+const Routes = require("../models/routes");
+const BusStops = require("../models/busStops");
+const Itinerarys = require("../models/itinerarys");
+const Points = require("../models/points");
 
 router.post("/", async (req, res) => {
   try {

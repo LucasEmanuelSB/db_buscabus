@@ -17,6 +17,10 @@ class Buses extends Sequelize.Model {
           type: Sequelize.BOOLEAN,
           allowNull: false, 
         },
+        velocity: {
+          type: Sequelize.FLOAT,
+          allowNull: true,
+        },
         busDriverId:{
           type: Sequelize.INTEGER,
           allowNull: true,
@@ -26,6 +30,10 @@ class Buses extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
+        nDevices: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+        }
       },
       {
         freezeTableName: true,
@@ -50,11 +58,6 @@ class Buses extends Sequelize.Model {
       foreignKey: 'busId',
       sourceKey: 'id',
       as: 'itinerary'
-    });
-
-    this.hasMany(models.Persons,{
-      foreignKey: 'busId',
-      as: 'persons'
     });
 
     this.belongsTo(models.GlobalPositions, {

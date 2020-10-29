@@ -37,11 +37,6 @@ class BusDrivers extends Sequelize.Model {
       as: 'buses'
     });
 
-    this.belongsToMany(models.Users,{
-      through: models.UsersBusDrivers,
-      foreignKey: 'busDriverId',
-      as: 'usersRatings'
-    });
   }
 }
 

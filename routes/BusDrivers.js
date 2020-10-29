@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const BusDrivers = require("../models/BusDrivers");
-const Buses = require("../models/Buses");
-const Users = require("../models/Users");
+const BusDrivers = require("../models/busDrivers");
+const Buses = require("../models/buses");
 
 router.post("/", async (req, res) => {
   try {

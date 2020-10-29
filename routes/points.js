@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Points = require("../models/Points");
-const Routes = require("../models/Routes");
+const Points = require("../models/points");
+const Routes = require("../models/routes");
 
 router.post("/", async (req, res) => {
   try {
@@ -19,7 +19,8 @@ router.get("/", async (req,res) => {
       attributes: ['id','latitude','longitude'],
       include: [{
         model: Routes,
-        as: 'route'
+        as: 'route',
+        attributes: ['id']
       }]
     });
       return res.status(200).send(points);
@@ -36,7 +37,8 @@ router.get("/:id", async (req, res) => {
       attributes: ['id','latitude','longitude'],
       include: [{
         model: Routes,
-        as: 'route'
+        as: 'route',
+        attributes: ['id']
       }]
     });
     return res.status(200).send(point);

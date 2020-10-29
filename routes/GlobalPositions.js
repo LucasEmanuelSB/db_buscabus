@@ -1,7 +1,6 @@
 const express = require("express");
-const { create } = require("../models/GlobalPositions");
 const router = express.Router();
-const GlobalPositions = require("../models/GlobalPositions");
+const GlobalPositions = require("../models/globalPositions");
 
 router.post("/", async (req, res) => {
   try {

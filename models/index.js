@@ -1,21 +1,16 @@
 const Sequelize = require("sequelize");
 const config = require("../config.json"); // ???
 
-const Adresses  = require("../models/Adresses");
-const Buses = require("../models/Buses");
-const BusDrivers = require("../models/BusDrivers");
-const BusStops = require("../models/BusStops");
-const Calendars = require("../models/Calendars");
-const Companys = require("../models/Companys");
-const GlobalPositions = require("../models/GlobalPositions");
-const Itinerarys = require("../models/Itinerarys");
-const Persons = require("../models/Persons");
-const Points = require("../models/Points");
-const Routes = require("../models/Routes");
-const RoutesBusStops = require("../models/RoutesBusStops")
-const Users = require("../models/Users");
-const UsersBusDrivers = require("../models/UsersBusDrivers");
-const UsersCompanys = require("../models/UsersCompanys");
+const Adresses  = require("./adresses");
+const Buses = require("./buses");
+const BusDrivers = require("./busDrivers");
+const BusStops = require("./busStops");
+const Calendars = require("./calendars");
+const GlobalPositions = require("./globalPositions");
+const Itinerarys = require("./itinerarys");
+const Points = require("./points");
+const Routes = require("./routes");
+const RoutesBusStops = require("./routesBusStops")
 
 const models = [
   Adresses,
@@ -23,16 +18,12 @@ const models = [
   BusDrivers,
   BusStops,
   Calendars,
-  Companys,
   GlobalPositions,
   Itinerarys,
-  Persons,
   Points,
   Routes,
   RoutesBusStops,
-  Users,
-  UsersBusDrivers,
-  UsersCompanys
+
 ];
 
 class Database {

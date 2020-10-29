@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Calendars = require("../models/Calendars");
+const Calendars = require("../models/calendars");
 
 router.post("/", async (req, res) => {
   try {
