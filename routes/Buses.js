@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
         {
           model: Itinerarys,
           as: 'itinerary',
-          atributes: [],
+          atributes: ['id'],
           include: [
             {
               model: Calendars,
@@ -41,7 +41,6 @@ router.get("/", async (req, res) => {
             {
               model: Routes,
               as: 'route',
-              through: { atributes: [] },
               include: [
                 {
                   model: BusStops,
@@ -67,7 +66,7 @@ router.get("/", async (req, res) => {
                   model: BusStops,
                   as: 'path',
                   attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
-                  through: { atributes: [] },
+                  through: {atributes: []},
                   include: [{
                     model: Adresses,
                     as: 'adress',
@@ -107,7 +106,7 @@ router.get("/:id", async (req, res) => {
         {
           model: Itinerarys,
           as: 'itinerary',
-          atributes: [],
+          atributes: ['id'],
           include: [
             {
               model: Calendars,
@@ -116,7 +115,6 @@ router.get("/:id", async (req, res) => {
             {
               model: Routes,
               as: 'route',
-              through: { atributes: [] },
               include: [
                 {
                   model: BusStops,
