@@ -3,6 +3,8 @@ const router = express.Router();
 const Routes = require("../models/routes");
 const BusStops = require("../models/busStops");
 const Adresses = require("../models/adresses");
+const Itinerarys = require("../models/itinerarys");
+const Buses = require("../models/buses");
 
 router.post("/", async (req, res) => {
   try {
@@ -46,6 +48,16 @@ router.get("/", async (req,res) => {
           as: 'adress'
         }]
       },
+      {
+        model: Itinerarys,
+        as: 'itinerarys',
+        atributes: ['id'],
+        include: [{
+            model: Buses,
+            as: 'bus',
+            atributes: ['id','line']
+        }]
+      }
     ]
     });
       return res.status(200).send(routes);
@@ -88,6 +100,16 @@ router.get("/:id", async (req, res) => {
           as: 'adress'
         }]
       },
+      {
+        model: Itinerarys,
+        as: 'itinerarys',
+        atributes: ['id'],
+        include: [{
+            model: Buses,
+            as: 'bus',
+            atributes: ['id','line']
+        }]
+      }
     ]
     });
     return res.status(200).send(route);
