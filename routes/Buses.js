@@ -32,6 +32,7 @@ router.get("/", async (req, res) => {
         {
           model: Itinerarys,
           as: 'itinerary',
+          atributes: [],
           include: [
             {
               model: Calendars,
@@ -40,6 +41,7 @@ router.get("/", async (req, res) => {
             {
               model: Routes,
               as: 'route',
+              through: { atributes: [] },
               include: [
                 {
                   model: BusStops,
@@ -47,7 +49,8 @@ router.get("/", async (req, res) => {
                   attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
                   include: [{
                     model: Adresses,
-                    as: 'adress'
+                    as: 'adress',
+                    atributes: ['neighborhood', 'street']
                   }]
                 },
                 {
@@ -56,7 +59,8 @@ router.get("/", async (req, res) => {
                   attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
                   include: [{
                     model: Adresses,
-                    as: 'adress'
+                    as: 'adress',
+                    atributes: ['neighborhood', 'street']
                   }]
                 },
                 {
@@ -66,7 +70,8 @@ router.get("/", async (req, res) => {
                   through: { atributes: [] },
                   include: [{
                     model: Adresses,
-                    as: 'adress'
+                    as: 'adress',
+                    atributes: ['neighborhood', 'street']
                   }]
                 },
               ]
@@ -76,6 +81,7 @@ router.get("/", async (req, res) => {
         {
           model: GlobalPositions,
           as: 'currentPosition',
+          atributes: ['id', 'latitude', 'longitude']
         },
       ]
     });
@@ -101,6 +107,7 @@ router.get("/:id", async (req, res) => {
         {
           model: Itinerarys,
           as: 'itinerary',
+          atributes: [],
           include: [
             {
               model: Calendars,
@@ -109,6 +116,7 @@ router.get("/:id", async (req, res) => {
             {
               model: Routes,
               as: 'route',
+              through: { atributes: [] },
               include: [
                 {
                   model: BusStops,
@@ -116,7 +124,8 @@ router.get("/:id", async (req, res) => {
                   attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
                   include: [{
                     model: Adresses,
-                    as: 'adress'
+                    as: 'adress',
+                    atributes: ['neighborhood', 'street']
                   }]
                 },
                 {
@@ -125,7 +134,8 @@ router.get("/:id", async (req, res) => {
                   attributes: ['id', 'isTerminal', 'latitude', 'longitude'],
                   include: [{
                     model: Adresses,
-                    as: 'adress'
+                    as: 'adress',
+                    atributes: ['neighborhood', 'street']
                   }]
                 },
                 {
@@ -135,7 +145,8 @@ router.get("/:id", async (req, res) => {
                   through: { atributes: [] },
                   include: [{
                     model: Adresses,
-                    as: 'adress'
+                    as: 'adress',
+                    atributes: ['neighborhood', 'street']
                   }]
                 },
               ]
@@ -145,6 +156,7 @@ router.get("/:id", async (req, res) => {
         {
           model: GlobalPositions,
           as: 'currentPosition',
+          atributes: ['id', 'latitude', 'longitude']
         },
       ]
     });
