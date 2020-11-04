@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
     let buses = await Buses.findAll({
       //raw: true,
       nest: true,
-      attributes: ['id', 'line', 'isAvailable', 'velocity', 'nDevices'],
+      attributes: ['id', 'line', 'isAvailable'],
       include: [
         {
           model: BusDrivers,
@@ -97,7 +97,7 @@ router.get("/:id", async (req, res) => {
 
       nest: true,
       where: { id: req.params.id },
-      attributes: ['id', 'line', 'isAvailable', 'velocity', 'nDevices'],
+      attributes: ['id', 'line', 'isAvailable'],
       include: [
         {
           model: BusDrivers,
