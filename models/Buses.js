@@ -17,23 +17,16 @@ class Buses extends Sequelize.Model {
           type: Sequelize.BOOLEAN,
           allowNull: false, 
         },
-        velocity: {
-          type: Sequelize.FLOAT,
-          allowNull: true,
-        },
         busDriverId:{
           type: Sequelize.INTEGER,
           allowNull: true,
           onDelete: 'CASCADE'
         },
-        globalPositionId: {
+        realTimeDataId: {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
-        nDevices: {
-          type: Sequelize.INTEGER,
-          allowNull: true,
-        }
+
       },
       {
         freezeTableName: true,
@@ -60,7 +53,7 @@ class Buses extends Sequelize.Model {
       as: 'itinerary'
     });
 
-    this.belongsTo(models.globalPositions, {
+    this.belongsTo(models.realTimeData, {
       foreignKey: 'globalPositionId',
       as: 'currentPosition'
     });

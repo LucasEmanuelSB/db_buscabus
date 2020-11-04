@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-class GlobalPositions extends Sequelize.Model {
+class RealTimeData extends Sequelize.Model {
   static init(sequelize) {
     super.init(
       {
@@ -17,12 +17,20 @@ class GlobalPositions extends Sequelize.Model {
           type: Sequelize.FLOAT,
           allowNull: true,
         },
+        velocity: {
+          type: Sequelize.FLOAT,
+          allowNull: true,
+        },
+        nDevices: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+        }
       },
       {
         freezeTableName: true,
         timestamps: true,
         sequelize,
-        modelName: "globalPositions",
+        modelName: "realTimeData",
       }
     );
 
@@ -32,4 +40,4 @@ class GlobalPositions extends Sequelize.Model {
 
 }
 
-module.exports = GlobalPositions;
+module.exports = RealTimeData;

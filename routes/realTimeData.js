@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const GlobalPositions = require("../models/globalPositions");
+const RealTimeData = require("../models/realTimeData");
 
 router.post("/", async (req, res) => {
   try {
-    GlobalPositions.create(req.body);
-    const globalPosition = await GlobalPositions.findOne({
+    RealTimeData.create(req.body);
+    const realTimeData = await RealTimeData.findOne({
     });
-    return res.send(globalPosition);
+    return res.send(realTimeData);
   } catch (error) {
     return res.status(500).send(error);
   }
@@ -15,9 +15,9 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const globalPositions = await GlobalPositions.findAll(
+    const realTimeData = await RealTimeData.findAll(
     );
-    return res.status(200).send(globalPositions);
+    return res.status(200).send(realTimeData);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -26,11 +26,11 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const globalPostion = await GlobalPositions.findOne({
+    const realTimeData = await RealTimeData.findOne({
       where: { id: req.params.id },
 
     });
-    return res.status(200).send(globalPostion);
+    return res.status(200).send(realTimeData);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -39,10 +39,10 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const gps = await GlobalPositions.update(req.body,
+    const realTimeData = await RealTimeData.update(req.body,
       { where: { id: req.params.id } }
     );
-    return res.status(200).send(gps);
+    return res.status(200).send(realTimeData);
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -52,7 +52,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    await GlobalPositions.destroy({
+    await RealTimeData.destroy({
       where: { id: req.params.id },
     });
     return res.status(200).send("Deletado com sucesso");

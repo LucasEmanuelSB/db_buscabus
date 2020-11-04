@@ -6,7 +6,7 @@ const Buses = require("./buses");
 const BusDrivers = require("./busDrivers");
 const BusStops = require("./busStops");
 const Calendars = require("./calendars");
-const GlobalPositions = require("./globalPositions");
+const RealTimeData = require("./realTimeData");
 const Itinerarys = require("./itinerarys");
 const Routes = require("./routes");
 const RoutesBusStops = require("./routesBusStops")
@@ -17,7 +17,7 @@ const models = [
   BusDrivers,
   BusStops,
   Calendars,
-  GlobalPositions,
+  RealTimeData,
   Itinerarys,
   Routes,
   RoutesBusStops,

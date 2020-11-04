@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Buses = require("../models/buses");
-const GlobalPositions = require("../models/globalPositions");
+const RealTimeData = require("../models/realTimeData");
 const Itinerarys = require("../models/itinerarys");
 const BusDrivers = require("../models/busDrivers");
 const Routes = require("../models/routes");
@@ -78,9 +78,9 @@ router.get("/", async (req, res) => {
           ]
         },
         {
-          model: GlobalPositions,
+          model: RealTimeData,
           as: 'currentPosition',
-          atributes: ['id', 'latitude', 'longitude']
+          atributes: ['id', 'latitude', 'longitude','velocity','nDevices']
         },
       ]
     });
@@ -152,9 +152,9 @@ router.get("/:id", async (req, res) => {
           ]
         },
         {
-          model: GlobalPositions,
+          model: RealTimeData,
           as: 'currentPosition',
-          atributes: ['id', 'latitude', 'longitude']
+          atributes: ['id', 'latitude', 'longitude','velocity','nDevices']
         },
       ]
     });

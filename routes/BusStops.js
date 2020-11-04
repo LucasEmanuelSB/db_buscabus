@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const BusStops = require("../models/busStops");
 const Adresses = require("../models/adresses");
-const Routes = require("../models/routes");
-const GlobalPositions = require("../models/globalPositions");
 
 router.post("/", async (req, res) => {
   try {
