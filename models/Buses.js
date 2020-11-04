@@ -54,7 +54,7 @@ class Buses extends Sequelize.Model {
     });
 
     this.belongsTo(models.realTimeData, {
-      foreignKey: 'globalPositionId',
+      foreignKey: 'realTimeDataId',
       as: 'currentPosition'
     });
   }
