@@ -59,10 +59,14 @@ router.put("/:routeId/:busStopId", async (req, res) => {
 
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:routeId/:busStopId", async (req, res) => {
+  const { routeId, busStopId } = req.params;
   try {
     await RoutesBusStops.destroy({
-      where: { id: req.params.id },
+      where: {
+        routeId: routeId,
+        busStopId: busStopId
+      },
     });
     return res.status(200).send("Deletado com sucesso");
   } catch (error) {
