@@ -79,7 +79,7 @@ router.get("/", async (req, res) => {
         },
         {
           model: RealTimeData,
-          as: 'currentPosition',
+          as: 'realTimeData',
           atributes: ['id', 'latitude', 'longitude','velocity','nDevices']
         },
       ]
@@ -153,7 +153,7 @@ router.get("/:id", async (req, res) => {
         },
         {
           model: RealTimeData,
-          as: 'currentPosition',
+          as: 'realTimeData',
           atributes: ['id', 'latitude', 'longitude','velocity','nDevices']
         },
       ]
