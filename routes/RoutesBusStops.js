@@ -12,25 +12,26 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req,res) => {
+router.get("/", async (req, res) => {
   try {
     const routesBusStops = await RoutesBusStops.findAll({
       //raw: true,
     });
-      return res.status(200).send(routesBusStops);
+    return res.status(200).send(routesBusStops);
   } catch (error) {
-      console.log(error);
-      return res.status(500).send(error);
-}});
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});
 
 router.get("/:routeId/:busStopId", async (req, res) => {
-    const { routeId, busStopId } = req.params;
+  const { routeId, busStopId } = req.params;
   try {
     const routeBusStop = await RoutesBusStops.findOne({
       where: {
-          routeId: routeId,
-          busStopId: busStopId
-    },
+        routeId: routeId,
+        busStopId: busStopId
+      },
     });
     return res.status(200).send(routeBusStop);
   } catch (error) {
@@ -39,10 +40,16 @@ router.get("/:routeId/:busStopId", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:routeId/:busStopId", async (req, res) => {
+  const { routeId, busStopId } = req.params;
   try {
     const routeBusStop = await RoutesBusStops.update(req.body,
-      { where: {id: req.params.id} }
+      {
+        where: {
+          routeId: routeId,
+          busStopId: busStopId
+        },
+      }
     );
     return res.status(200).send(routeBusStop);
   } catch (error) {
@@ -53,15 +60,15 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-    try {
-      await RoutesBusStops.destroy({
-        where: {id: req.params.id},
-      }); 
-      return res.status(200).send("Deletado com sucesso");
-    } catch (error) {
-      console.log(error);
-      return res.status(500).send(error);
-    }
+  try {
+    await RoutesBusStops.destroy({
+      where: { id: req.params.id },
+    });
+    return res.status(200).send("Deletado com sucesso");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
 });
 
 module.exports = router;
