@@ -35,7 +35,7 @@ class Database {                                                             // 
 
     models                                                                   // Variável que armazena todos os modelos
       .map((model) => model.init(sequelize))                                 // Inicializa modelos
-      //.map((model) => model.sync({ force: true }))                           // Força a criação de tabelas 
+      //.map((model) => model.sync())                                       // Força a criação de tabelas 
       .map((model) => model.associate && model.associate(sequelize.models)); // Realiza as associações
   }
 }
