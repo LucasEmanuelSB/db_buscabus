@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const config = require("../config.json"); // ???
+const config = require("../config.json");
 
 const Adresses  = require("./adresses");
 const Buses = require("./buses");
@@ -9,9 +9,10 @@ const Calendars = require("./calendars");
 const RealTimeData = require("./realTimeData");
 const Itinerarys = require("./itinerarys");
 const Routes = require("./routes");
-const RoutesBusStops = require("./routesBusStops")
+const RoutesBusStops = require("./routesBusStops");
+const Sensor = require("./sensor");
 
-const models = [
+const models = [                                                             // Armazena em um vetor todos modelos
   Adresses,
   Buses,
   BusDrivers,
@@ -21,20 +22,21 @@ const models = [
   Itinerarys,
   Routes,
   RoutesBusStops,
+  Sensor
 ];
 
-class Database {
+class Database {                                                             // Cria um Banco de Dados
   constructor() {
     this.init();
   }
 
   init() {
-      const sequelize = new Sequelize(config.sequelize);
+      const sequelize = new Sequelize(config.sequelize);                     // Importa as configurações do servidor PostgreSQL
 
-    models
-      .map((model) => model.init(sequelize))
-      //.map((model) => model.sync({ force: true }))
-      .map((model) => model.associate && model.associate(sequelize.models));
+    models                                                                   // Variável que armazena todos os modelos
+      .map((model) => model.init(sequelize))                                 // Inicializa modelos
+      //.map((model) => model.sync({ force: true }))                           // Força a criação de tabelas 
+      .map((model) => model.associate && model.associate(sequelize.models)); // Realiza as associações
   }
 }
 

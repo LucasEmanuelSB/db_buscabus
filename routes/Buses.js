@@ -9,16 +9,16 @@ const Calendars = require("../models/calendars");
 const BusStops = require("../models/busStops");
 const Adresses = require("../models/adresses");
 
-router.post("/", async (req, res) => {
-  try {
-    Buses.create(req.body);
-    return res.status(200).send(req.body);
-  } catch (error) {
-    return res.status(500).send(error);
+router.post("/", async (req, res) => {      // Requisição POST
+  try {                                     // Tentativa de excecução:
+    Buses.create(req.body);                 //    Cria um modelo com base no body (JSON) recebido
+    return res.status(200).send(req.body);  //    Envia o código de estado e o body (JSON) de volta.
+  } catch (error) {                         // Possui erro ? Captura erro
+    return res.status(500).send(error);     //    Envia o código de estado da requisção e o erro.
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res) => {       // Requisição GET
   try {
     let buses = await Buses.findAll({
       //raw: true,
@@ -91,7 +91,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {    // Requisição GET pelo id
   try {
     const bus = await Buses.findOne({
 
@@ -165,7 +165,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {    // Requisição PUT
   try {
     const bus = await Buses.update(req.body,
       { where: { id: req.params.id } }
@@ -178,7 +178,7 @@ router.put("/:id", async (req, res) => {
 
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => { // Requisição DELETE
   try {
     await Buses.destroy({
       where: { id: req.params.id },
