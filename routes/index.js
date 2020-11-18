@@ -11,5 +11,4 @@ router.use("/realTimeData", require("./realTimeData"));
 router.use("/itinerarys", require("./itinerarys"));
 router.use("/routes", require("./routes"));
 router.use("/routesBusStops", require("./routesBusStops"));
-router.use("/sensor",require("./sensor"));
 module.exports = router;

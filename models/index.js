@@ -10,7 +10,6 @@ const RealTimeData = require("./realTimeData");
 const Itinerarys = require("./itinerarys");
 const Routes = require("./routes");
 const RoutesBusStops = require("./routesBusStops");
-const Sensor = require("./sensor");
 
 const models = [                                                             // Armazena em um vetor todos modelos
   Adresses,
@@ -22,7 +21,7 @@ const models = [                                                             // 
   Itinerarys,
   Routes,
   RoutesBusStops,
-  Sensor
+
 ];
 
 class Database {                                                             // Cria um Banco de Dados
